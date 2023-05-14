@@ -5,9 +5,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
+   [Header("Object")] 
+   public Collider2D light;
+   
+   
+   // Component
    private PlayerInputControlls inputControlls;
    private Rigidbody2D rb;
    
+   [Header("Var")]
    public Vector2 moveDirection;
    public Vector2 mousePosition;
    public  Vector2 worldMousePosition;
@@ -31,12 +37,29 @@ public class PlayerController : MonoBehaviour
       inputControlls.Disable();
    }
 
-   #endregion  
+   #endregion
+
+   private void OnDrawGizmos()
+   {
+      //Gizmos.DrawLine(transform.position, transform.localPosition + Vector3.up * 30);
+      
+   }
+
    private void Update()
    {
       moveDirection = inputControlls.GamePlay.Move.ReadValue<Vector2>();
       mousePosition = inputControlls.GamePlay.Look.ReadValue<Vector2>();
       worldMousePosition  = Camera.main.ScreenToWorldPoint(mousePosition);
+
+      RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, LayerMask.NameToLayer("Default"));
+
+      if (hit.collider != null)
+      {
+         if (hit.transform.CompareTag("Enemy"))
+         {
+            Debug.Log("Enemy!!!");
+         }
+      }
    }
    
 
