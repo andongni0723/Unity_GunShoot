@@ -1,17 +1,23 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
+using DG.Tweening;
+using Random = UnityEngine.Random;
+
 public class PlayerController : MonoBehaviour
 {
    [Header("Object")] 
    public Collider2D light;
+
+   public Transform gunPoint;
    
    
    // Component
    private PlayerInputControlls inputControlls;
    private Rigidbody2D rb;
+   public Light2D gunFireLight;
+   public BulletPool bulletPool;
    
    [Header("Var")]
    public Vector2 moveDirection;
@@ -19,10 +25,15 @@ public class PlayerController : MonoBehaviour
    public  Vector2 worldMousePosition;
    public float speed = 5f;
    
+   
    private void Awake()
    {
       inputControlls = new PlayerInputControlls();
       rb = GetComponent<Rigidbody2D>();
+      //bulletPool = GetComponent<BulletPool>();
+      
+      // Fire Action
+      inputControlls.GamePlay.Fire.performed += _ => OnFire();
    }
 
    #region Event
@@ -36,15 +47,18 @@ public class PlayerController : MonoBehaviour
    {
       inputControlls.Disable();
    }
-
-   #endregion
-
-   private void OnDrawGizmos()
+   
+   private void OnFire()
    {
-      //Gizmos.DrawLine(transform.position, transform.localPosition + Vector3.up * 30);
-      
+      float rotationZ = transform.rotation.eulerAngles.z;
+      AudioManager.Instance.PlayAudio(AudioManager.Instance.handgunFireAudio);
+      CinemachineShake.Instance.CameraShake(10, 0.1f);
+      bulletPool.Fire(gunPoint.transform.position, 
+         Quaternion.Euler(0,0, Random.Range(rotationZ - gunFireLight.pointLightInnerAngle / 2, rotationZ + gunFireLight.pointLightOuterAngle / 2)));
    }
 
+   #endregion
+   
    private void Update()
    {
       moveDirection = inputControlls.GamePlay.Move.ReadValue<Vector2>();

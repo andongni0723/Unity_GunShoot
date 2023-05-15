@@ -48,11 +48,6 @@ public class BaseEnemy : MonoBehaviour
         //TODO: set active bug
 
         TestAddRayList();
-        
-        foreach (var hit in hits)
-        {
-            Debug.Log($"{hitsL.IndexOf(hit.transform.name)} {hit.transform.name}");
-        }
 
         if (hits.Length != 0)
         {
