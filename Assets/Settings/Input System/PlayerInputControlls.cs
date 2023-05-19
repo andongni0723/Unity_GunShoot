@@ -53,6 +53,15 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReloadBullet"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1a5e371-7a9e-4b8d-bbcd-aa31986c3f4d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -273,6 +282,17 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dae422a9-3a90-487e-9c16-cd66ab1a7c65"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReloadBullet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -863,6 +883,7 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
         m_GamePlay_Look = m_GamePlay.FindAction("Look", throwIfNotFound: true);
         m_GamePlay_Fire = m_GamePlay.FindAction("Fire", throwIfNotFound: true);
+        m_GamePlay_ReloadBullet = m_GamePlay.FindAction("ReloadBullet", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -939,6 +960,7 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Move;
     private readonly InputAction m_GamePlay_Look;
     private readonly InputAction m_GamePlay_Fire;
+    private readonly InputAction m_GamePlay_ReloadBullet;
     public struct GamePlayActions
     {
         private @PlayerInputControlls m_Wrapper;
@@ -946,6 +968,7 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
         public InputAction @Look => m_Wrapper.m_GamePlay_Look;
         public InputAction @Fire => m_Wrapper.m_GamePlay_Fire;
+        public InputAction @ReloadBullet => m_Wrapper.m_GamePlay_ReloadBullet;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -964,6 +987,9 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
+            @ReloadBullet.started += instance.OnReloadBullet;
+            @ReloadBullet.performed += instance.OnReloadBullet;
+            @ReloadBullet.canceled += instance.OnReloadBullet;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -977,6 +1003,9 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
+            @ReloadBullet.started -= instance.OnReloadBullet;
+            @ReloadBullet.performed -= instance.OnReloadBullet;
+            @ReloadBullet.canceled -= instance.OnReloadBullet;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1162,6 +1191,7 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnReloadBullet(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

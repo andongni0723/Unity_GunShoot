@@ -21,12 +21,12 @@ MonoBehaviour:
   - keyChar: \2
     textColor: {r: 1, g: 1, b: 1, a: 1}
     backgroundColor: {r: 0, g: 0.6152477, b: 1, a: 1}
-    textAlignment: 5
+    textAlignment: 4
     fontStyle: 1
   - keyChar: \3
     textColor: {r: 1, g: 1, b: 1, a: 1}
     backgroundColor: {r: 0.5058824, g: 0.84705883, b: 0.81960785, a: 1}
-    textAlignment: 3
+    textAlignment: 4
     fontStyle: 1
   - keyChar: \4
     textColor: {r: 1, g: 1, b: 1, a: 1}

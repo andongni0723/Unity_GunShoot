@@ -10,6 +10,8 @@ public class AudioManager : Singleton<AudioManager>
    [Header("Audio")] 
    public AudioClip handgunFireAudio;
 
+   public AudioClip reloadWeaponAudio;
+
    protected override void Awake()
    {
        base.Awake();

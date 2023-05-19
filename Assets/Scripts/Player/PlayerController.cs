@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class PlayerController : MonoBehaviour
 {
    [Header("Object")] 
+   public GameObject player;
    public Collider2D light;
 
    public Transform gunPoint;
@@ -16,24 +17,28 @@ public class PlayerController : MonoBehaviour
    // Component
    private PlayerInputControlls inputControlls;
    private Rigidbody2D rb;
+   private BaseWeapon playerWeapon;
    public Light2D gunFireLight;
-   public BulletPool bulletPool;
-   
+
+
    [Header("Var")]
    public Vector2 moveDirection;
    public Vector2 mousePosition;
    public  Vector2 worldMousePosition;
    public float speed = 5f;
+   public float currentSpeed;
    
    
    private void Awake()
    {
       inputControlls = new PlayerInputControlls();
       rb = GetComponent<Rigidbody2D>();
+      playerWeapon = GetComponent<BaseWeapon>();
       //bulletPool = GetComponent<BulletPool>();
       
       // Fire Action
       inputControlls.GamePlay.Fire.performed += _ => OnFire();
+      inputControlls.GamePlay.ReloadBullet.performed += _ => OnReload();
    }
 
    #region Event
@@ -50,12 +55,13 @@ public class PlayerController : MonoBehaviour
    
    private void OnFire()
    {
-      float rotationZ = transform.rotation.eulerAngles.z;
-      AudioManager.Instance.PlayAudio(AudioManager.Instance.handgunFireAudio);
-      CinemachineShake.Instance.CameraShake(10, 0.1f);
-      bulletPool.Fire(gunPoint.transform.position, 
-         Quaternion.Euler(0,0, Random.Range(rotationZ - gunFireLight.pointLightInnerAngle / 2, rotationZ + gunFireLight.pointLightOuterAngle / 2)));
+      playerWeapon.Fire(player, gunPoint.gameObject);
    }
+   
+   private void OnReload()
+   {
+      StartCoroutine(playerWeapon.ReloadBullet());
+   } 
 
    #endregion
    
@@ -64,16 +70,9 @@ public class PlayerController : MonoBehaviour
       moveDirection = inputControlls.GamePlay.Move.ReadValue<Vector2>();
       mousePosition = inputControlls.GamePlay.Look.ReadValue<Vector2>();
       worldMousePosition  = Camera.main.ScreenToWorldPoint(mousePosition);
-
-      RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, LayerMask.NameToLayer("Default"));
-
-      if (hit.collider != null)
-      {
-         if (hit.transform.CompareTag("Enemy"))
-         {
-            Debug.Log("Enemy!!!");
-         }
-      }
+      
+      currentSpeed = (moveDirection != default) ? 1 : 0;
+      playerWeapon.SpeedToChangeShootAngle(currentSpeed);
    }
    
 
@@ -95,6 +94,6 @@ public class PlayerController : MonoBehaviour
       float angle = Mathf.Atan2(worldMousePosition.y - transform.position.y ,worldMousePosition.x - transform.position.x) * Mathf.Rad2Deg;
 
 
-      transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+      player.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
    }
 }
