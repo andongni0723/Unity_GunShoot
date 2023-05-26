@@ -20,6 +20,7 @@ public class CinemachineShake : Singleton<CinemachineShake>
     public void CameraShake(float intensity, float time)
     {
         noise.m_AmplitudeGain = intensity;
+        noise.
         StartCoroutine(TimeToCloseShake(time));
     }
 

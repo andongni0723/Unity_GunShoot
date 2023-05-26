@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Bullet : MonoBehaviour
 {
+    public int damage;
     public int speed;
     private Action<Bullet> spawnAction;
     private BulletFirePool bulletFirePool;
@@ -15,26 +16,33 @@ public class Bullet : MonoBehaviour
         bulletFirePool = GameObject.FindWithTag("PoolManager").GetComponent<BulletFirePool>();
     }
 
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
     private void OnEnable()
     {
         StartCoroutine(TimeToAction());
         GetComponent<TrailRenderer>().Clear();
     }
 
-    private void FixedUpdate()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        Move();
+        // Check Can Damage
+        if (other.transform.TryGetComponent<BaseHealth>(out BaseHealth baseHealth))
+        {
+            baseHealth.Damage(damage);
+        }
+        
+        // Play VFX
+        bulletFirePool.FireVFX(transform.position, transform.rotation);
+        spawnAction?.Invoke(this);
     }
 
     private void Move()
     {
         transform.Translate(Vector3.up * (speed * Time.deltaTime));
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        bulletFirePool.FireVFX(transform.position, transform.rotation);
-        spawnAction?.Invoke(this);
     }
 
     public void SetSpawnAction(Action<Bullet> spawnAction)

@@ -16,7 +16,7 @@ public class BasePool<T> : MonoBehaviour where T : Component
     public int totalCount => pool.CountAll;
     
     
-    protected virtual void Initialize(bool collectionCheck = true) =>
+    protected virtual void Initialize(bool collectionCheck = false) =>
         pool = new ObjectPool<T>(OnCreatePoolItem, OnGetPoolItem, OnReleasePoolItem, OnDestroyPoolItem, collectionCheck,
                     defultSize, maxSize);
     protected virtual void OnDestroyPoolItem(T obj) => Destroy(obj.gameObject);

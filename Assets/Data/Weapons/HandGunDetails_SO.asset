@@ -19,3 +19,5 @@ MonoBehaviour:
   weaponReloadTime: 1
   shootAngle: {x: 6, y: 20}
   fireAudio: {fileID: 8300000, guid: 1b145bcffd767854fb0c71c37678ebaa, type: 3}
+  shootCooldown: 0.2
+  damage: 40

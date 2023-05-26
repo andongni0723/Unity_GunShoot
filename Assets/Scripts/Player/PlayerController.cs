@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Random = UnityEngine.Random;
 
+
 public class PlayerController : MonoBehaviour
 {
    [Header("Object")] 
@@ -15,7 +16,7 @@ public class PlayerController : MonoBehaviour
    
    
    // Component
-   private PlayerInputControlls inputControlls;
+   public PlayerInputControlls inputControlls;
    private Rigidbody2D rb;
    private BaseWeapon playerWeapon;
    public Light2D gunFireLight;
@@ -63,6 +64,8 @@ public class PlayerController : MonoBehaviour
       StartCoroutine(playerWeapon.ReloadBullet());
    } 
 
+   
+   // Interface
    #endregion
    
    private void Update()
@@ -96,4 +99,6 @@ public class PlayerController : MonoBehaviour
 
       player.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
    }
+
+   
 }

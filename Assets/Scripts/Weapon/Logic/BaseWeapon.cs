@@ -2,34 +2,43 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
+using Sirenix.OdinInspector;
 
 public class BaseWeapon : MonoBehaviour
 {
     [Header("Object")]
     public List<WeaponDetails_SO> weaponList;
-
     public WeaponDetails_SO currentWeapon;
 
     [Header("Component")]
     public Light2D weaponLight;
-    
     public BulletPool bulletPool;
 
-    public int currentBulletCount;
-    public int currentBagBulletCount;
+    [Header("Setting")]
+    public float cameraShakeIntensity = 10;
 
+    //var
     private int reloadBulletCount;
     
-    //Timer
-    [SerializeField]
-    protected float timer = 0;
-    [SerializeField]
-    protected bool isTimerEnd = true;
-    protected float endTime;
+    [Space(15f)]
+    [FoldoutGroup("Debug", true)]public int currentBulletCount;
+    [FoldoutGroup("Debug")] public int currentBagBulletCount;
+    [FoldoutGroup("Debug"), SerializeField] protected float currentAngle;
     
+    //Timer
+    [Space(10f)]
+    [FoldoutGroup("Debug"), SerializeField] protected float reloadTimer = 0;
+    [FoldoutGroup("Debug"), SerializeField] protected bool isReloadTimerEnd = true;
+    [FoldoutGroup("Debug"), SerializeField] protected float shootCooldownTimer = 0;
+    [FoldoutGroup("Debug"), SerializeField] protected bool isShootCooldownTimerEnd = true;
+
+    protected float endTime;
+
     private void Awake()
     {
         currentWeapon = weaponList[0];
@@ -41,14 +50,23 @@ public class BaseWeapon : MonoBehaviour
     protected virtual void Update()
     {
         // Timer
-        if (!isTimerEnd)
+        if (!isReloadTimerEnd)
         {
-           
-            timer += Time.deltaTime;
+            reloadTimer += Time.deltaTime;
     
-            if (timer >= endTime)
+            if (reloadTimer >= endTime)
             {
-                isTimerEnd = true;
+                isReloadTimerEnd = true;
+            }
+        }
+
+        if (!isShootCooldownTimerEnd)
+        {
+            shootCooldownTimer += Time.deltaTime;
+    
+            if (shootCooldownTimer >= endTime)
+            {
+                isShootCooldownTimerEnd = true;
             }
         }
     }
@@ -57,46 +75,40 @@ public class BaseWeapon : MonoBehaviour
     public void Fire(GameObject fireObject, GameObject firePoint)
     {
         // Check not reloading
-        if (isTimerEnd)
+        if (isReloadTimerEnd)
             StartCoroutine(FireAction(fireObject, firePoint));
     }
     
     IEnumerator FireAction(GameObject fireObject, GameObject firePoint)
     {
-        if (currentBulletCount > 0)
+        // Check isn't in shoot cooldown
+        if (isShootCooldownTimerEnd && isReloadTimerEnd)
         {
-            float rotationZ = fireObject.transform.rotation.eulerAngles.z;
-            AudioManager.Instance.PlayAudio(currentWeapon.fireAudio);
-            CinemachineShake.Instance.CameraShake(10, 0.1f);
-            bulletPool.Fire(firePoint.transform.position, 
-                Quaternion.Euler(0,0, Random.Range(rotationZ - weaponLight.pointLightInnerAngle / 2, rotationZ + weaponLight.pointLightInnerAngle / 2)));
+            // Check have bullet
+            if (currentBulletCount > 0)
+            {
+                float rotationZ = fireObject.transform.rotation.eulerAngles.z;
+                AudioManager.Instance.PlayAudio(currentWeapon.fireAudio);
+                CinemachineShake.Instance.CameraShake(10, 0.1f);
+                bulletPool.Fire(firePoint.transform.position, 
+                    Quaternion.Euler(0,0, Random.Range(rotationZ - currentAngle / 2, rotationZ + currentAngle / 2)), currentWeapon.damage);
+                
+                currentBulletCount--;
+                CallShootCooldownTimer(currentWeapon.shootCooldown);
+            }
+            else
+            {
+                // TODO: Reload
+                StartCoroutine(ReloadBullet()); 
+            }
 
-            // Check the bullet count
-            currentBulletCount--;
         }
-        else
-        {
-            // TODO: Reload
-            
-
-            StartCoroutine(ReloadBullet());
-        }
-
         yield return null;
-    }
-
-    public void SpeedToChangeShootAngle(float speed)
-    {
-        float angle = currentWeapon.minShootAngle +
-                      speed * (currentWeapon.maxShootAngle - currentWeapon.minShootAngle);
-        
-        weaponLight.pointLightInnerAngle = angle;
-        weaponLight.pointLightOuterAngle = angle;
     }
 
     public virtual IEnumerator ReloadBullet()
     {
-        if (currentBagBulletCount > 0)
+        if (currentBagBulletCount > 0 && isReloadTimerEnd)
         {
             // Check Bag bullet is enough for a clip 
             if (currentWeapon.clipBulletCount - currentBulletCount < currentBagBulletCount)
@@ -113,18 +125,35 @@ public class BaseWeapon : MonoBehaviour
             }
 
             // Wait Reload Bullet time
-            CallTimer(currentWeapon.weaponReloadTime);
-            yield return new WaitUntil(() => isTimerEnd );
+            CallReloadTimer(currentWeapon.weaponReloadTime);
+            yield return new WaitUntil(() => isReloadTimerEnd );
 
             currentBagBulletCount -= reloadBulletCount;
             currentBulletCount += reloadBulletCount; 
         }
     }
 
-    private void CallTimer(float endTime)
+    /// <summary>
+    /// The angle of shoot will be change by character speed
+    /// </summary>
+    /// <param name="speed"></param>
+    public virtual void SpeedToChangeShootAngle(float speed)
     {
-        isTimerEnd = false;
-        timer = 0; 
-        this.endTime = endTime;
+        currentAngle = currentWeapon.minShootAngle +
+                       speed * (currentWeapon.maxShootAngle - currentWeapon.minShootAngle);
+    }
+
+    private void CallReloadTimer(float _endTime)
+    {
+        isReloadTimerEnd = false;
+        reloadTimer = 0; 
+        endTime = _endTime;
+    }
+
+    protected void CallShootCooldownTimer(float _endTime)
+    {
+        isShootCooldownTimerEnd = false;
+        shootCooldownTimer= 0;
+        endTime = _endTime;
     }
 }
