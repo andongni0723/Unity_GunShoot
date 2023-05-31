@@ -17,8 +17,9 @@ public class PlayerController : MonoBehaviour
    
    // Component
    public PlayerInputControlls inputControlls;
-   private Rigidbody2D rb;
-   private BaseWeapon playerWeapon;
+   private Rigidbody2D rb => GetComponent<Rigidbody2D>();
+   private BaseWeapon playerWeapon => GetComponent<BaseWeapon>();
+   private ItemManager itemManager => GetComponent<ItemManager>();
    public Light2D gunFireLight;
 
 
@@ -33,14 +34,14 @@ public class PlayerController : MonoBehaviour
    private void Awake()
    {
       inputControlls = new PlayerInputControlls();
-      rb = GetComponent<Rigidbody2D>();
-      playerWeapon = GetComponent<BaseWeapon>();
-      //bulletPool = GetComponent<BulletPool>();
       
       // Fire Action
       inputControlls.GamePlay.Fire.performed += _ => OnFire();
       inputControlls.GamePlay.ReloadBullet.performed += _ => OnReload();
+      inputControlls.GamePlay.Skill.performed += _ => OnUseSkill();
    }
+
+   
 
    #region Event
 
@@ -64,6 +65,10 @@ public class PlayerController : MonoBehaviour
       StartCoroutine(playerWeapon.ReloadBullet());
    } 
 
+   private void OnUseSkill()
+   {
+      itemManager.UseSkillItem(worldMousePosition - (Vector2)transform.position, transform.position);
+   } 
    
    // Interface
    #endregion

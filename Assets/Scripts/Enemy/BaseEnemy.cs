@@ -13,6 +13,7 @@ public class BaseEnemy : MonoBehaviour
     public GameObject enemyObject;
     public GameObject enemySpriteObject;
     public GameObject gunPoint;
+    public GameObject UICanvas;
     public BaseWeapon baseWeapon;
 
     [Header("Setting")] 
@@ -43,6 +44,8 @@ public class BaseEnemy : MonoBehaviour
     private void Start()
     {
         originPos = transform.position;
+        enemySpriteObject.SetActive(false);
+        UICanvas.SetActive(false);
     }
 
     private void Update()
@@ -78,7 +81,11 @@ public class BaseEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        canRayToPlayer = true;
+        if (other.CompareTag("Player") || other.CompareTag("Light"))
+        {
+            canRayToPlayer = true;
+        }
+        
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -107,12 +114,14 @@ public class BaseEnemy : MonoBehaviour
             {
                 canSeePlayer = true;
                 enemySpriteObject.SetActive(true);
+                UICanvas.SetActive(true);
                 isFirstSeePlayer = true;
             }
             else
             {
                 canSeePlayer = false;
                 enemySpriteObject.SetActive(false);
+                UICanvas.SetActive(false);
             }
         }
         else

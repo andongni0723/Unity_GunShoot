@@ -2,25 +2,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AudioManager : Singleton<AudioManager>
 {
-   private AudioSource audioSource;
+    public AudioSource fireAudioSource; 
+    public AudioSource itemAudioSource;
 
-   [Header("Audio")] 
-   public AudioClip handgunFireAudio;
+    [Header("Audio")] 
+    public AudioClip grenadeThrowAudio;
+    public AudioClip grenadeBombAudio;
+    public AudioClip reloadWeaponAudio;
+    
 
-   public AudioClip reloadWeaponAudio;
+    public void PlayAudio(AudioClip clip)
+    {
+       fireAudioSource.clip = clip;
+       fireAudioSource.Play();
+    }
 
-   protected override void Awake()
-   {
-       base.Awake();
-       audioSource = GetComponent<AudioSource>();
-   }
-
-   public void PlayAudio(AudioClip clip)
-   {
-       audioSource.clip = clip;
-       audioSource.Play();
-   }
+    public void GrenadeAudio(AudioClip clip)
+    {
+        itemAudioSource.clip = clip;
+        itemAudioSource.Play();
+    }
+    
 }

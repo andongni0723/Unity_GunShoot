@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class EnemyHealth : BaseHealth
 {
@@ -10,7 +13,7 @@ public class EnemyHealth : BaseHealth
     private BaseEnemy baseEnemy => GetComponent<BaseEnemy>();
 
     [Header("Setting")] 
-    public GameObject EnemyDeadVFX;
+    public GameObject enemyDeadVFX;
     
     public override void Damage(int damage)
     {
@@ -23,8 +26,8 @@ public class EnemyHealth : BaseHealth
     protected override void Dead()
     {
         // Play dead animation
-        float angle = -baseEnemy.enemyObject.transform.rotation.z * Mathf.Rad2Deg;
-        Instantiate(EnemyDeadVFX, transform.position, Quaternion.Euler(0, 0, angle));
+        float angle = Random.Range(0, 360);
+        Instantiate(enemyDeadVFX, transform.position, quaternion.Euler(0, 0, angle));
         Debug.Log(angle);
         Destroy(gameObject);
     }

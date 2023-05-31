@@ -20,4 +20,4 @@ MonoBehaviour:
   shootAngle: {x: 15, y: 30}
   fireAudio: {fileID: 8300000, guid: 1b145bcffd767854fb0c71c37678ebaa, type: 3}
   shootCooldown: 0.4
-  damage: 20
+  damage: 40
