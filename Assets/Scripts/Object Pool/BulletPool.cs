@@ -10,12 +10,13 @@ public class BulletPool : BasePool<Bullet>
         Initialize();
     }
 
-    public void Fire(Vector3 position, Quaternion rotation, int damage)
+    public void Fire(Vector3 position, Quaternion rotation, int damage, LayerMask layerMask)
     {
         var obj = Get();
 
         obj.transform.position = position;
         obj.transform.rotation = rotation;
+        obj.gameObject.layer = layerMask;
         obj.GetComponent<Bullet>().damage = damage;
         obj.GetComponent<TrailRenderer>().Clear();
     }

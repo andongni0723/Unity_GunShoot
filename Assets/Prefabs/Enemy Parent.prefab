@@ -393,10 +393,11 @@ MonoBehaviour:
   enemyObject: {fileID: 3080020160453691092}
   enemySpriteObject: {fileID: 7993419006972664087}
   gunPoint: {fileID: 4991409198615269563}
+  UICanvas: {fileID: 0}
   baseWeapon: {fileID: 8996153998137635191}
   rayLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2049
   chaseDistance: 15
   attackDistance: 8
   canRayToPlayer: 1
@@ -450,8 +451,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   maxHealth: 100
+  defense: 0
   healthBar: {fileID: 8405527144984515007}
-  EnemyDeadVFX: {fileID: 6444556125758272099, guid: a18a1a6f8eb6b43e98c07d093df92f09, type: 3}
+  enemyDeadVFX: {fileID: 0}
 --- !u!1 &3080020160453691092
 GameObject:
   m_ObjectHideFlags: 0

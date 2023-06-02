@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Grenade : ThrowItem
 {
-    [Header("Component")] public GameObject BombVFX;
+    [Header("Component")] 
+    public GameObject BombVFX;
+    public GameObject BombAreaLight;
     public float bombArea;
     public LayerMask rayLayerMask;
     
@@ -15,8 +17,9 @@ public class Grenade : ThrowItem
     {
         //Setting
         BombVFX.SetActive(false);
+        BombAreaLight.SetActive(true);
         base.Throw(startForce);
-        AudioManager.Instance.GrenadeAudio(AudioManager.Instance.grenadeThrowAudio);
+        AudioManager.Instance.PlayItemAudio(AudioManager.Instance.grenadeThrowAudio);
     }
 
     protected override void Action()
@@ -24,21 +27,10 @@ public class Grenade : ThrowItem
         base.Action();
         // isAction = true;
         BombVFX.SetActive(true);
-        AudioManager.Instance.GrenadeAudio(AudioManager.Instance.grenadeBombAudio);
+        BombAreaLight.SetActive(false);
+        AudioManager.Instance.PlayItemAudio(AudioManager.Instance.grenadeBombAudio);
 
-        // Invoke(nameof(CloseAction), 1);
     }
-
-    // private void CloseAction() => isAction = true;
-    //
-    // private void OnTriggerStay2D(Collider2D other)
-    // {
-    //     if (isAction)
-    //     {
-    //         CheckHurt(other.gameObject);
-    //         isAction = false;
-    //     }
-    // }
 
     private void OnDrawGizmos()
     {
@@ -47,24 +39,25 @@ public class Grenade : ThrowItem
 
     protected override void CheckHurt()
     {
+        // Check area have hurt target
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, bombArea);
 
         foreach (var hit in hits)
         {
-            //Debug.Log("hit1");
             CheckTargetBlock(hit); 
         }
     }
 
     private void CheckTargetBlock(Collider2D target)
     {
-        //playerPos = playerPosUpdate;
+        // Check first hit object is target, that is be self can see target
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, target.transform.position - transform.position,
             Vector2.Distance(transform.position, target.transform.position) + 10, rayLayerMask);
 
         if (hits.Length != 0)
         {
-            Debug.Log($"{hits[0].transform.name}");
+            //Debug.Log($"{hits[0].transform.name}");
+            
             // Check first hit object is target, that is be self can see target
             if (hits[0].transform.name == target.transform.name)
             {
@@ -72,7 +65,7 @@ public class Grenade : ThrowItem
                 if (target.gameObject.TryGetComponent<BaseHealth>(out var baseHealth))
                 {
                     baseHealth.Damage(damage);
-                    Debug.Log($"hit, {hits.Length} {hits[0].transform.name}");
+                    //Debug.Log($"hit, {hits.Length} {hits[0].transform.name}");
                 } 
             }
         }

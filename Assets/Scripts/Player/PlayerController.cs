@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
    private void OnUseSkill()
    {
-      itemManager.UseSkillItem(worldMousePosition - (Vector2)transform.position, transform.position);
+      itemManager.UseSkillItem(worldMousePosition - (Vector2)transform.position, transform.position, player.transform.rotation);
    } 
    
    // Interface
@@ -97,10 +97,8 @@ public class PlayerController : MonoBehaviour
 
    private void Look()
    {
-      //float angle = MathF.Atan2(worldMousePosition.y, worldMousePosition.x);
-      
+      // Look to mouse 
       float angle = Mathf.Atan2(worldMousePosition.y - transform.position.y ,worldMousePosition.x - transform.position.x) * Mathf.Rad2Deg;
-
 
       player.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
    }

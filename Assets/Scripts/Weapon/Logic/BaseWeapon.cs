@@ -2,12 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
-using Sirenix.OdinInspector;
 
 public class BaseWeapon : MonoBehaviour
 {
@@ -91,7 +89,7 @@ public class BaseWeapon : MonoBehaviour
                 AudioManager.Instance.PlayAudio(currentWeapon.fireAudio);
                 CinemachineShake.Instance.CameraShake(10, 0.1f);
                 bulletPool.Fire(firePoint.transform.position, 
-                    Quaternion.Euler(0,0, Random.Range(rotationZ - currentAngle / 2, rotationZ + currentAngle / 2)), currentWeapon.damage);
+                    Quaternion.Euler(0,0, Random.Range(rotationZ - currentAngle / 2, rotationZ + currentAngle / 2)), currentWeapon.damage, gameObject.layer);
                 
                 currentBulletCount--;
                 CallShootCooldownTimer(currentWeapon.shootCooldown);

@@ -9,12 +9,7 @@ public class Bullet : MonoBehaviour
     public int damage;
     public int speed;
     private Action<Bullet> spawnAction;
-    private BulletFirePool bulletFirePool;
-
-    private void Awake()
-    {
-        bulletFirePool = GameObject.FindWithTag("PoolManager").GetComponent<BulletFirePool>();
-    }
+    private BulletFirePool bulletFirePool => GameObject.FindWithTag("PoolManager").GetComponent<BulletFirePool>();
 
     private void FixedUpdate()
     {
@@ -30,7 +25,7 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         // Check Can Damage
-        if (other.transform.TryGetComponent<BaseHealth>(out BaseHealth baseHealth))
+        if (other.transform.TryGetComponent<BaseHealth>(out var baseHealth))
         {
             baseHealth.Damage(damage);
         }

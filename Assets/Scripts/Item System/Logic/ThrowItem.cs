@@ -25,6 +25,8 @@ public class ThrowItem : MonoBehaviour
     {
         Destroy(gameObject, destroyTime);
         CheckHurt();
+        rb.bodyType = RigidbodyType2D.Static; // Can't move
+        //rb.velocity = Vector2.zero;
     }
 
     protected virtual void CheckHurt()

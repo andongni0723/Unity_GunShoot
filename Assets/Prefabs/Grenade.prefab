@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4472496994233626005}
   - component: {fileID: 5518908026506819191}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Damage Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5580260956812936718}
   - component: {fileID: 6463989744207316556}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 1807513233002415599}
   - component: {fileID: 2540465907697055883}
   - component: {fileID: 4844509045945743430}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ Transform:
   - {fileID: 5580260956812936718}
   - {fileID: 4472496994233626005}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -46.59}
 --- !u!212 &6300572464339483192
 SpriteRenderer:
@@ -347,10 +347,11 @@ MonoBehaviour:
   destroyTime: 5
   damage: 100
   BombVFX: {fileID: 2881129714017221972}
+  BombAreaLight: {fileID: 1581877030050780559}
   bombArea: 3.21
   rayLayerMask:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 2177
 --- !u!1 &2881129714017221972
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +363,7 @@ GameObject:
   - component: {fileID: 6833018964740605964}
   - component: {fileID: 6877208749473069223}
   - component: {fileID: 2834968246114643044}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Smoky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5267,7 +5268,7 @@ GameObject:
   - component: {fileID: 3544584222382098276}
   - component: {fileID: 293263410760460304}
   - component: {fileID: 3751857183892661989}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Middle Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}

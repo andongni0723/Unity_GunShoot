@@ -28,7 +28,6 @@ public class EnemyHealth : BaseHealth
         // Play dead animation
         float angle = Random.Range(0, 360);
         Instantiate(enemyDeadVFX, transform.position, quaternion.Euler(0, 0, angle));
-        Debug.Log(angle);
         Destroy(gameObject);
     }
 }

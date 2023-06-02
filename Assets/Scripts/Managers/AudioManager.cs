@@ -12,7 +12,10 @@ public class AudioManager : Singleton<AudioManager>
     [Header("Audio")] 
     public AudioClip grenadeThrowAudio;
     public AudioClip grenadeBombAudio;
+    public AudioClip scoutAudio;
     public AudioClip reloadWeaponAudio;
+    public AudioClip shieldOpenAudio;
+    public AudioClip shieldHitAudio;
     
 
     public void PlayAudio(AudioClip clip)
@@ -21,7 +24,7 @@ public class AudioManager : Singleton<AudioManager>
        fireAudioSource.Play();
     }
 
-    public void GrenadeAudio(AudioClip clip)
+    public void PlayItemAudio(AudioClip clip)
     {
         itemAudioSource.clip = clip;
         itemAudioSource.Play();
