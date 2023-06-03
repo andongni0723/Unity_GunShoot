@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     public int damage;
     public int speed;
     private Action<Bullet> spawnAction;
+    private Rigidbody2D rb => GetComponent<Rigidbody2D>();
     private BulletFirePool bulletFirePool => GameObject.FindWithTag("PoolManager").GetComponent<BulletFirePool>();
 
     private void FixedUpdate()
@@ -19,6 +20,7 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(TimeToAction());
+        //Debug.Break();
         GetComponent<TrailRenderer>().Clear();
     }
 
@@ -37,7 +39,11 @@ public class Bullet : MonoBehaviour
 
     private void Move()
     {
-        transform.Translate(Vector3.up * (speed * Time.deltaTime));
+        //transform.Translate(Vector3.up * (speed * Time.deltaTime));
+        //rb.MovePosition(transform.position + Vector3.up * (speed * Time.deltaTime));
+        //rb.velocity = new Vector2(0, speed * Time.deltaTime);
+        rb.velocity = transform.up * speed;
+        //Debug.Log("move");
     }
 
     public void SetSpawnAction(Action<Bullet> spawnAction)
