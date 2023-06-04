@@ -162,7 +162,8 @@ public class BaseEnemy : MonoBehaviour
                 // Rotation
                 enemyObject.transform.up = playerPosUpdate - transform.position;
                 // Attack
-                baseWeapon.Fire(gunPoint, enemyObject);
+                if(baseWeapon.isReloadTimerEnd)
+                    baseWeapon.Fire(gunPoint, enemyObject);
                 break;
             case EnemyState.Chase:
                 if (isFirstSeePlayer)

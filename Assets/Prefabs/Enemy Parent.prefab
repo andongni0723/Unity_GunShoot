@@ -302,7 +302,7 @@ Transform:
   - {fileID: 4399224224826015989}
   - {fileID: 8926625758600945953}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!210 &1626565631952788279
 SortingGroup:
@@ -364,7 +364,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -427,6 +427,10 @@ MonoBehaviour:
   weaponList:
   - {fileID: 11400000, guid: 2f41650e125b848079b2fe8c5b579646, type: 2}
   currentWeapon: {fileID: 0}
+  data:
+    weaponDetails: {fileID: 0}
+    currentBulletCount: 0
+    currentBagBulletCount: 0
   weaponLight: {fileID: 0}
   bulletPool: {fileID: 0}
   cameraShakeIntensity: 3
@@ -435,6 +439,7 @@ MonoBehaviour:
   currentAngle: 0
   reloadTimer: 0
   isReloadTimerEnd: 1
+  isReloadEnd: 1
   shootCooldownTimer: 0
   isShootCooldownTimerEnd: 1
 --- !u!114 &6604150371278905900
@@ -638,7 +643,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4991409198615269563}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.89, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -986,6 +991,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 1072193085

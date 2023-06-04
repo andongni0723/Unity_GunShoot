@@ -12,6 +12,7 @@ public class BaseWeapon : MonoBehaviour
     [Header("Object")]
     public List<WeaponDetails_SO> weaponList;
     public WeaponDetails_SO currentWeapon;
+    public WeaponBulletData data;
 
     [Header("Component")]
     public Light2D weaponLight;
@@ -21,6 +22,8 @@ public class BaseWeapon : MonoBehaviour
     public float cameraShakeIntensity = 10;
 
     //var
+    protected Action saveWeaponDataAction;
+    protected Action loadWeaponDataAction;
     private int reloadBulletCount;
     
     [Space(15f)]
@@ -31,18 +34,24 @@ public class BaseWeapon : MonoBehaviour
     //Timer
     [Space(10f)]
     [FoldoutGroup("Debug"), SerializeField] protected float reloadTimer = 0;
-    [FoldoutGroup("Debug"), SerializeField] protected bool isReloadTimerEnd = true;
+    [FoldoutGroup("Debug"), SerializeField] public bool isReloadTimerEnd = true;
+    [FoldoutGroup("Debug"), SerializeField] public bool isReloadEnd = true;
     [FoldoutGroup("Debug"), SerializeField] protected float shootCooldownTimer = 0;
-    [FoldoutGroup("Debug"), SerializeField] protected bool isShootCooldownTimerEnd = true;
+    [FoldoutGroup("Debug"), SerializeField] public bool isShootCooldownTimerEnd = true;
 
     protected float endTime;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         currentWeapon = weaponList[0];
+
+        // New bullet data from currentWeapon
+        data =
+            new WeaponBulletData(currentWeapon, currentWeapon.clipBulletCount, currentWeapon.bagBulletCount);
         
-        currentBulletCount = currentWeapon.clipBulletCount;
-        currentBagBulletCount = currentWeapon.bagBulletCount;
+        // currentBulletCount = currentWeapon.clipBulletCount;
+        // currentBagBulletCount = currentWeapon.bagBulletCount;
+        
     }
 
     protected virtual void Update()
@@ -73,30 +82,33 @@ public class BaseWeapon : MonoBehaviour
     public void Fire(GameObject fireObject, GameObject firePoint)
     {
         // Check not reloading
-        if (isReloadTimerEnd)
+        if (isReloadEnd)
             StartCoroutine(FireAction(fireObject, firePoint));
     }
     
     IEnumerator FireAction(GameObject fireObject, GameObject firePoint)
     {
         // Check isn't in shoot cooldown
-        if (isShootCooldownTimerEnd && isReloadTimerEnd)
+        if (isShootCooldownTimerEnd && isReloadEnd)
         {
             // Check have bullet
-            if (currentBulletCount > 0)
+            if (data.currentBulletCount > 0)
             {
                 float rotationZ = fireObject.transform.rotation.eulerAngles.z;
-                AudioManager.Instance.PlayAudio(currentWeapon.fireAudio);
+                AudioManager.Instance.PlayAudio(data.weaponDetails.fireAudio);
                 CinemachineShake.Instance.CameraShake(10, 0.1f);
                 bulletPool.Fire(firePoint.transform.position, 
                     Quaternion.Euler(0,0, Random.Range(rotationZ - currentAngle / 2, rotationZ + currentAngle / 2)), currentWeapon.damage, gameObject.layer);
                 
-                currentBulletCount--;
-                CallShootCooldownTimer(currentWeapon.shootCooldown);
+                data.currentBulletCount--;
+                CallShootCooldownTimer(data.weaponDetails.shootCooldown);
+                saveWeaponDataAction?.Invoke(); // Save data
+
             }
             else
             {
                 // TODO: Reload
+
                 StartCoroutine(ReloadBullet()); 
             }
 
@@ -106,28 +118,31 @@ public class BaseWeapon : MonoBehaviour
 
     public virtual IEnumerator ReloadBullet()
     {
-        if (currentBagBulletCount > 0 && isReloadTimerEnd)
+        if (data.currentBagBulletCount > 0 && isReloadTimerEnd)
         {
             // Check Bag bullet is enough for a clip 
-            if (currentWeapon.clipBulletCount - currentBulletCount < currentBagBulletCount)
+            if (data.weaponDetails.clipBulletCount - data.currentBulletCount < data.currentBagBulletCount)
             {
-                reloadBulletCount = currentWeapon.clipBulletCount - currentBulletCount;
+                reloadBulletCount = data.weaponDetails.clipBulletCount - data.currentBulletCount;
             }
             else
             {
                 // Check bag bullet have
                 if (currentBagBulletCount > 0)
                 {
-                    reloadBulletCount = currentBagBulletCount;
+                    reloadBulletCount = data.currentBagBulletCount;
+
                 }
             }
 
             // Wait Reload Bullet time
-            CallReloadTimer(currentWeapon.weaponReloadTime);
+            CallReloadTimer(data.weaponDetails.weaponReloadTime);
             yield return new WaitUntil(() => isReloadTimerEnd );
-
-            currentBagBulletCount -= reloadBulletCount;
-            currentBulletCount += reloadBulletCount; 
+            
+            data.currentBagBulletCount -= reloadBulletCount;
+            data.currentBulletCount += reloadBulletCount;
+            saveWeaponDataAction?.Invoke(); // Save data
+            isReloadEnd = true;
         }
     }
 
@@ -144,6 +159,7 @@ public class BaseWeapon : MonoBehaviour
     private void CallReloadTimer(float _endTime)
     {
         isReloadTimerEnd = false;
+        isReloadEnd = false;
         reloadTimer = 0; 
         endTime = _endTime;
     }
@@ -153,5 +169,15 @@ public class BaseWeapon : MonoBehaviour
         isShootCooldownTimerEnd = false;
         shootCooldownTimer= 0;
         endTime = _endTime;
+    }
+
+    protected virtual void SetSaveBulletDataAction(Action action)
+    {
+        saveWeaponDataAction = action;
+    }
+
+    protected virtual void SetLoadBulletDataAction(Action action)
+    {
+        loadWeaponDataAction = action;
     }
 }

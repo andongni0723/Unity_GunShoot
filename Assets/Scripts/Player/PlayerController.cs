@@ -6,7 +6,7 @@ using DG.Tweening;
 using Random = UnityEngine.Random;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
    [Header("Object")] 
    public GameObject player;
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
    // Component
    public PlayerInputControlls inputControlls;
    private Rigidbody2D rb => GetComponent<Rigidbody2D>();
-   private BaseWeapon playerWeapon => GetComponent<BaseWeapon>();
+   public BaseWeapon playerWeapon => GetComponent<BaseWeapon>();
    private ItemManager itemManager => GetComponent<ItemManager>();
    public Light2D gunFireLight;
 
@@ -34,15 +34,14 @@ public class PlayerController : MonoBehaviour
    private void Awake()
    {
       inputControlls = new PlayerInputControlls();
-      
       // Fire Action
       inputControlls.GamePlay.Fire.performed += _ => OnFire();
       inputControlls.GamePlay.ReloadBullet.performed += _ => OnReload();
       inputControlls.GamePlay.Skill.performed += _ => OnUseSkill();
+      inputControlls.GamePlay.PlayerDetails.performed += _ => OnOpenPlayerDetails();
+      inputControlls.GamePlay.ChangeWeapon.performed += _ => OnChangeWeapon();
    }
-
    
-
    #region Event
 
    private void OnEnable()
@@ -67,9 +66,25 @@ public class PlayerController : MonoBehaviour
 
    private void OnUseSkill()
    {
-      itemManager.UseSkillItem(worldMousePosition - (Vector2)transform.position, transform.position, player.transform.rotation);
+      itemManager.UseSkillItem(worldMousePosition - (Vector2)transform.position, 
+         transform.position, player.transform.rotation);
    } 
    
+   private void OnOpenPlayerDetails()
+   {
+      // Check player has second weapon, and read player detail
+      Debug.Log("TAB");
+      EventHandler.CallReadPlayDetail(playerWeapon.weaponList[0], 
+         (playerWeapon.weaponList.Count >= 2 ? playerWeapon.weaponList[1] : default), playerWeapon.data.weaponDetails);
+   }
+   
+   private void OnChangeWeapon()
+   {
+      // is Main weapon to change Second weapon
+      // and is Second to Main
+      if(playerWeapon.isReloadEnd)
+         EventHandler.CallChangeWeapon(playerWeapon.currentWeapon == playerWeapon.weaponList[0]? playerWeapon.weaponList[1] : playerWeapon.weaponList[0]);
+   }
    // Interface
    #endregion
    

@@ -10,6 +10,7 @@ using UnityEngine.Serialization;
 public class PlayerWeapon : BaseWeapon
 {
     [Header("UI")] 
+    public Image currentWeaponImage;
     public TextMeshProUGUI currentBulletText;
     public TextMeshProUGUI currentBagBulletText;
     
@@ -17,6 +18,35 @@ public class PlayerWeapon : BaseWeapon
     public Slider shootCooldownBar;
     public Slider reloadBulletBar;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        
+        SetSaveBulletDataAction(delegate { GameManager.Instance.SavePlayerWeaponBulletData(data); });
+        SetLoadBulletDataAction(delegate { GameManager.Instance.LoadPlayerWeaponBulletData(currentWeapon); });
+    }
+
+    #region Event
+
+    private void OnEnable()
+    {
+        EventHandler.ChangeWeapon += OnChangeWeapon;
+    }
+
+    private void OnDisable()
+    {
+        EventHandler.ChangeWeapon -= OnChangeWeapon;
+    }
+
+    private void OnChangeWeapon(WeaponDetails_SO _data)
+    {
+        currentWeapon = _data;
+        
+        data = GameManager.Instance.LoadPlayerWeaponBulletData(currentWeapon);
+        UpdateUIDetails();
+    }
+
+    #endregion 
     protected override void Update()
     {
         // Timer
@@ -26,7 +56,7 @@ public class PlayerWeapon : BaseWeapon
     
             // Value 1 to 0 with reload time
             reloadBulletBar.gameObject.SetActive(true);
-            reloadBulletBar.value = currentWeapon.weaponReloadTime - reloadTimer / currentWeapon.weaponReloadTime;
+            reloadBulletBar.value = (data.weaponDetails.weaponReloadTime - reloadTimer) / data.weaponDetails.weaponReloadTime;
             
             if (reloadTimer >= endTime)
             {
@@ -41,7 +71,7 @@ public class PlayerWeapon : BaseWeapon
             
             // Value 1 to 0 with shoot cooldown time
             shootCooldownBar.gameObject.SetActive(true);
-            reloadBulletBar.value = currentWeapon.shootCooldown - shootCooldownTimer / currentWeapon.shootCooldown;
+            reloadBulletBar.value = data.weaponDetails.shootCooldown - shootCooldownTimer / data.weaponDetails.shootCooldown;
 
             if (shootCooldownTimer >= endTime)
             {
@@ -50,10 +80,17 @@ public class PlayerWeapon : BaseWeapon
             }
         }
         
-        currentBulletText.text = currentBulletCount.ToString();
-        currentBagBulletText.text = $"/{currentBagBulletCount.ToString()}";
+        UpdateUIDetails(); 
     }
-    
+
+    private void UpdateUIDetails()
+    {
+        currentWeaponImage.sprite = data.weaponDetails.weaponSprite;
+        currentWeaponImage.SetNativeSize(); 
+        currentBulletText.text = data.currentBulletCount.ToString();
+        currentBagBulletText.text = $"/{data.currentBagBulletCount.ToString()}"; 
+    }
+
     /// <summary>
     /// The angle of shoot will be change by character speed
     /// </summary>
@@ -69,7 +106,7 @@ public class PlayerWeapon : BaseWeapon
 
     public override IEnumerator ReloadBullet()
     {
-        if (currentBagBulletCount > 0)
+        if (data.currentBagBulletCount > 0)
         {
             AudioManager.Instance.PlayAudio(AudioManager.Instance.reloadWeaponAudio);
         }

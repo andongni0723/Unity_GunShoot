@@ -71,6 +71,24 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlayerDetails"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c3823ef-5287-4755-93d6-95801f9d2d82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""557184ac-c555-4595-9f54-bc80e1928c09"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -300,7 +318,7 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""ReloadBullet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -311,8 +329,30 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/g"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Skill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""408751c1-a6a6-4b57-bcf6-4f5de3744868"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""PlayerDetails"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7936609-0368-4ccb-8272-ae2d84aac156"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ChangeWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -702,6 +742,17 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e66cd92d-9d9e-4c65-a47f-4125a50c2c29"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c52c8e0b-8179-41d3-b8a1-d149033bbe86"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
@@ -905,6 +956,8 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
         m_GamePlay_Fire = m_GamePlay.FindAction("Fire", throwIfNotFound: true);
         m_GamePlay_ReloadBullet = m_GamePlay.FindAction("ReloadBullet", throwIfNotFound: true);
         m_GamePlay_Skill = m_GamePlay.FindAction("Skill", throwIfNotFound: true);
+        m_GamePlay_PlayerDetails = m_GamePlay.FindAction("PlayerDetails", throwIfNotFound: true);
+        m_GamePlay_ChangeWeapon = m_GamePlay.FindAction("ChangeWeapon", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -983,6 +1036,8 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Fire;
     private readonly InputAction m_GamePlay_ReloadBullet;
     private readonly InputAction m_GamePlay_Skill;
+    private readonly InputAction m_GamePlay_PlayerDetails;
+    private readonly InputAction m_GamePlay_ChangeWeapon;
     public struct GamePlayActions
     {
         private @PlayerInputControlls m_Wrapper;
@@ -992,6 +1047,8 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_GamePlay_Fire;
         public InputAction @ReloadBullet => m_Wrapper.m_GamePlay_ReloadBullet;
         public InputAction @Skill => m_Wrapper.m_GamePlay_Skill;
+        public InputAction @PlayerDetails => m_Wrapper.m_GamePlay_PlayerDetails;
+        public InputAction @ChangeWeapon => m_Wrapper.m_GamePlay_ChangeWeapon;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1016,6 +1073,12 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
             @Skill.started += instance.OnSkill;
             @Skill.performed += instance.OnSkill;
             @Skill.canceled += instance.OnSkill;
+            @PlayerDetails.started += instance.OnPlayerDetails;
+            @PlayerDetails.performed += instance.OnPlayerDetails;
+            @PlayerDetails.canceled += instance.OnPlayerDetails;
+            @ChangeWeapon.started += instance.OnChangeWeapon;
+            @ChangeWeapon.performed += instance.OnChangeWeapon;
+            @ChangeWeapon.canceled += instance.OnChangeWeapon;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -1035,6 +1098,12 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
             @Skill.started -= instance.OnSkill;
             @Skill.performed -= instance.OnSkill;
             @Skill.canceled -= instance.OnSkill;
+            @PlayerDetails.started -= instance.OnPlayerDetails;
+            @PlayerDetails.performed -= instance.OnPlayerDetails;
+            @PlayerDetails.canceled -= instance.OnPlayerDetails;
+            @ChangeWeapon.started -= instance.OnChangeWeapon;
+            @ChangeWeapon.performed -= instance.OnChangeWeapon;
+            @ChangeWeapon.canceled -= instance.OnChangeWeapon;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1222,6 +1291,8 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnReloadBullet(InputAction.CallbackContext context);
         void OnSkill(InputAction.CallbackContext context);
+        void OnPlayerDetails(InputAction.CallbackContext context);
+        void OnChangeWeapon(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
