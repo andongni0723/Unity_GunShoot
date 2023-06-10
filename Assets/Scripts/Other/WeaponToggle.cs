@@ -27,12 +27,16 @@ public class WeaponToggle : MonoBehaviour
 
     private void OnEnable()
     {
-        EventHandler.UpdatePlayerDetails += OnUpdatePlayerDetails;
+        EventHandler.UpdatePlayerDetails += OnUpdatePlayerDetails; // update toggle and children UI
+        EventHandler.WeaponReload += OnWeaponReload; // Set toggle can't use
+        EventHandler.WeaponReloadEnd += OnWeaponReloadEnd; // Set toggle can use
     }
 
     private void OnDisable()
     {
         EventHandler.UpdatePlayerDetails -= OnUpdatePlayerDetails;
+        EventHandler.WeaponReload -= OnWeaponReload;
+        EventHandler.WeaponReloadEnd -= OnWeaponReloadEnd;
     }
 
     private void OnUpdatePlayerDetails(WeaponDetails_SO playerCurrentWeapon)
@@ -44,10 +48,20 @@ public class WeaponToggle : MonoBehaviour
         weaponImage.SetNativeSize();
         weaponName.text = data.weaponDetails.name;
         weaponCurrentBulletsText.text = data.currentBulletCount.ToString();
-        weaponCurrentBugBulletsText.text = data.currentBagBulletCount.ToString();
+        weaponCurrentBugBulletsText.text = $"/{data.currentBagBulletCount.ToString()}";
 
         toggle.isOn = playerCurrentWeapon == weaponDetails;
         openOutLineImage.SetActive(toggle.isOn);
+    }
+
+    private void OnWeaponReload()
+    {
+        toggle.enabled = false;
+    }
+
+    private void OnWeaponReloadEnd()
+    {
+        toggle.enabled = true;
     }
 
     #endregion 
@@ -55,6 +69,6 @@ public class WeaponToggle : MonoBehaviour
     private void ToggleValueChange()
     {
         openOutLineImage.SetActive(toggle.isOn);
-        EventHandler.CallChangeWeapon(weaponDetails);
+        EventHandler.CallChangeWeapon(weaponDetails); 
     }
 }

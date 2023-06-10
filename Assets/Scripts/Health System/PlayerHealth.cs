@@ -24,7 +24,7 @@ public class PlayerHealth : BaseHealth
         Sequence sequence = DOTween.Sequence();
         sequence.Append(canvasGroup.DOFade(1, 0.1f));
         sequence.Append(canvasGroup.DOFade(0, 0.8f));
-        CinemachineShake.Instance.CameraShake(10, 0.1f);
+        CameraController.Instance.CameraShake(10, 0.1f);
         
         // Health Bar
         healthBar.value = (float)currentHealth / maxHealth;

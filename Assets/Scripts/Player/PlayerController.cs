@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
 
@@ -56,7 +57,8 @@ public class PlayerController : Singleton<PlayerController>
    
    private void OnFire()
    {
-      playerWeapon.Fire(player, gunPoint.gameObject);
+      if(!EventSystem.current.IsPointerOverGameObject())
+         playerWeapon.Fire(player, gunPoint.gameObject);
    }
    
    private void OnReload()
@@ -75,15 +77,18 @@ public class PlayerController : Singleton<PlayerController>
       // Check player has second weapon, and read player detail
       Debug.Log("TAB");
       EventHandler.CallReadPlayDetail(playerWeapon.weaponList[0], 
-         (playerWeapon.weaponList.Count >= 2 ? playerWeapon.weaponList[1] : default), playerWeapon.data.weaponDetails);
+         (playerWeapon.weaponList.Count >= 2 ? playerWeapon.weaponList[1] : default), playerWeapon.data.weaponDetails); 
    }
    
    private void OnChangeWeapon()
    {
       // is Main weapon to change Second weapon
       // and is Second to Main
-      if(playerWeapon.isReloadEnd)
+      if (playerWeapon.isReloadEnd)
+      {
          EventHandler.CallChangeWeapon(playerWeapon.currentWeapon == playerWeapon.weaponList[0]? playerWeapon.weaponList[1] : playerWeapon.weaponList[0]);
+         EventHandler.CallChangeCameraSight(playerWeapon.currentWeapon.cameraSight);
+      }
    }
    // Interface
    #endregion

@@ -30,6 +30,11 @@ public class WeaponDetails_SO : ScriptableObject
     public float shootCooldown;
     public int damage = 1;
     
+    [Header("Camera Setting")]
+    public float cameraSight = 5.5f;
+    public float lightOutSight = 7.78f;
+    public float fireCameraShake = 10;
+    
     public float minShootAngle => shootAngle.x;
 
     public float maxShootAngle => shootAngle.y;

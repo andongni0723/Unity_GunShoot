@@ -21,9 +21,13 @@ public class BaseWeapon : MonoBehaviour
     [Header("Setting")]
     public float cameraShakeIntensity = 10;
 
+    // The action will be set by PlayerWeapon (Enemy not to use)
+    private Action saveWeaponDataAction;
+    private Action loadWeaponDataAction;
+    private Action weaponReloadAction;
+    private Action weaponReloadEndAction;
+
     //var
-    protected Action saveWeaponDataAction;
-    protected Action loadWeaponDataAction;
     private int reloadBulletCount;
     
     [Space(15f)]
@@ -96,7 +100,7 @@ public class BaseWeapon : MonoBehaviour
             {
                 float rotationZ = fireObject.transform.rotation.eulerAngles.z;
                 AudioManager.Instance.PlayAudio(data.weaponDetails.fireAudio);
-                CinemachineShake.Instance.CameraShake(10, 0.1f);
+                CameraController.Instance.CameraShake(data.weaponDetails.fireCameraShake, 0.1f);
                 bulletPool.Fire(firePoint.transform.position, 
                     Quaternion.Euler(0,0, Random.Range(rotationZ - currentAngle / 2, rotationZ + currentAngle / 2)), currentWeapon.damage, gameObject.layer);
                 
@@ -137,12 +141,14 @@ public class BaseWeapon : MonoBehaviour
 
             // Wait Reload Bullet time
             CallReloadTimer(data.weaponDetails.weaponReloadTime);
+            weaponReloadAction?.Invoke(); // Reload Action
             yield return new WaitUntil(() => isReloadTimerEnd );
             
             data.currentBagBulletCount -= reloadBulletCount;
             data.currentBulletCount += reloadBulletCount;
             saveWeaponDataAction?.Invoke(); // Save data
             isReloadEnd = true;
+            weaponReloadEndAction?.Invoke(); // Reload End Action
         }
     }
 
@@ -171,13 +177,22 @@ public class BaseWeapon : MonoBehaviour
         endTime = _endTime;
     }
 
-    protected virtual void SetSaveBulletDataAction(Action action)
+    protected  void SetSaveBulletDataAction(Action action)
     {
         saveWeaponDataAction = action;
     }
 
-    protected virtual void SetLoadBulletDataAction(Action action)
+    protected  void SetLoadBulletDataAction(Action action)
     {
         loadWeaponDataAction = action;
+    }
+    
+    protected void SetWeaponReloadAction(Action action)
+    {
+        weaponReloadAction = action;
+    }
+    protected void SetWeaponReloadEndAction(Action action)
+    {
+        weaponReloadEndAction = action;
     }
 }

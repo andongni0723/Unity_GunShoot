@@ -29,4 +29,25 @@ public class EventHandler : MonoBehaviour
     {
         ChangeWeapon?.Invoke(data);
     }
+
+    public static event Action WeaponReload;
+
+    public static void CallWeaponReload()
+    {
+        WeaponReload?.Invoke();
+    }
+
+    public static event Action WeaponReloadEnd;
+
+    public static void CallWeaponReloadEnd()
+    {
+        WeaponReloadEnd?.Invoke();
+    }
+
+    public static event Action<float> ChangeCameraSight;
+
+    public static void CallChangeCameraSight(float target)
+    {
+        ChangeCameraSight?.Invoke(target);
+    }
 }
