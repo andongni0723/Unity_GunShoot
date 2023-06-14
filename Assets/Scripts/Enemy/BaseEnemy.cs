@@ -50,7 +50,7 @@ public class BaseEnemy : MonoBehaviour
 
     private void Update()
     {
-        playerPosUpdate = GameManager.Instance.playerObject.transform.position;
+        playerPosUpdate = GameManager.Instance.playerHeadObject.transform.position;
         playerDistance = Vector2.Distance(transform.position,playerPosUpdate);
         
         baseWeapon.SpeedToChangeShootAngle((currentEnemyState == EnemyState.Chase)? 1 : 0);
@@ -102,14 +102,16 @@ public class BaseEnemy : MonoBehaviour
     private void CheckPlayerSightAndSetActive()
     {
         playerPos = playerPosUpdate;
-        hits = Physics2D.RaycastAll(transform.position, playerPos - transform.position,
+
+        //hits = Physics2D.RaycastAll(transform.position, playerPos - transform.position, Vector2.Distance(transform.position, playerPos) + 10, rayLayerMask);
+        int hitCount = Physics2D.RaycastNonAlloc(transform.position, playerPos - transform.position, hits,
             Vector2.Distance(transform.position, playerPos) + 10, rayLayerMask);
 
-        TestAddRayList();
+        //TODO: fix
+        //TestAddRayList();
 
-        if (hits.Length != 0)
+        for (int i = 0; i < hitCount; i++)
         {
-            // Check first hit object is player, that is be player can see enemy
             if (hits[0].transform.name == GameManager.Instance.playerObject.name)
             {
                 canSeePlayer = true;
@@ -123,11 +125,30 @@ public class BaseEnemy : MonoBehaviour
                 enemySpriteObject.SetActive(false);
                 UICanvas.SetActive(false);
             }
+            
+            break;
         }
-        else
-        {
-            enemySpriteObject.SetActive(false);
-        }
+        // if (hits.Length != 0)
+        // {
+        //     // Check first hit object is player, that is be player can see enemy
+        //     if (hits[0].transform.name == GameManager.Instance.playerObject.name)
+        //     {
+        //         canSeePlayer = true;
+        //         enemySpriteObject.SetActive(true);
+        //         UICanvas.SetActive(true);
+        //         isFirstSeePlayer = true;
+        //     }
+        //     else
+        //     {
+        //         canSeePlayer = false;
+        //         enemySpriteObject.SetActive(false);
+        //         UICanvas.SetActive(false);
+        //     }
+        // }
+        // else
+        // {
+        //     enemySpriteObject.SetActive(false);
+        // }
     }
 
     private void TestAddRayList()
@@ -160,7 +181,11 @@ public class BaseEnemy : MonoBehaviour
                 break;
             case EnemyState.Attack:
                 // Rotation
-                enemyObject.transform.up = playerPosUpdate - transform.position;
+                //enemyObject.transform.up = playerPosUpdate - transform.position;
+                
+                float angle = Mathf.Atan2(playerPosUpdate.y - transform.position.y ,playerPosUpdate.x - transform.position.x) * Mathf.Rad2Deg;
+                enemyObject.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+                
                 // Attack
                 if(baseWeapon.isReloadTimerEnd)
                     baseWeapon.Fire(gunPoint, enemyObject);
@@ -171,7 +196,10 @@ public class BaseEnemy : MonoBehaviour
                     // Position
                     transform.position = Vector3.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
                     // Rotation
-                    enemyObject.transform.up = playerPosUpdate - transform.position;
+                    //enemyObject.transform.up = playerPosUpdate - transform.position;
+                    
+                    angle = Mathf.Atan2(playerPosUpdate.y - transform.position.y ,playerPosUpdate.x - transform.position.x) * Mathf.Rad2Deg;
+                    enemyObject.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
                 }
                 break;
             case EnemyState.Static:

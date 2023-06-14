@@ -69,7 +69,7 @@ public class PlayerController : Singleton<PlayerController>
    private void OnUseSkill()
    {
       itemManager.UseSkillItem(worldMousePosition - (Vector2)transform.position, 
-         transform.position, player.transform.rotation);
+         gunPoint.transform.position, player.transform.rotation);
    } 
    
    private void OnOpenPlayerDetails()

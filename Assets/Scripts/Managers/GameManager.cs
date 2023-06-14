@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public GameObject playerObject;
+    public GameObject playerHeadObject;
     public List<WeaponBulletData> PlayerWeaponBulletDataList = new List<WeaponBulletData>();
 
 

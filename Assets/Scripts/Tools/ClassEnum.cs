@@ -7,6 +7,11 @@ public enum EnemyState
     Static, Chase, Attack, Back
 }
 
+public enum CharacterHeadState
+{
+    Left, Center, Right
+}
+
 // Class
 [System.Serializable]
 public class WeaponBulletData
