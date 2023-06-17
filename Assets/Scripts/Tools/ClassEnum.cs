@@ -12,6 +12,11 @@ public enum CharacterHeadState
     Left, Center, Right
 }
 
+public enum ItemType
+{
+    Weapon, Skill, Healthy , Buff
+}
+
 // Class
 [System.Serializable]
 public class WeaponBulletData

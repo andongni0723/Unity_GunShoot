@@ -46,7 +46,7 @@ public class WeaponToggle : MonoBehaviour
         // Update UI 
         weaponImage.sprite = data.weaponDetails.weaponSprite;
         weaponImage.SetNativeSize();
-        weaponName.text = data.weaponDetails.name;
+        weaponName.text = data.weaponDetails.weaponName;
         weaponCurrentBulletsText.text = data.currentBulletCount.ToString();
         weaponCurrentBugBulletsText.text = $"/{data.currentBagBulletCount.ToString()}";
 

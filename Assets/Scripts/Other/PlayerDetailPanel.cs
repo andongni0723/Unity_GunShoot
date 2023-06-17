@@ -14,23 +14,8 @@ public class PlayerDetailPanel : MonoBehaviour
 
     private void Awake()
     {
-        
-        //inputControlls.UI.Click.performed += _ => OnCancel();
-        //inputControlls.GamePlay.Fire.performed += _ => OnCancel();
-        
         panelParent.SetActive(false);
     }
-
-    private void Start()
-    {
-        //inputControlls = PlayerController.Instance.inputControlls;
-
-        //inputControlls.UI.Cancel.performed += _ => OnCancel();
-        
-        //inputControlls.GamePlay.PlayerDetails.performed += _ => OnOpen();
-    }
-
-    private void OnOpen() => Debug.Log("TAB Open");
 
     #region Event
 

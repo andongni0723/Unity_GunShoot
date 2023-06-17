@@ -7,8 +7,24 @@ public class GameManager : Singleton<GameManager>
 {
     public GameObject playerObject;
     public GameObject playerHeadObject;
+
+    [Header("Data")] 
+    public CharacterDetails_SO playerDetail;
+    public int currentPlayerMoney = 250;
     public List<WeaponBulletData> PlayerWeaponBulletDataList = new List<WeaponBulletData>();
 
+    protected override void Awake()
+    {
+        base.Awake();
+        
+        StartCoroutine(WaitForGetPlayerDetails());
+    }
+
+    IEnumerator WaitForGetPlayerDetails()
+    {
+        yield return new WaitUntil(() => playerDetail != default);
+        EventHandler.CallLoadPlayer(playerDetail);
+    }
 
     public WeaponBulletData LoadPlayerWeaponBulletData(WeaponDetails_SO loadData)
     {

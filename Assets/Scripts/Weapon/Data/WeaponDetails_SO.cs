@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Serialization;
 
-[CreateAssetMenu(menuName = "Game Data", fileName = "Weapon Detail")]
+[CreateAssetMenu(menuName = "Game Data/Weapon Detail", fileName = "Details_SO")]
 public class WeaponDetails_SO : ScriptableObject
 {
     
@@ -13,8 +13,8 @@ public class WeaponDetails_SO : ScriptableObject
     [PreviewField(100, ObjectFieldAlignment.Left), HideLabel]
     public Sprite weaponSprite;
   
-    [VerticalGroup("Basic/Details")]
-    public string name;
+    [FormerlySerializedAs("weaponNme")] [FormerlySerializedAs("name")] [VerticalGroup("Basic/Details")]
+    public string weaponName;
     
     [VerticalGroup("Basic/Details"), MinValue(0)]
     public int clipBulletCount;

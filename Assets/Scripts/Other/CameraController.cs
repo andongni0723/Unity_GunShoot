@@ -8,7 +8,7 @@ using UnityEditor.ShaderGraph.Internal;
 
 public class CameraController : Singleton<CameraController>
 {
-    private CinemachineVirtualCamera camera;
+    private new CinemachineVirtualCamera camera;
     private CinemachineBasicMultiChannelPerlin noise;
 
     protected override void Awake()

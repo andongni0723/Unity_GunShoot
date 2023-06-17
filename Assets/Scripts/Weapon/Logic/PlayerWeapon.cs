@@ -24,9 +24,8 @@ public class PlayerWeapon : BaseWeapon
 
     protected override void Awake()
     {
-        base.Awake();
-
-
+        // Init late to load player details done
+        
         // Set BaseWeapon action
         SetSaveBulletDataAction(delegate { GameManager.Instance.SavePlayerWeaponBulletData(data); });
         SetLoadBulletDataAction(delegate { GameManager.Instance.LoadPlayerWeaponBulletData(currentWeapon); });
@@ -35,21 +34,29 @@ public class PlayerWeapon : BaseWeapon
         
     }
 
-    private void Start()
-    {
-        OnChangeWeapon(currentWeapon);
-    }
-
     #region Event
 
     private void OnEnable()
     {
-        EventHandler.ChangeWeapon += OnChangeWeapon;
+        EventHandler.LoadPlayerEnd += OnLoadPlayerEnd; // Init
+        EventHandler.ChangeWeapon += OnChangeWeapon; // Change weapon 
     }
 
     private void OnDisable()
     {
+        EventHandler.LoadPlayerEnd -= OnLoadPlayerEnd;
         EventHandler.ChangeWeapon -= OnChangeWeapon;
+    }
+
+    private void OnLoadPlayerEnd()
+    {
+        currentWeapon = weaponList[0];
+
+        // New bullet data from currentWeapon
+        data =
+            new WeaponBulletData(currentWeapon, currentWeapon.clipBulletCount, currentWeapon.bagBulletCount);
+        
+        OnChangeWeapon(currentWeapon);
     }
 
     private void OnChangeWeapon(WeaponDetails_SO _data)
@@ -104,10 +111,13 @@ public class PlayerWeapon : BaseWeapon
 
     private void UpdateUIDetails()
     {
-        currentWeaponImage.sprite = data.weaponDetails.weaponSprite;
-        currentWeaponImage.SetNativeSize(); 
-        currentBulletText.text = data.currentBulletCount.ToString();
-        currentBagBulletText.text = $"/{data.currentBagBulletCount.ToString()}"; 
+        if (currentWeapon != null)
+        {
+            currentWeaponImage.sprite = data.weaponDetails.weaponSprite;
+            currentWeaponImage.SetNativeSize(); 
+            currentBulletText.text = data.currentBulletCount.ToString();
+            currentBagBulletText.text = $"/{data.currentBagBulletCount.ToString()}";  
+        }
     }
 
     private void LightSightToColliderSize(float lightSight)
@@ -126,11 +136,14 @@ public class PlayerWeapon : BaseWeapon
     /// <param name="speed"></param>
     public override void SpeedToChangeShootAngle(float speed)
     {
-        currentAngle = currentWeapon.minShootAngle +
-                       speed * (currentWeapon.maxShootAngle - currentWeapon.minShootAngle);
+        if (currentWeapon != null)
+        {
+            currentAngle = currentWeapon.minShootAngle +
+                           speed * (currentWeapon.maxShootAngle - currentWeapon.minShootAngle);
         
-        weaponLight.pointLightInnerAngle = currentAngle;
-        weaponLight.pointLightOuterAngle = currentAngle;
+            weaponLight.pointLightInnerAngle = currentAngle;
+            weaponLight.pointLightOuterAngle = currentAngle;
+        }
     }
 
     public override IEnumerator ReloadBullet()
