@@ -39,11 +39,11 @@ public class HeadController : MonoBehaviour
         int centerHitCount = Physics2D.RaycastNonAlloc(headCenterPoint.transform.position, transform.up, centerHits, 3, hitLayer);
         int rightHitCount  = Physics2D.RaycastNonAlloc(headRightPoint.transform.position, transform.up, rightHits, 3, hitLayer);
 
-        for (int i = 0; i < centerHitCount; i++)
-        {
-            Debug.Log($"{centerHits[i].transform.name}, {Vector2.Distance(transform.position, centerHits[i].transform.position)}");
-            break;
-        }
+        // for (int i = 0; i < centerHitCount; i++)
+        // {
+        //     //Debug.Log($"{centerHits[i].transform.name}, {Vector2.Distance(transform.position, centerHits[i].transform.position)}");
+        //     break;
+        // }
 
         // Execute Head State Action
         switch (playerHeadState)

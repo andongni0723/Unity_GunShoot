@@ -5,13 +5,18 @@ using UnityEngine;
 
 public class BuyMainWeaponButton : BuyButton
 {
-    private WeaponDetails_SO itemData;
     protected override void Start()
     {
+        // get data from GameManager
+        buyItemDetails.itemName = GameManager.Instance.playerDetail.mainWeaponDetails.weaponName;
+        buyItemDetails.buyWeaponDetails = GameManager.Instance.playerDetail.mainWeaponDetails;
         itemSprite = GameManager.Instance.playerDetail.mainWeaponDetails.weaponSprite;
-        itemNameText.text = GameManager.Instance.playerDetail.mainWeaponDetails.weaponName;
-        itemData = GameManager.Instance.playerDetail.mainWeaponDetails;
-        
-        button.onClick.AddListener(delegate { OnBuy(itemData); });;
+
+        // Update UI
+        itemIconImage.sprite = itemSprite;
+        itemNameText.text = buyItemDetails.itemName;
+
+        // Add Listener
+        button.onClick.AddListener(OnBuy);;
     }
 }

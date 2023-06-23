@@ -89,6 +89,24 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InteractiveItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""c77d0724-8f68-4abd-96a4-7acc213cce7c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Recovery"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc161141-4ac3-4ca9-a690-41820e8b59b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -353,6 +371,28 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92b441c7-59c0-4680-80e6-355a450e3d14"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Touch;Gamepad;Joystick;XR"",
+                    ""action"": ""InteractiveItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cfba8bdb-c9b3-4221-a513-386daa311b05"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad;Joystick;XR;Touch"",
+                    ""action"": ""Recovery"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -731,22 +771,11 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""82627dcc-3b13-4ba9-841d-e4b746d6553e"",
-                    ""path"": ""*/{Cancel}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
-                    ""action"": ""Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""e66cd92d-9d9e-4c65-a47f-4125a50c2c29"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -958,6 +987,8 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
         m_GamePlay_Skill = m_GamePlay.FindAction("Skill", throwIfNotFound: true);
         m_GamePlay_PlayerDetails = m_GamePlay.FindAction("PlayerDetails", throwIfNotFound: true);
         m_GamePlay_ChangeWeapon = m_GamePlay.FindAction("ChangeWeapon", throwIfNotFound: true);
+        m_GamePlay_InteractiveItem = m_GamePlay.FindAction("InteractiveItem", throwIfNotFound: true);
+        m_GamePlay_Recovery = m_GamePlay.FindAction("Recovery", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1038,6 +1069,8 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Skill;
     private readonly InputAction m_GamePlay_PlayerDetails;
     private readonly InputAction m_GamePlay_ChangeWeapon;
+    private readonly InputAction m_GamePlay_InteractiveItem;
+    private readonly InputAction m_GamePlay_Recovery;
     public struct GamePlayActions
     {
         private @PlayerInputControlls m_Wrapper;
@@ -1049,6 +1082,8 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
         public InputAction @Skill => m_Wrapper.m_GamePlay_Skill;
         public InputAction @PlayerDetails => m_Wrapper.m_GamePlay_PlayerDetails;
         public InputAction @ChangeWeapon => m_Wrapper.m_GamePlay_ChangeWeapon;
+        public InputAction @InteractiveItem => m_Wrapper.m_GamePlay_InteractiveItem;
+        public InputAction @Recovery => m_Wrapper.m_GamePlay_Recovery;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1079,6 +1114,12 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
             @ChangeWeapon.started += instance.OnChangeWeapon;
             @ChangeWeapon.performed += instance.OnChangeWeapon;
             @ChangeWeapon.canceled += instance.OnChangeWeapon;
+            @InteractiveItem.started += instance.OnInteractiveItem;
+            @InteractiveItem.performed += instance.OnInteractiveItem;
+            @InteractiveItem.canceled += instance.OnInteractiveItem;
+            @Recovery.started += instance.OnRecovery;
+            @Recovery.performed += instance.OnRecovery;
+            @Recovery.canceled += instance.OnRecovery;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -1104,6 +1145,12 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
             @ChangeWeapon.started -= instance.OnChangeWeapon;
             @ChangeWeapon.performed -= instance.OnChangeWeapon;
             @ChangeWeapon.canceled -= instance.OnChangeWeapon;
+            @InteractiveItem.started -= instance.OnInteractiveItem;
+            @InteractiveItem.performed -= instance.OnInteractiveItem;
+            @InteractiveItem.canceled -= instance.OnInteractiveItem;
+            @Recovery.started -= instance.OnRecovery;
+            @Recovery.performed -= instance.OnRecovery;
+            @Recovery.canceled -= instance.OnRecovery;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1293,6 +1340,8 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
         void OnSkill(InputAction.CallbackContext context);
         void OnPlayerDetails(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
+        void OnInteractiveItem(InputAction.CallbackContext context);
+        void OnRecovery(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

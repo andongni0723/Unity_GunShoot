@@ -824,7 +824,7 @@ ParticleSystem:
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
-    m_Texture: {fileID: 10912, guid: 0000000000000000f000000000000000, type: 0}
+    m_Texture: {fileID: 0}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
     m_TextureUVChannel: 0
@@ -5002,7 +5002,7 @@ Transform:
   - {fileID: 710209523182931830}
   - {fileID: 1975422818812456197}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3668956611008034131
 MonoBehaviour:

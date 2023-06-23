@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
     IEnumerator WaitForGetPlayerDetails()
     {
         yield return new WaitUntil(() => playerDetail != default);
+        Debug.Log("Load Player");
         EventHandler.CallLoadPlayer(playerDetail);
     }
 
@@ -38,6 +39,8 @@ public class GameManager : Singleton<GameManager>
         
         // Not Found
         Debug.LogWarning($"Not Found WeaponBulletData: '{loadData}'");
+        Debug.Log($"Not Found WeaponBulletData: '{loadData}'");
+        
         WeaponBulletData newData = new WeaponBulletData(loadData, loadData.clipBulletCount, loadData.bagBulletCount);
         PlayerWeaponBulletDataList.Add(newData);
         return newData;

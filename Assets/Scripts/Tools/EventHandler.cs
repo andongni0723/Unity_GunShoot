@@ -23,6 +23,20 @@ public class EventHandler : MonoBehaviour
         PlayerDead?.Invoke();
     }
 
+    public static event Action<GameObject> InteractiveItem;
+
+    public static void CallInteractiveItem(GameObject targetItem)
+    {
+        InteractiveItem?.Invoke(targetItem);
+    }
+
+    public static event Action OnCancelUI;
+
+    public static void CallOnCancelUI()
+    {
+        OnCancelUI?.Invoke();
+    }
+    
     public static event Action<WeaponDetails_SO, WeaponDetails_SO, WeaponDetails_SO> ReadPlayDetail;
 
     public static void CallReadPlayDetail(WeaponDetails_SO mainWeapon, WeaponDetails_SO secondWeapon, WeaponDetails_SO currentWeapon)
@@ -35,6 +49,13 @@ public class EventHandler : MonoBehaviour
     public static void CallUpdatePlayerDetails(WeaponDetails_SO currentWeapon)
     {
         UpdatePlayerDetails?.Invoke(currentWeapon);
+    }
+
+    public static event Action OpenStorePanel;
+
+    public static void CallOpenStorePanel()
+    {
+        OpenStorePanel?.Invoke();
     }
 
     public static event Action StorePanelLoadingDone;
@@ -74,18 +95,18 @@ public class EventHandler : MonoBehaviour
 
     #region Store
 
-    public static event Action<ItemType, WeaponDetails_SO, int> BuyItem;
+    public static event Action<BuyItemDetails> BuyItem;
 
-    public static void CallBuyItem(ItemType itemType, WeaponDetails_SO data, int itemPrice)
+    public static void CallBuyItem(BuyItemDetails data)
     {
-        BuyItem?.Invoke(itemType, data, itemPrice);
+        BuyItem?.Invoke(data);
     }
 
-    public static event Action<WeaponDetails_SO, int> CorrectBuyItem;
+    public static event Action<BuyItemDetails> CorrectBuyItem;
 
-    public static void CallCorrectBuyItem(WeaponDetails_SO data, int itemPrice)
+    public static void CallCorrectBuyItem(BuyItemDetails data)
     {
-        CorrectBuyItem?.Invoke(data, itemPrice);
+        CorrectBuyItem?.Invoke(data);
     }
 
     public static event Action CancelBuyItem;
@@ -95,11 +116,11 @@ public class EventHandler : MonoBehaviour
         CancelBuyItem?.Invoke();
     }
 
-    public static event Action BuyItemSuccessful;
+    public static event Action<BuyItemDetails> BuyItemSuccessful;
 
-    public static void CallBuyItemSuccessful()
+    public static void CallBuyItemSuccessful(BuyItemDetails data)
     {
-        BuyItemSuccessful?.Invoke();
+        BuyItemSuccessful?.Invoke(data);
     }
 
     #endregion

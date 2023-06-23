@@ -68,30 +68,44 @@ public class StorePanel : MonoBehaviour
 
     private void OnEnable()
     {
-        EventHandler.BuyItem += OnBuyItem; // switch window to check window
+        EventHandler.OnCancelUI += OnOnCancelUI;         // Close Window
+        EventHandler.OpenStorePanel += OnOpenStorePanel; // Open Panel
+        EventHandler.BuyItem += OnBuyItem;               // switch window to check window
         EventHandler.CorrectBuyItem += OnCorrectBuyItem; // Check have money to buy
-        EventHandler.CancelBuyItem += OnCancelBuyItem;
+        EventHandler.CancelBuyItem += OnCancelBuyItem;   // Back to Main Store Window
     }
 
     private void OnDisable()
     {
+        EventHandler.OnCancelUI -= OnOnCancelUI;
+        EventHandler.OpenStorePanel -= OnOpenStorePanel;
         EventHandler.BuyItem -= OnBuyItem;
         EventHandler.CorrectBuyItem -= OnCorrectBuyItem;
         EventHandler.CancelBuyItem -= OnCancelBuyItem;
     }
 
-    private void OnCorrectBuyItem(WeaponDetails_SO data, int itemPrice)
+    private void OnOpenStorePanel()
+    {
+        storePanel.SetActive(true);
+    }
+
+    private void OnOnCancelUI()
+    {
+        storePanel.SetActive(false);
+    }
+
+    private void OnCorrectBuyItem(BuyItemDetails data)
     {
         // Check have money to buy item
-        if (GameManager.Instance.currentPlayerMoney > itemPrice)
+        if (GameManager.Instance.currentPlayerMoney > data.itemPrice)
         {
             // Buy successful, switch window to "CorrectWindow"
-            EventHandler.CallBuyItemSuccessful();
+            EventHandler.CallBuyItemSuccessful(data);
             StartCoroutine(SwitchWindow(checkPanelWindow, buyCorrectWindow, 0));
             StartCoroutine(SwitchWindow(buyCorrectWindow, mainStoreWindow, 1));
 
-            Debug.Log(itemPrice);
-            GameManager.Instance.currentPlayerMoney -= itemPrice;
+            Debug.Log(data.itemPrice);
+            GameManager.Instance.currentPlayerMoney -= data.itemPrice;
         }
         else
         {
@@ -108,7 +122,7 @@ public class StorePanel : MonoBehaviour
         StartCoroutine(SwitchWindow(checkPanelWindow, mainStoreWindow, 0));
     }
 
-    private void OnBuyItem(ItemType itemType, WeaponDetails_SO data, int itemPrice)
+    private void OnBuyItem(BuyItemDetails data)
     {
         StartCoroutine(SwitchWindow(mainStoreWindow, checkPanelWindow, 0));
     }
@@ -120,6 +134,7 @@ public class StorePanel : MonoBehaviour
         loadingBar.DOValue(1, loadingBarValueFadeTime).OnComplete(() =>
         {
             StartCoroutine(SwitchWindow(loadingBarParent, mainStoreWindow, 0));
+            EventHandler.CallStorePanelLoadingDone();
         });
     }
 
@@ -144,31 +159,4 @@ public class StorePanel : MonoBehaviour
         sequence.Append(targetWindow.DOFade(1, panelFadeTime));
         yield return null; 
     }
-    
-    // #region Button Event
-    //
-    // public void CheckBuyItem()
-    // {
-    //     StartCoroutine(SwitchWindow(mainStoreWindow, checkPanelWindow, 0));
-    // }
-    //
-    // public void BuyCorrect()
-    // {
-    //     StartCoroutine(SwitchWindow(checkPanelWindow, buyCorrectWindow, 0));
-    //     StartCoroutine(SwitchWindow(buyCorrectWindow, mainStoreWindow, 0.5f));
-    // }
-    //
-    // public void BuyFailed(string failedMessage)
-    // {
-    //     buyFailedMessageText.text = failedMessage;
-    //     StartCoroutine(SwitchWindow(checkPanelWindow, buyFailedWindow, 0));
-    //     StartCoroutine(SwitchWindow(buyFailedWindow, mainStoreWindow, 0.5f));
-    // }
-    //
-    // public void BuyCancel()
-    // {
-    //     StartCoroutine(SwitchWindow(checkPanelWindow, mainStoreWindow, 0));
-    // }
-    //
-    // #endregion
 }

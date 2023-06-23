@@ -21,12 +21,19 @@ public class PlayerDetailPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        EventHandler.ReadPlayDetail += OnReadPlayDetail; // Update detail to componemts
+        EventHandler.OnCancelUI += OnOnCancelUI; // Close Window
+        EventHandler.ReadPlayDetail += OnReadPlayDetail; // Update detail to components
     }
 
     private void OnDisable()
     {
+        EventHandler.OnCancelUI -= OnOnCancelUI;
         EventHandler.ReadPlayDetail -= OnReadPlayDetail;
+    }
+
+    private void OnOnCancelUI()
+    {
+        panelParent.SetActive(false);
     }
 
     private void OnReadPlayDetail(WeaponDetails_SO mainWeapon, WeaponDetails_SO secondWeapon, WeaponDetails_SO currentWeapon)

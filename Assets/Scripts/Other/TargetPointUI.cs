@@ -18,7 +18,10 @@ public class TargetPointUI : MonoBehaviour
     {
         CinemachineCore.CameraUpdatedEvent.AddListener(delegate
         {
-            rectTrans.position = GetClampPos(RectTransformUtility.WorldToScreenPoint(Camera.main, targetTransform.position), CalRectByCanvas(canvas, rectTrans.sizeDelta));
+            //rectTrans.position = GetClampPos(RectTransformUtility.WorldToScreenPoint(Camera.main, targetTransform.position), CalRectByCanvas(canvas, rectTrans.sizeDelta));
+            rectTrans.position = GetClampPos(RectTransformUtility.WorldToScreenPoint(Camera.main, targetTransform.position), 
+                CalRectByVector2(new Vector2(Screen.width, Screen.height), rectTrans.sizeDelta));
+            
             distanceText.text = $"{(Vector2.Distance(GameManager.Instance.playerObject.transform.position, targetTransform.position) * 5).ToString("00")}m";
         }); 
     }
@@ -44,6 +47,23 @@ public class TargetPointUI : MonoBehaviour
         // rect.yMin = uiSize.y / 2;
         rect.xMax = area.x - uiSize.x;
         rect.yMax = area.y - uiSize.y;
+        rect.xMin = uiSize.x;
+        rect.yMin = uiSize.y;
+
+        return rect;
+    }
+    
+    private Rect CalRectByVector2(Vector2 cameraSize, Vector2 uiSize)
+    {
+        Rect rect = Rect.zero;
+
+        //减去uiSize的一半是为了防止UI元素一般溢出屏幕
+        // rect.xMax = area.x - uiSize.x / 2;
+        // rect.yMax = area.y - uiSize.y / 2;
+        // rect.xMin = uiSize.x / 2;
+        // rect.yMin = uiSize.y / 2;
+        rect.xMax = cameraSize.x - uiSize.x;
+        rect.yMax = cameraSize.y - uiSize.y;
         rect.xMin = uiSize.x;
         rect.yMin = uiSize.y;
 

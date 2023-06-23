@@ -11,7 +11,7 @@ public class Grenade : ThrowItem
     public float bombArea;
     public LayerMask rayLayerMask;
     
-    private bool isAction = false;
+    //private bool isAction = false;
 
     public override void Throw(Vector2 startForce)
     {

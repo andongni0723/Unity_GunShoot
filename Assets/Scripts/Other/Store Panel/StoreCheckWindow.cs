@@ -13,9 +13,9 @@ public class StoreCheckWindow : MonoBehaviour
     public Button cancelButton;
     public TextMeshProUGUI buyItemNameText;
 
-    [Header("Setting")] 
-    private WeaponDetails_SO buyItemDetail;
-    private int buyItemPrice;
+    [Header("Setting")]
+    //private WeaponDetails_SO buyItemDetail;
+    private BuyItemDetails buyItemDetails;
 
     private void Awake()
     {
@@ -30,26 +30,24 @@ public class StoreCheckWindow : MonoBehaviour
         EventHandler.BuyItem += OnBuyItem; // Update UI
     }
 
-    private void OnBuyItem(ItemType itemType, WeaponDetails_SO data, int itemPrice)
+    private void OnBuyItem(BuyItemDetails data)
     {
-        buyItemDetail = data;
-        buyItemNameText.text = buyItemDetail.weaponName;
-        buyItemPrice = itemPrice;
-        Debug.Log($"check {itemPrice}");
-
+        buyItemDetails = data;
+        buyItemNameText.text = buyItemDetails.itemName;
+        Debug.Log($"check {data.itemPrice}");
     }
 
     #endregion
 
     #region Button Event
 
-    public void OnPressCorrect()
+    private void OnPressCorrect()
     {
         //Debug.Log($"Press {buyItemPrice}");
-        EventHandler.CallCorrectBuyItem(buyItemDetail, buyItemPrice);
+        EventHandler.CallCorrectBuyItem(buyItemDetails);
     }
 
-    public void OnPressCancel()
+    private void OnPressCancel()
     {
         EventHandler.CallCancelBuyItem();
     }

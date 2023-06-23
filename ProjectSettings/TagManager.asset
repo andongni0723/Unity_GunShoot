@@ -8,6 +8,8 @@ TagManager:
   - PoolManager
   - Light
   - Cinemachine
+  - InteractiveObject
+  - WorldCanvas
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - Other
   - Player
   - PlayerItem
-  - 
+  - InteractiveObject
   - 
   - 
   - 

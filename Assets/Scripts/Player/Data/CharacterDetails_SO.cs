@@ -16,7 +16,11 @@ public class CharacterDetails_SO : ScriptableObject
     [VerticalGroup("Basic/Image")]
     [PreviewField(100, ObjectFieldAlignment.Left), HideLabel]
     [SerializeField] private Sprite secondWeaponSprite;
-  
+    
+    [VerticalGroup("Basic/Image")]
+    [PreviewField(100, ObjectFieldAlignment.Left), HideLabel]
+    [SerializeField] public Sprite skillItemSprite;
+
     [VerticalGroup("Basic/Details")]
     public string characterName;
 
@@ -31,8 +35,15 @@ public class CharacterDetails_SO : ScriptableObject
     [VerticalGroup("Basic/Details")]
     public WeaponDetails_SO secondWeaponDetails;
     
-    //[VerticalGroup("Basic/Details")] 
+    [VerticalGroup("Basic/Details")]
+    public GameObject skillItemDetails;
+    
+    [VerticalGroup("Basic/Details")]
+    public string skillItemName;
+    
     public List<WeaponDetails_SO> startWeaponList = new List<WeaponDetails_SO>();
+
+    public int recoveryHealth = 30;
 
     //[VerticalGroup("Basic/Details"), MinValue(0)]
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class BuyButton : MonoBehaviour
@@ -16,14 +17,12 @@ public class BuyButton : MonoBehaviour
     
     [Header("Setting")]
     public bool canBuyAgain = true;
-    public ItemType buyItemType;
+    [FormerlySerializedAs("buyItemDetail")] public BuyItemDetails buyItemDetails;
     public Sprite itemSprite;
-    public int itemPrice = 100;
 
     protected virtual void Start()
     {
-        
-        button.onClick.AddListener(delegate { OnBuy(default); });
+        button.onClick.AddListener(OnBuy);
     }
 
     #region Event
@@ -37,10 +36,10 @@ public class BuyButton : MonoBehaviour
     private void OnStorePanelLoadingDone()
     {
         itemIconImage.sprite = itemSprite;
-        moneyText.text = itemPrice.ToString();
+        moneyText.text = buyItemDetails.itemPrice.ToString();
     }
 
-    private void OnBuyItemSuccessful()
+    private void OnBuyItemSuccessful(BuyItemDetails data)
     {
         button.interactable = canBuyAgain;
     }
@@ -49,10 +48,10 @@ public class BuyButton : MonoBehaviour
 
     #region Button Event
 
-    protected virtual void OnBuy(WeaponDetails_SO data)
+    protected virtual void OnBuy()
     {
-        EventHandler.CallBuyItem(buyItemType, data, itemPrice);
-        Debug.Log($"BUY {itemPrice}");
+        EventHandler.CallBuyItem(buyItemDetails);
+        Debug.Log($"BUY {buyItemDetails.itemPrice}");
     }
 
     #endregion

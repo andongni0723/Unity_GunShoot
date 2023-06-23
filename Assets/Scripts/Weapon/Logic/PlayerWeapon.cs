@@ -17,7 +17,7 @@ public class PlayerWeapon : BaseWeapon
     public Image currentWeaponImage;
     public TextMeshProUGUI currentBulletText;
     public TextMeshProUGUI currentBagBulletText;
-    
+
     //Health
     public Slider shootCooldownBar;
     public Slider reloadBulletBar;
@@ -40,14 +40,16 @@ public class PlayerWeapon : BaseWeapon
     {
         EventHandler.LoadPlayerEnd += OnLoadPlayerEnd; // Init
         EventHandler.ChangeWeapon += OnChangeWeapon; // Change weapon 
+        EventHandler.BuyItemSuccessful += OnBuyItemSuccessful; // Check player has buy main weapon
     }
 
     private void OnDisable()
     {
         EventHandler.LoadPlayerEnd -= OnLoadPlayerEnd;
         EventHandler.ChangeWeapon -= OnChangeWeapon;
+        EventHandler.BuyItemSuccessful -= OnBuyItemSuccessful;
     }
-
+    
     private void OnLoadPlayerEnd()
     {
         currentWeapon = weaponList[0];
@@ -56,7 +58,8 @@ public class PlayerWeapon : BaseWeapon
         data =
             new WeaponBulletData(currentWeapon, currentWeapon.clipBulletCount, currentWeapon.bagBulletCount);
         
-        OnChangeWeapon(currentWeapon);
+        //EventHandler.CallBuyItemSuccessful(tb);
+        //OnChangeWeapon(currentWeapon);
     }
 
     private void OnChangeWeapon(WeaponDetails_SO _data)
@@ -72,7 +75,19 @@ public class PlayerWeapon : BaseWeapon
         UpdateUIDetails();
     }
 
-    #endregion 
+    private void OnBuyItemSuccessful(BuyItemDetails _data)
+    {
+        switch (_data.itemType)
+        {
+            case ItemType.Weapon:
+                weaponList[0] = _data.buyWeaponDetails; // Set first weapon (None) to main weapon of buy 
+                OnChangeWeapon(weaponList[0]); // Change Weapon to main weapon
+                break;
+        } 
+    }
+
+    #endregion
+
     protected override void Update()
     {
         // Timer

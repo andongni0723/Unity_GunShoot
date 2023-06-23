@@ -32,3 +32,14 @@ public class WeaponBulletData
         this.currentBagBulletCount = currentBagBulletCount;
     }
 }
+
+[System.Serializable]
+public class BuyItemDetails
+{
+    public ItemType itemType;
+    public string itemName;
+    public int itemPrice;
+    public WeaponDetails_SO buyWeaponDetails;
+    public int buySkillObjectCount;
+    public int buyHealthObjectCount;
+}

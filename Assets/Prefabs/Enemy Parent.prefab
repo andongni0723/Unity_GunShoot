@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 1626565631952788279}
   - component: {fileID: 3961496565866209964}
   - component: {fileID: 5358096437140261653}
+  - component: {fileID: 8726337602496279900}
   - component: {fileID: 8678295676661795565}
   - component: {fileID: 8996153998137635191}
   - component: {fileID: 6604150371278905900}
@@ -301,6 +302,7 @@ Transform:
   m_Children:
   - {fileID: 4399224224826015989}
   - {fileID: 8926625758600945953}
+  - {fileID: 956702646468791088}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -378,6 +380,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &8726337602496279900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558112920120395133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d751db08286e408a84d8d94168b678b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayLayerMask:
+    serializedVersion: 2
+    m_Bits: 2049
+  canSeePlayer: 0
+  isFirstSeePlayer: 0
+  playerDistance: 0
+  playerPos: {x: 0, y: 0, z: 0}
+  playerPosUpdate: {x: 0, y: 0, z: 0}
+  hitsL: []
+  canRayToPlayer: 0
+  enemySpriteObject: {fileID: 7993419006972664087}
+  UICanvas: {fileID: 6278722123868019936}
 --- !u!114 &8678295676661795565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,23 +420,13 @@ MonoBehaviour:
   enemySpriteObject: {fileID: 7993419006972664087}
   gunPoint: {fileID: 4991409198615269563}
   UICanvas: {fileID: 0}
-  baseWeapon: {fileID: 8996153998137635191}
-  rayLayerMask:
-    serializedVersion: 2
-    m_Bits: 2049
   chaseDistance: 15
   attackDistance: 8
-  canRayToPlayer: 1
-  canSeePlayer: 0
   isGoneTargetPos: 0
   originPos: {x: 0, y: 0, z: 0}
   speed: 2
   canTestDraw: 0
-  isFirstSeePlayer: 0
   currentEnemyState: 0
-  playerDistance: 0
-  playerPos: {x: 0, y: 0, z: 0}
-  playerPosUpdate: {x: 0, y: 0, z: 0}
   hitsL: []
 --- !u!114 &8996153998137635191
 MonoBehaviour:
@@ -457,8 +473,11 @@ MonoBehaviour:
   currentHealth: 100
   maxHealth: 100
   defense: 0
+  deadVFX: {fileID: 6444556125758272099, guid: a18a1a6f8eb6b43e98c07d093df92f09, type: 3}
+  TextVFXInstantiatePoint: {fileID: 6014882139447957538}
+  healthChangeTextVFXObject: {fileID: 2011207226391736243, guid: f9597163404b24a318834b832bff929c, type: 3}
+  recoveryVFXPool: {fileID: 0}
   healthBar: {fileID: 8405527144984515007}
-  enemyDeadVFX: {fileID: 0}
 --- !u!1 &3080020160453691092
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,6 +638,37 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &4592734387217822310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 956702646468791088}
+  m_Layer: 11
+  m_Name: Health Change Text Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &956702646468791088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4592734387217822310}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.96, y: 0.81, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1444922634174636478}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4991409198615269563
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,6 +982,42 @@ PolygonCollider2D:
       - {x: 0.00059086084, y: -0.011862636}
       - {x: 3.1500685, y: 7.14355}
   m_UseDelaunayMesh: 0
+--- !u!1 &6014882139447957538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 847094493158188149}
+  m_Layer: 0
+  m_Name: Health Change Text Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &847094493158188149
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014882139447957538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8926625758600945953}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.721, y: 0.747}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6278722123868019936
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,6 +1052,7 @@ RectTransform:
   - {fileID: 8937821306509128420}
   - {fileID: 2349913621444941241}
   - {fileID: 4309651647753657246}
+  - {fileID: 847094493158188149}
   m_Father: {fileID: 1444922634174636478}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -12,8 +12,8 @@ public class EnemyHealth : BaseHealth
     [SerializeField] private Slider healthBar;
     private BaseEnemy baseEnemy => GetComponent<BaseEnemy>();
 
-    [Header("Setting")] 
-    public GameObject enemyDeadVFX;
+    //[Header("Setting")] 
+    //public GameObject enemyDeadVFX;
     
     public override void Damage(int damage)
     {
@@ -27,7 +27,7 @@ public class EnemyHealth : BaseHealth
     {
         // Play dead animation
         float angle = Random.Range(0, 360);
-        Instantiate(enemyDeadVFX, transform.position, quaternion.Euler(0, 0, angle));
+        Instantiate(deadVFX, transform.position, quaternion.Euler(0, 0, angle));
         Destroy(gameObject);
     }
 }
