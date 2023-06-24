@@ -1,6 +1,9 @@
 // Enum
 
-using UnityEngine.Serialization;
+public enum GamePlatform
+{
+    PC, Mobile
+}
 
 public enum EnemyState
 {

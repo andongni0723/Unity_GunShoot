@@ -10,6 +10,7 @@ TagManager:
   - Cinemachine
   - InteractiveObject
   - WorldCanvas
+  - LookTouchArea
   layers:
   - Default
   - TransparentFX

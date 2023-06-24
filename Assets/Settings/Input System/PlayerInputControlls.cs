@@ -46,9 +46,27 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""DragScreenMobile"",
+                    ""type"": ""Button"",
+                    ""id"": ""147c2057-c2bd-4127-b06c-f7d13721e2f1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Fire"",
                     ""type"": ""Button"",
                     ""id"": ""6a8e070e-7ba6-4b54-ab2d-b792b6b8c4e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FireMobile"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d1c252c-9c31-4741-ae29-54bc4415a236"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -67,6 +85,15 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                     ""name"": ""Skill"",
                     ""type"": ""Button"",
                     ""id"": ""c2df8e4d-90cc-4256-9a79-1e0f2238d5f4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Recovery"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc161141-4ac3-4ca9-a690-41820e8b59b8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -94,15 +121,6 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                     ""name"": ""InteractiveItem"",
                     ""type"": ""Button"",
                     ""id"": ""c77d0724-8f68-4abd-96a4-7acc213cce7c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Recovery"",
-                    ""type"": ""Button"",
-                    ""id"": ""dc161141-4ac3-4ca9-a690-41820e8b59b8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -259,7 +277,7 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse;Touch"",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -277,12 +295,12 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""143bb1cd-cc10-4eca-a2f0-a3664166fe91"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""id"": ""a4f1e6f7-26e7-4f15-a22a-8190bef87039"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Fire"",
+                    ""groups"": ""Keyboard&Mouse;Touch"",
+                    ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -292,18 +310,18 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse;Touch;Gamepad;Joystick;XR"",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""886e731e-7071-4ae4-95c0-e61739dad6fd"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""id"": ""143bb1cd-cc10-4eca-a2f0-a3664166fe91"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Touch"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -344,10 +362,10 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a7899fd3-f33b-4683-9533-2b7783420774"",
-                    ""path"": ""<Keyboard>/g"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
                     ""action"": ""Skill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -377,7 +395,7 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""92b441c7-59c0-4680-80e6-355a450e3d14"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse;Touch;Gamepad;Joystick;XR"",
@@ -387,12 +405,45 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cfba8bdb-c9b3-4221-a513-386daa311b05"",
-                    ""path"": ""<Keyboard>/h"",
+                    ""id"": ""098c2ecb-ba75-43e3-add4-2b35414f5afb"",
+                    ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse;Gamepad;Joystick;XR;Touch"",
+                    ""groups"": """",
                     ""action"": ""Recovery"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4cb49985-e590-4208-9e72-4d3202f3555f"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireMobile"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fcbb463b-e631-4a77-a9a8-dcbbd2754af8"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;XR;Joystick"",
+                    ""action"": ""DragScreenMobile"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e52903fa-74c8-46d6-8a72-d7f5cdff51b3"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch;Keyboard&Mouse;Gamepad;Joystick;XR"",
+                    ""action"": ""DragScreenMobile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -982,13 +1033,15 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
         m_GamePlay_Look = m_GamePlay.FindAction("Look", throwIfNotFound: true);
+        m_GamePlay_DragScreenMobile = m_GamePlay.FindAction("DragScreenMobile", throwIfNotFound: true);
         m_GamePlay_Fire = m_GamePlay.FindAction("Fire", throwIfNotFound: true);
+        m_GamePlay_FireMobile = m_GamePlay.FindAction("FireMobile", throwIfNotFound: true);
         m_GamePlay_ReloadBullet = m_GamePlay.FindAction("ReloadBullet", throwIfNotFound: true);
         m_GamePlay_Skill = m_GamePlay.FindAction("Skill", throwIfNotFound: true);
+        m_GamePlay_Recovery = m_GamePlay.FindAction("Recovery", throwIfNotFound: true);
         m_GamePlay_PlayerDetails = m_GamePlay.FindAction("PlayerDetails", throwIfNotFound: true);
         m_GamePlay_ChangeWeapon = m_GamePlay.FindAction("ChangeWeapon", throwIfNotFound: true);
         m_GamePlay_InteractiveItem = m_GamePlay.FindAction("InteractiveItem", throwIfNotFound: true);
-        m_GamePlay_Recovery = m_GamePlay.FindAction("Recovery", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1064,26 +1117,30 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
     private List<IGamePlayActions> m_GamePlayActionsCallbackInterfaces = new List<IGamePlayActions>();
     private readonly InputAction m_GamePlay_Move;
     private readonly InputAction m_GamePlay_Look;
+    private readonly InputAction m_GamePlay_DragScreenMobile;
     private readonly InputAction m_GamePlay_Fire;
+    private readonly InputAction m_GamePlay_FireMobile;
     private readonly InputAction m_GamePlay_ReloadBullet;
     private readonly InputAction m_GamePlay_Skill;
+    private readonly InputAction m_GamePlay_Recovery;
     private readonly InputAction m_GamePlay_PlayerDetails;
     private readonly InputAction m_GamePlay_ChangeWeapon;
     private readonly InputAction m_GamePlay_InteractiveItem;
-    private readonly InputAction m_GamePlay_Recovery;
     public struct GamePlayActions
     {
         private @PlayerInputControlls m_Wrapper;
         public GamePlayActions(@PlayerInputControlls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
         public InputAction @Look => m_Wrapper.m_GamePlay_Look;
+        public InputAction @DragScreenMobile => m_Wrapper.m_GamePlay_DragScreenMobile;
         public InputAction @Fire => m_Wrapper.m_GamePlay_Fire;
+        public InputAction @FireMobile => m_Wrapper.m_GamePlay_FireMobile;
         public InputAction @ReloadBullet => m_Wrapper.m_GamePlay_ReloadBullet;
         public InputAction @Skill => m_Wrapper.m_GamePlay_Skill;
+        public InputAction @Recovery => m_Wrapper.m_GamePlay_Recovery;
         public InputAction @PlayerDetails => m_Wrapper.m_GamePlay_PlayerDetails;
         public InputAction @ChangeWeapon => m_Wrapper.m_GamePlay_ChangeWeapon;
         public InputAction @InteractiveItem => m_Wrapper.m_GamePlay_InteractiveItem;
-        public InputAction @Recovery => m_Wrapper.m_GamePlay_Recovery;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1099,15 +1156,24 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @DragScreenMobile.started += instance.OnDragScreenMobile;
+            @DragScreenMobile.performed += instance.OnDragScreenMobile;
+            @DragScreenMobile.canceled += instance.OnDragScreenMobile;
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
+            @FireMobile.started += instance.OnFireMobile;
+            @FireMobile.performed += instance.OnFireMobile;
+            @FireMobile.canceled += instance.OnFireMobile;
             @ReloadBullet.started += instance.OnReloadBullet;
             @ReloadBullet.performed += instance.OnReloadBullet;
             @ReloadBullet.canceled += instance.OnReloadBullet;
             @Skill.started += instance.OnSkill;
             @Skill.performed += instance.OnSkill;
             @Skill.canceled += instance.OnSkill;
+            @Recovery.started += instance.OnRecovery;
+            @Recovery.performed += instance.OnRecovery;
+            @Recovery.canceled += instance.OnRecovery;
             @PlayerDetails.started += instance.OnPlayerDetails;
             @PlayerDetails.performed += instance.OnPlayerDetails;
             @PlayerDetails.canceled += instance.OnPlayerDetails;
@@ -1117,9 +1183,6 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
             @InteractiveItem.started += instance.OnInteractiveItem;
             @InteractiveItem.performed += instance.OnInteractiveItem;
             @InteractiveItem.canceled += instance.OnInteractiveItem;
-            @Recovery.started += instance.OnRecovery;
-            @Recovery.performed += instance.OnRecovery;
-            @Recovery.canceled += instance.OnRecovery;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -1130,15 +1193,24 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @DragScreenMobile.started -= instance.OnDragScreenMobile;
+            @DragScreenMobile.performed -= instance.OnDragScreenMobile;
+            @DragScreenMobile.canceled -= instance.OnDragScreenMobile;
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
+            @FireMobile.started -= instance.OnFireMobile;
+            @FireMobile.performed -= instance.OnFireMobile;
+            @FireMobile.canceled -= instance.OnFireMobile;
             @ReloadBullet.started -= instance.OnReloadBullet;
             @ReloadBullet.performed -= instance.OnReloadBullet;
             @ReloadBullet.canceled -= instance.OnReloadBullet;
             @Skill.started -= instance.OnSkill;
             @Skill.performed -= instance.OnSkill;
             @Skill.canceled -= instance.OnSkill;
+            @Recovery.started -= instance.OnRecovery;
+            @Recovery.performed -= instance.OnRecovery;
+            @Recovery.canceled -= instance.OnRecovery;
             @PlayerDetails.started -= instance.OnPlayerDetails;
             @PlayerDetails.performed -= instance.OnPlayerDetails;
             @PlayerDetails.canceled -= instance.OnPlayerDetails;
@@ -1148,9 +1220,6 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
             @InteractiveItem.started -= instance.OnInteractiveItem;
             @InteractiveItem.performed -= instance.OnInteractiveItem;
             @InteractiveItem.canceled -= instance.OnInteractiveItem;
-            @Recovery.started -= instance.OnRecovery;
-            @Recovery.performed -= instance.OnRecovery;
-            @Recovery.canceled -= instance.OnRecovery;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1335,13 +1404,15 @@ public partial class @PlayerInputControlls: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnDragScreenMobile(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnFireMobile(InputAction.CallbackContext context);
         void OnReloadBullet(InputAction.CallbackContext context);
         void OnSkill(InputAction.CallbackContext context);
+        void OnRecovery(InputAction.CallbackContext context);
         void OnPlayerDetails(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
         void OnInteractiveItem(InputAction.CallbackContext context);
-        void OnRecovery(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

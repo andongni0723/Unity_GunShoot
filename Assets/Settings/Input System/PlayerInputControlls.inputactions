@@ -24,9 +24,27 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "DragScreenMobile",
+                    "type": "Button",
+                    "id": "147c2057-c2bd-4127-b06c-f7d13721e2f1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Fire",
                     "type": "Button",
                     "id": "6a8e070e-7ba6-4b54-ab2d-b792b6b8c4e9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FireMobile",
+                    "type": "Button",
+                    "id": "3d1c252c-9c31-4741-ae29-54bc4415a236",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -45,6 +63,15 @@
                     "name": "Skill",
                     "type": "Button",
                     "id": "c2df8e4d-90cc-4256-9a79-1e0f2238d5f4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Recovery",
+                    "type": "Button",
+                    "id": "dc161141-4ac3-4ca9-a690-41820e8b59b8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -72,15 +99,6 @@
                     "name": "InteractiveItem",
                     "type": "Button",
                     "id": "c77d0724-8f68-4abd-96a4-7acc213cce7c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Recovery",
-                    "type": "Button",
-                    "id": "dc161141-4ac3-4ca9-a690-41820e8b59b8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -237,7 +255,7 @@
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse;Touch",
+                    "groups": "Keyboard&Mouse",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -255,12 +273,12 @@
                 },
                 {
                     "name": "",
-                    "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
-                    "path": "<Gamepad>/rightTrigger",
+                    "id": "a4f1e6f7-26e7-4f15-a22a-8190bef87039",
+                    "path": "<Touchscreen>/primaryTouch/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Fire",
+                    "groups": "Keyboard&Mouse;Touch",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -270,18 +288,18 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse;Touch;Gamepad;Joystick;XR",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "886e731e-7071-4ae4-95c0-e61739dad6fd",
-                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Touch",
+                    "groups": "Gamepad",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -322,10 +340,10 @@
                 {
                     "name": "",
                     "id": "a7899fd3-f33b-4683-9533-2b7783420774",
-                    "path": "<Keyboard>/g",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
                     "action": "Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -355,7 +373,7 @@
                 {
                     "name": "",
                     "id": "92b441c7-59c0-4680-80e6-355a450e3d14",
-                    "path": "<Keyboard>/f",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse;Touch;Gamepad;Joystick;XR",
@@ -365,12 +383,45 @@
                 },
                 {
                     "name": "",
-                    "id": "cfba8bdb-c9b3-4221-a513-386daa311b05",
-                    "path": "<Keyboard>/h",
+                    "id": "098c2ecb-ba75-43e3-add4-2b35414f5afb",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad;Joystick;XR;Touch",
+                    "groups": "",
                     "action": "Recovery",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4cb49985-e590-4208-9e72-4d3202f3555f",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireMobile",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fcbb463b-e631-4a77-a9a8-dcbbd2754af8",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;XR;Joystick",
+                    "action": "DragScreenMobile",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e52903fa-74c8-46d6-8a72-d7f5cdff51b3",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch;Keyboard&Mouse;Gamepad;Joystick;XR",
+                    "action": "DragScreenMobile",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

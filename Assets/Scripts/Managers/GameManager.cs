@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject playerHeadObject;
 
     [Header("Data")] 
+    public GamePlatform gamePlatform;
     public CharacterDetails_SO playerDetail;
     public int currentPlayerMoney = 250;
     public List<WeaponBulletData> PlayerWeaponBulletDataList = new List<WeaponBulletData>();
@@ -16,8 +17,20 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        
+        CheckGamePlatform();
+        Application.targetFrameRate = 300;
         StartCoroutine(WaitForGetPlayerDetails());
+    }
+
+    private void CheckGamePlatform()
+    {
+        
+#if UNITY_ANDROID && UNITY_IOS
+        gamePlatform = GamePlatform.Mobile;
+        
+#elif UNITY_STANDALONE
+        gamePlatform = GamePlatform.PC;
+#endif
     }
 
     IEnumerator WaitForGetPlayerDetails()

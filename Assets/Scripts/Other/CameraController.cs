@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using DG.Tweening;
-using Unity.Mathematics;
-using UnityEditor.ShaderGraph.Internal;
 
 public class CameraController : Singleton<CameraController>
 {

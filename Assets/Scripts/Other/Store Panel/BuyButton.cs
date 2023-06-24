@@ -41,7 +41,9 @@ public class BuyButton : MonoBehaviour
 
     private void OnBuyItemSuccessful(BuyItemDetails data)
     {
-        button.interactable = canBuyAgain;
+        // Check buy item is self
+        if(data == buyItemDetails)
+            button.interactable = canBuyAgain;
     }
 
     #endregion
