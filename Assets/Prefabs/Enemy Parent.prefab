@@ -394,7 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rayLayerMask:
     serializedVersion: 2
-    m_Bits: 2049
+    m_Bits: 18433
   canSeePlayer: 0
   isFirstSeePlayer: 0
   playerDistance: 0

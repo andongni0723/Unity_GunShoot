@@ -14,10 +14,13 @@ public class GameManager : Singleton<GameManager>
     public int currentPlayerMoney = 250;
     public List<WeaponBulletData> PlayerWeaponBulletDataList = new List<WeaponBulletData>();
 
+    [Header("Setting")] 
+    public bool isTest;
+
     protected override void Awake()
     {
         base.Awake();
-        CheckGamePlatform();
+        if(!isTest) CheckGamePlatform();
         Application.targetFrameRate = 300;
         StartCoroutine(WaitForGetPlayerDetails());
     }

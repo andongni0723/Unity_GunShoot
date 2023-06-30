@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BaseInteractiveItem : MonoBehaviour
 {
+    public string interactiveDescription; // The player close to item, the player UI will show button and text from this string.
+    
     #region Event
 
     private void OnEnable()
@@ -15,7 +17,7 @@ public class BaseInteractiveItem : MonoBehaviour
     {
         EventHandler.InteractiveItem -= OnInteractiveItem;
     }
-
+    
     private void OnInteractiveItem(GameObject targetItem)
     {
         if (gameObject == targetItem)
@@ -23,7 +25,7 @@ public class BaseInteractiveItem : MonoBehaviour
             InteractiveAction(); 
         }
     }
-
+    
     #endregion 
     
     

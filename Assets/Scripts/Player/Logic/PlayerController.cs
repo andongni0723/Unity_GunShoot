@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private PlayerHealth playerHealth => GetComponent<PlayerHealth>();
     public Light2D gunFireLight;
     public Button interactiveButton;
+    public TextMeshProUGUI interactiveItemNameText;
     public GameObject mobileUIParent;
     public CanvasScaler canvasScaler;
     public MobileRotateController mobileMouseDragArea;
@@ -45,20 +47,12 @@ public class PlayerController : MonoBehaviour
     private float currentPosX;
     private bool isDrag;
 
-    [Header("Debug")] 
-    public Vector2 mouseRectPosition;
-   
     private void Awake()
     {
         inputControlls = new PlayerInputControlls();
       
         inputControlls.GamePlay.Fire.performed += _ => OnFire();
         inputControlls.GamePlay.FireMobile.performed += _ => OnFireMobile();
-        
-        //inputControlls.GamePlay.DragScreenMobile.started += OnDragScreenMobileStart;
-        //inputControlls.GamePlay.DragScreenMobile.performed += OnDragScreenMobile; // Mobile Look
-        //inputControlls.GamePlay.DragScreenMobile.canceled += OnDragScreenMobileEnd;
-        
         inputControlls.GamePlay.ReloadBullet.performed += _ => OnReload();
         inputControlls.GamePlay.Skill.performed += _ => OnUseSkill();
         inputControlls.GamePlay.Recovery.performed += _ => OnRecovery();
@@ -121,76 +115,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Mobile Look Action
-    private void OnDragScreenMobileStart(InputAction.CallbackContext ctx)
-    {
-        //Debug.Log(mousePosition);
-        if (GameManager.Instance.gamePlatform == GamePlatform.Mobile)
-        {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(mobileUIParent.GetComponent<RectTransform>(),
-                inputControlls.GamePlay.Look.ReadValue<Vector2>(), Camera.main,out mouseRectPosition);
-            //RectTransformUtility.ScreenPointToLocalPointInRectangle(mobileMouseDragArea,
-                //inputControlls.GamePlay.Look.ReadValue<Vector2>(), Camera.main,out mouseRectPosition);
-                
-            //Debug.Log(mouseRectPosition);
-
-            // if (mobileMouseDragArea.rect.Contains(mouseRectPosition))
-            // {
-            //     isDrag = true;
-            //     lastPosX = worldMousePosition.x; // first set 
-            // }
-            
-            //if (RectTransformUtility.ScreenPointToLocalPointInRectangle(mobileUIParent.GetComponent<RectTransform>(), mousePosition, Camera.main,
-                    // out var mouseRectPosition))
-            {
-                
-            }
-
-            // Debug.Log($"{mobileMouseDragArea.rect.xMin} {mouseRectPosition} {inputControlls.GamePlay.Look.ReadValue<Vector2>()} ");
-            // if (mouseRectPosition.x >= mobileMouseDragArea.anchoredPosition.x &&
-            //     mouseRectPosition.y >= mobileMouseDragArea.anchoredPosition.y)
-            // {
-            //     isDrag = true;
-            //     lastPosX = worldMousePosition.x; // first set
-            // }
-            
-            // float mouseAnchoredPosX = mousePosition.x - Screen.width - canvasScaler
-            //     .referenceResolution.x;
-            // float mouseAnchoredPosY = mousePosition.y - Screen.height - canvasScaler
-            //     .referenceResolution.y;
-            //
-            // Debug.Log($"{mousePosition.x} {Screen.width} {canvasScaler.referenceResolution.x}");
-            //
-            // // Check player press in Look Touch area
-            // if (mouseAnchoredPosX >= mobileMouseDragArea.anchoredPosition.x &&
-            //     mouseAnchoredPosY >= mobileMouseDragArea.anchoredPosition.y)
-            // {
-            //     isDrag = true;
-            //     lastPosX = worldMousePosition.x; // first set
-            // }
-        }
-    }
-    private void OnDragScreenMobileEnd(InputAction.CallbackContext ctx)
-    {
-        isDrag = false;
-    
-    }
-    // private void LateUpdate()
-    // {
-    //     if (GameManager.Instance.gamePlatform == GamePlatform.Mobile)
-    //     {
-    //         if (isDrag)
-    //         {
-    //             currentPosX = worldMousePosition.x;
-    //             player.transform.rotation = Quaternion.Euler(0, 0, 
-    //                 player.transform.eulerAngles.z - (currentPosX - lastPosX) * 20);
-    //
-    //             lastPosX = currentPosX;  
-    //         }
-    //     }
-    // }
-
-
     // Others
     private void OnReload()
     {
@@ -199,7 +123,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnUseSkill()
     {
-        itemManager.UseSkillItem(worldMousePosition - (Vector2)transform.position, 
+        itemManager.UseSkillItem((Vector2)gunPoint.transform.position - (Vector2)transform.position, 
             gunPoint.transform.position, player.transform.rotation);
     } 
    
@@ -226,7 +150,7 @@ public class PlayerController : MonoBehaviour
             EventHandler.CallChangeCameraSight(playerWeapon.currentWeapon.cameraSight);
         }
     }
-   
+    
     private void OnPressInteractive()
     {
         if (canInteractive)
@@ -288,7 +212,7 @@ public class PlayerController : MonoBehaviour
                 player.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
                 break;
             case GamePlatform.Mobile:
-                angle = mobileMouseDragArea.rZ;
+                angle = mobileMouseDragArea.rotationZ;
                 Debug.Log(angle);
                 player.transform.rotation = Quaternion.Euler(0, 0, angle);
                 break;
@@ -296,13 +220,14 @@ public class PlayerController : MonoBehaviour
       
     }
 
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("InteractiveObject"))
         {
-            interactiveButton.gameObject.SetActive(true);
             wantInteractiveObject = other.gameObject;
+            
+            interactiveItemNameText.text = wantInteractiveObject.GetComponent<BaseInteractiveItem>().interactiveDescription;
+            interactiveButton.gameObject.SetActive(true);
             canInteractive = true;
         }
     }

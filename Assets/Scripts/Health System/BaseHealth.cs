@@ -20,7 +20,8 @@ public class BaseHealth : MonoBehaviour
         
     public virtual void Damage(int damage)
     {
-        currentHealth -= (int)(damage * (1 - defense * 0.01f));
+        int newDamage = (int)(damage * (1 - defense * 0.01f));
+        currentHealth -= newDamage;
         
         // Animation
         if (damage != 0)
@@ -28,7 +29,7 @@ public class BaseHealth : MonoBehaviour
             GameObject textVFX = Instantiate(healthChangeTextVFXObject,
                     TextVFXInstantiatePoint.transform.position, Quaternion.identity, worldCanvas);
                     
-            textVFX.GetComponent<HealthChangeTextVFX>().CallChangeHealthTextAnimation(damage * -1); 
+            textVFX.GetComponent<HealthChangeTextVFX>().CallChangeHealthTextAnimation(newDamage * -1); 
         }
        
         
