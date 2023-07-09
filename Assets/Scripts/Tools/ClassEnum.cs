@@ -1,5 +1,8 @@
 // Enum
 
+using System.Collections.Generic;
+using UnityEngine;
+
 public enum GamePlatform
 {
     PC, Mobile
@@ -18,6 +21,16 @@ public enum CharacterHeadState
 public enum ItemType
 {
     Weapon, Skill, Healthy , Buff
+}
+
+public enum MissionType
+{
+    MainMission, OtherMission
+}
+
+public enum MissionContentType
+{
+    GotoItemPoint, CountSomeThing
 }
 
 // Class
@@ -45,4 +58,12 @@ public class BuyItemDetails
     public WeaponDetails_SO buyWeaponDetails;
     public int buySkillObjectCount;
     public int buyHealthObjectCount;
+}
+
+[System.Serializable]
+public class RandomSpawnItemDetails
+{
+    public List<GameObject> SpawnPointsList = new List<GameObject>();
+    public GameObject spawnItem;
+    public int spawnCount = 1;
 }

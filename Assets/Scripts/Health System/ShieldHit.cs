@@ -11,6 +11,6 @@ public class ShieldHit : BaseHealth
     {
         //abase.Damage(damage);
         AudioManager.Instance.PlayItemAudio(AudioManager.Instance.shieldHitAudio);
-        shieldHitVFXPool.PlayHitVFX(transform.position, transform.parent.rotation);
+        shieldHitVFXPool.PlayHitVFX(transform.position, transform.rotation);
     }
 }

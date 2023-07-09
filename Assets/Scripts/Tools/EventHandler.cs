@@ -124,4 +124,15 @@ public class EventHandler : MonoBehaviour
     }
 
     #endregion
+
+    #region Mission System
+
+    public static event Action<MissionDetails_SO> NewMission;
+
+    public static void CallNewMission(MissionDetails_SO data)
+    {
+        NewMission?.Invoke(data);
+    }
+
+    #endregion
 }

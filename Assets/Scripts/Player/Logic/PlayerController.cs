@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
         itemManager.skillItem = _data.skillItemDetails;
         itemManager.skillItemIconImage.sprite = _data.skillItemSprite;
         playerHealth.maxHealth = _data.startHealth;
+        playerHealth.currentHealth = _data.startHealth;
         playerHealth.defense = _data.startDefense;
 
         mobileUIParent.SetActive(GameManager.Instance.gamePlatform == GamePlatform.Mobile);
@@ -147,7 +148,7 @@ public class PlayerController : MonoBehaviour
         if (playerWeapon.isReloadEnd)
         {
             EventHandler.CallChangeWeapon(playerWeapon.currentWeapon == playerWeapon.weaponList[0]? playerWeapon.weaponList[1] : playerWeapon.weaponList[0]);
-            EventHandler.CallChangeCameraSight(playerWeapon.currentWeapon.cameraSight);
+            
         }
     }
     
@@ -213,7 +214,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case GamePlatform.Mobile:
                 angle = mobileMouseDragArea.rotationZ;
-                Debug.Log(angle);
+                //Debug.Log(angle);
                 player.transform.rotation = Quaternion.Euler(0, 0, angle);
                 break;
         }

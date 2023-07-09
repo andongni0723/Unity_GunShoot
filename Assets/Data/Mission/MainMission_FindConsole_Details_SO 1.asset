@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5768d9add4f847f4a1d8d3d157c063a, type: 3}
+  m_Name: MainMission_FindConsole_Details_SO 1
+  m_EditorClassIdentifier: 
+  missionName: "\u5C0B\u627E\u63A7\u5236\u53F0"
+  missionDescription: "\u5DF2\u641C\u7D22\u76EE\u6A19"
+  missionType: 0
+  missionContentType: 0
+  TargetPointTag: ConsoleSpawnPoint
+  realItemName: Console(Clone)
+  MissionDoneNextMissionList:
+  - {fileID: 11400000, guid: 495f39a7ec11e443b99a8dacf54936ba, type: 2}

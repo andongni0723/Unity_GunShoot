@@ -68,10 +68,14 @@ public class BaseSeePlayer : MonoBehaviour
             Vector2.Distance(transform.position, playerPos) + 10, rayLayerMask);
 
         //TODO: fix
-        //TestAddRayList();
+        //TestAddRayList(hitCount);
 
-        for (int i = 0; i < hitCount; )
+        hitsL.Clear();
+        for (int i = 0; i < hitCount;)
         {
+            
+            hitsL.Add(hits[i].transform.name);
+
             if (hits[0].transform.name == GameManager.Instance.playerObject.name)
             {
                 canSeePlayer = true;
@@ -94,13 +98,13 @@ public class BaseSeePlayer : MonoBehaviour
     /// <summary>
     /// Debug to see that item hit
     /// </summary>
-    private void TestAddRayList()
+    private void TestAddRayList(int hitCount)
     {
         hitsL.Clear();
 
-        foreach (var hit in hits)
+        for (int i = 0; i < hitCount;)
         {
-            hitsL.Add(hit.transform.name);
+            hitsL.Add(hits[i].transform.name);
         }
     }
 

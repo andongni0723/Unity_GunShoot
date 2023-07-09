@@ -11,6 +11,8 @@ TagManager:
   - InteractiveObject
   - WorldCanvas
   - LookTouchArea
+  - ConsoleSpawnPoint
+  - Canvas
   layers:
   - Default
   - TransparentFX

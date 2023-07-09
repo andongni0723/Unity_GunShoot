@@ -13,16 +13,19 @@ public class GameManager : Singleton<GameManager>
     public CharacterDetails_SO playerDetail;
     public int currentPlayerMoney = 250;
     public List<WeaponBulletData> PlayerWeaponBulletDataList = new List<WeaponBulletData>();
-
+    public bool isMapPrepare; // ItemRandomSpawnManager will spawn console and enemys 
+    
     [Header("Setting")] 
     public bool isTest;
 
     protected override void Awake()
     {
         base.Awake();
-        if(!isTest) CheckGamePlatform();
+        if(!isTest) 
+            CheckGamePlatform();
+        
         Application.targetFrameRate = 300;
-        StartCoroutine(WaitForGetPlayerDetails());
+        StartCoroutine(WaitForGetPlayerDetailsAndMapPrepare());
     }
 
     private void CheckGamePlatform()
@@ -36,12 +39,14 @@ public class GameManager : Singleton<GameManager>
 #endif
     }
 
-    IEnumerator WaitForGetPlayerDetails()
+    IEnumerator WaitForGetPlayerDetailsAndMapPrepare()
     {
-        yield return new WaitUntil(() => playerDetail != default);
+        yield return new WaitUntil(() => playerDetail != default && isMapPrepare);
         Debug.Log("Load Player");
         EventHandler.CallLoadPlayer(playerDetail);
     }
+
+    #region Tools
 
     public WeaponBulletData LoadPlayerWeaponBulletData(WeaponDetails_SO loadData)
     {
@@ -77,4 +82,7 @@ public class GameManager : Singleton<GameManager>
         // Not Found
         PlayerWeaponBulletDataList.Add(updateData);
     }
+
+    #endregion
+    
 }

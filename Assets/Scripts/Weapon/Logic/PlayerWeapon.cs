@@ -71,7 +71,9 @@ public class PlayerWeapon : BaseWeapon
         playerLight.pointLightInnerRadius = data.weaponDetails.lightOutSight - 0.64f;
         gunLight.pointLightOuterRadius = data.weaponDetails.lightOutSight;
         gunLight.pointLightInnerRadius = data.weaponDetails.lightOutSight - 0.64f;
+        
         LightSightToColliderSize(data.weaponDetails.lightOutSight);
+        EventHandler.CallChangeCameraSight(data.weaponDetails.cameraSight);
         UpdateUIDetails();
     }
 
@@ -80,7 +82,7 @@ public class PlayerWeapon : BaseWeapon
         switch (_data.itemType)
         {
             case ItemType.Weapon:
-                weaponList[0] = _data.buyWeaponDetails; // Set first weapon (None) to main weapon of buy 
+                weaponList[0] = _data.buyWeaponDetails; // Set first weapon (None) to main weapon of buy
                 OnChangeWeapon(weaponList[0]); // Change Weapon to main weapon
                 break;
         } 

@@ -119,7 +119,7 @@ Transform:
   m_Children:
   - {fileID: 6999263658279066229}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!61 &7559296925534878048
 BoxCollider2D:
@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c26ed752418470c9f8742a2e18840b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactiveDescription: "\u63A7\u5236\u53F0"
 --- !u!1 &8641040420065896596
 GameObject:
   m_ObjectHideFlags: 0
