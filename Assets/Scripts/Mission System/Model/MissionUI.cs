@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -35,13 +34,23 @@ public class MissionUI : MonoBehaviour
     public bool isPlayerArrivesRealItemPoint; // When player arrives the real item target point,
                                               // the MissionPoint will call this var true.
 
+    [Space(20)] 
+    [Title("Count Item")] 
+    public List<GameObject> countItemTargetList = new List<GameObject>();
+    public int allCountItemCount;
+    public int itemDisappearCount; // When item which mission count was destroy,
+                                   // the MissionCountItem will call this var increase.
 
     private bool _isMissionDoneActionCall; // Make sure the mission done action run only once.
 
     private IEnumerator Start()
     {
-        yield return new WaitUntil(() => missionDetails != null && GameObject.Find(missionDetails.realItemName) != null);
+        // Wait
+        yield return new WaitUntil(() => missionDetails != null);
         
+        if (missionDetails.missionContentType == MissionContentType.GotoItemPoint)
+            yield return new WaitUntil(() => GameObject.Find(missionDetails.realItemName) != null);
+
         // Setting UI
         titleText.text = missionDetails.missionName;
 
@@ -72,6 +81,7 @@ public class MissionUI : MonoBehaviour
                    
                    missionTargetPointList.Add(newMissionPoint.gameObject);
                 }
+                
                 allMissionPointCount = missionTargetPointList.Count;
                 
                 // Spawn Real Item Point
@@ -85,6 +95,19 @@ public class MissionUI : MonoBehaviour
                 break;
             
             case MissionContentType.CountSomeThing:
+
+                Debug.Log("Find");
+                // Get All Item which mission count to Add Script to Check them status
+                foreach (GameObject targetObject in GameObject.FindGameObjectsWithTag(missionDetails.CountItemTag))
+                {
+                    countItemTargetList.Add(targetObject);
+
+                    MissionCountItem newMissionCountItem = targetObject.AddComponent<MissionCountItem>();
+
+                    newMissionCountItem.parentMission = this;
+                }
+
+                allCountItemCount = countItemTargetList.Count;
                 break;
         }
     }
@@ -109,6 +132,18 @@ public class MissionUI : MonoBehaviour
                 break;
             
             case MissionContentType.CountSomeThing:
+                
+                descriptionText.text =  $"{missionDetails.missionDescription} ({itemDisappearCount} / {allCountItemCount} )";
+                
+                // Player collected item which mission count
+                if (!_isMissionDoneActionCall)
+                {
+                    if (itemDisappearCount == allCountItemCount && allCountItemCount != 0)
+                    {
+                        MissionDone();
+                        _isMissionDoneActionCall = true;
+                    }
+                }
                 break;
         }
     }

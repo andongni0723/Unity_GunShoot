@@ -21,7 +21,7 @@ public class ItemRandomSpawnManager : MonoBehaviour
     {
         foreach (RandomSpawnItemDetails data in randomSpawnItemDetailsList)
         {
-            int randomInt = Random.Range(0, randomSpawnItemDetailsList.Count);
+            int randomInt = Random.Range(0, data.SpawnPointsList.Count);
 
             // Spawn item
             for (int i = 0; i < data.spawnCount; i++)

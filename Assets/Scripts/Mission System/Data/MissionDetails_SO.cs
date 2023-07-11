@@ -18,6 +18,10 @@ public class MissionDetails_SO : ScriptableObject
     [TagSelector] public string TargetPointTag;
     public string realItemName;
 
+    [Space(20)] 
+    [Title("Count Item")] 
+    [TagSelector] public string CountItemTag;
+
 
     [Space(20)] 
     public List<MissionDetails_SO> MissionDoneNextMissionList = new List<MissionDetails_SO>();

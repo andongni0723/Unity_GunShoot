@@ -8,7 +8,6 @@ using UnityEngine.Events;
 
 public class TargetPointUI : MonoBehaviour
 {
-    
     private RectTransform _rectTrans => GetComponent<RectTransform>();
 
     [Header("Component")]
@@ -52,8 +51,8 @@ public class TargetPointUI : MonoBehaviour
         Rect rect = Rect.zero;
 
         //减去uiSize的一半是为了防止UI元素一般溢出屏幕
-        rect.xMax = cameraSize.x - uiSize.x * 2;
-        rect.yMax = cameraSize.y - uiSize.y * 2;
+        rect.xMax = cameraSize.x - uiSize.x * 1.5f;
+        rect.yMax = cameraSize.y - uiSize.y * 1.5f;
         rect.xMin = uiSize.x;
         rect.yMin = uiSize.y;
 
