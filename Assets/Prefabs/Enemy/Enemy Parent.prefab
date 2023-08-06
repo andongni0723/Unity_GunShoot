@@ -458,6 +458,8 @@ MonoBehaviour:
   isReloadEnd: 1
   shootCooldownTimer: 0
   isShootCooldownTimerEnd: 1
+  isCancelReload: 0
+  isShootButtonDone: 0
 --- !u!114 &6604150371278905900
 MonoBehaviour:
   m_ObjectHideFlags: 0

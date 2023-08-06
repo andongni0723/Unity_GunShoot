@@ -23,6 +23,11 @@ public enum ItemType
     Weapon, Skill, Healthy , Buff
 }
 
+public enum GunShootMode
+{
+    semi_auto, fully_auto
+}
+
 public enum MissionType
 {
     MainMission, OtherMission

@@ -52,7 +52,9 @@ public class PlayerController : MonoBehaviour
         inputControlls = new PlayerInputControlls();
       
         inputControlls.GamePlay.Fire.performed += _ => OnFire();
+        inputControlls.GamePlay.Fire.canceled += _ => OnFireDone();
         inputControlls.GamePlay.FireMobile.performed += _ => OnFireMobile();
+        inputControlls.GamePlay.FireMobile.canceled += _ => OnFireDone();
         inputControlls.GamePlay.ReloadBullet.performed += _ => OnReload();
         inputControlls.GamePlay.Skill.performed += _ => OnUseSkill();
         inputControlls.GamePlay.Recovery.performed += _ => OnRecovery();
@@ -66,7 +68,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    
 
     #region Event
 
@@ -103,8 +104,11 @@ public class PlayerController : MonoBehaviour
         //Mouse
         if (GameManager.Instance.gamePlatform == GamePlatform.PC)
         {
-            if(!EventSystem.current.IsPointerOverGameObject())
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                playerWeapon.SetShootDone(false);
                 playerWeapon.Fire(player, gunPoint.gameObject);
+            }
         }
     }
     private void OnFireMobile()
@@ -112,8 +116,15 @@ public class PlayerController : MonoBehaviour
         // Button
         if (GameManager.Instance.gamePlatform == GamePlatform.Mobile)
         {
+            playerWeapon.SetShootDone(false);
             playerWeapon.Fire(player, gunPoint.gameObject);
         }
+    }
+
+    private void OnFireDone()
+    {
+        Debug.Log("DONE");
+        playerWeapon.SetShootDone(true);
     }
 
     // Others
@@ -145,11 +156,7 @@ public class PlayerController : MonoBehaviour
     {
         // is Main weapon to change Second weapon
         // and is Second to Main
-        if (playerWeapon.isReloadEnd)
-        {
-            EventHandler.CallChangeWeapon(playerWeapon.currentWeapon == playerWeapon.weaponList[0]? playerWeapon.weaponList[1] : playerWeapon.weaponList[0]);
-            
-        }
+        EventHandler.CallChangeWeapon(playerWeapon.currentWeapon == playerWeapon.weaponList[0]? playerWeapon.weaponList[1] : playerWeapon.weaponList[0]);
     }
     
     private void OnPressInteractive()

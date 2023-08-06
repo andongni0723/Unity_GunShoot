@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RiflesDetains_SO
   m_EditorClassIdentifier: 
   weaponSprite: {fileID: 21300046, guid: 6674e8c43c63e4f4184cbd009379498d, type: 3}
-  name: "\u6B65\u69CD"
+  weaponName: "\u6B65\u69CD"
   clipBulletCount: 26
   bagBulletCount: 104
   weaponReloadTime: 2
@@ -22,4 +22,5 @@ MonoBehaviour:
   shootCooldown: 0.08
   damage: 50
   cameraSight: 6.5
-  lightOutSight: 7.8
+  lightOutSight: 7.2
+  fireCameraShake: 7

@@ -64,15 +64,19 @@ public class PlayerWeapon : BaseWeapon
 
     private void OnChangeWeapon(WeaponDetails_SO _data)
     {
-        currentWeapon = _data;
+        CancelReloadBullet();
         
+        currentWeapon = _data;
         data = GameManager.Instance.LoadPlayerWeaponBulletData(currentWeapon);
+        
+        // Reset the gun light with the new weapon details
         playerLight.pointLightOuterRadius = data.weaponDetails.lightOutSight;
         playerLight.pointLightInnerRadius = data.weaponDetails.lightOutSight - 0.64f;
         gunLight.pointLightOuterRadius = data.weaponDetails.lightOutSight;
         gunLight.pointLightInnerRadius = data.weaponDetails.lightOutSight - 0.64f;
         
         LightSightToColliderSize(data.weaponDetails.lightOutSight);
+        AudioManager.Instance.PlayItemAudio(AudioManager.Instance.changeWeaponAudio);
         EventHandler.CallChangeCameraSight(data.weaponDetails.cameraSight);
         UpdateUIDetails();
     }
@@ -170,5 +174,11 @@ public class PlayerWeapon : BaseWeapon
             AudioManager.Instance.PlayAudio(AudioManager.Instance.reloadWeaponAudio);
         }
         return base.ReloadBullet();
+    }
+
+    protected override void CancelReloadBullet()
+    {
+        reloadBulletBar.value = 0; 
+        base.CancelReloadBullet();
     }
 }

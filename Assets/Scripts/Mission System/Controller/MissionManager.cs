@@ -26,7 +26,7 @@ public class MissionManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventHandler.NewMission += OnNewMission;
+        EventHandler.NewMission += OnNewMission; // Instantiate New Mission and Setting
     }
 
     private void OnDisable()
@@ -41,7 +41,9 @@ public class MissionManager : MonoBehaviour
         {
             case MissionType.MainMission:
                 newMission = Instantiate(mainMissionPrefabs, missionPanel.transform);
+                newMission.transform.SetSiblingIndex(1); // Put the Main Mission on top
                 break;
+            
             case MissionType.OtherMission:
                 newMission = Instantiate(otherMissionPrefabs, missionPanel.transform);
                 break;

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class BaseWeapon : MonoBehaviour
@@ -42,6 +41,8 @@ public class BaseWeapon : MonoBehaviour
     [FoldoutGroup("Debug"), SerializeField] public bool isReloadEnd = true;
     [FoldoutGroup("Debug"), SerializeField] protected float shootCooldownTimer = 0;
     [FoldoutGroup("Debug"), SerializeField] public bool isShootCooldownTimerEnd = true;
+    [FoldoutGroup("Debug"), SerializeField] public bool isCancelReload = false;
+    [FoldoutGroup("Debug"), SerializeField] public bool isShootButtonDone = false;
 
     protected float endTime;
 
@@ -50,12 +51,7 @@ public class BaseWeapon : MonoBehaviour
         currentWeapon = weaponList[0];
 
         // New bullet data from currentWeapon
-        data =
-            new WeaponBulletData(currentWeapon, currentWeapon.clipBulletCount, currentWeapon.bagBulletCount);
-        
-        // currentBulletCount = currentWeapon.clipBulletCount;
-        // currentBagBulletCount = currentWeapon.bagBulletCount;
-        
+        data = new WeaponBulletData(currentWeapon, currentWeapon.clipBulletCount, currentWeapon.bagBulletCount);
     }
 
     protected virtual void Update()
@@ -85,9 +81,29 @@ public class BaseWeapon : MonoBehaviour
 
     public void Fire(GameObject fireObject, GameObject firePoint)
     {
-        // Check not reloading
-        if (isReloadEnd)
+        // Check reloading (Break)
+        if (!isReloadEnd) return;
+        
+        if (currentWeapon.gunShootMode == GunShootMode.fully_auto)
+        {
+            StartCoroutine(FullyAutoFire(fireObject, firePoint));
+
+        }
+        else // semi-auto
+        {
             StartCoroutine(FireAction(fireObject, firePoint));
+        }
+    }
+
+    IEnumerator FullyAutoFire(GameObject fireObject, GameObject firePoint)
+    {
+        while (!isShootButtonDone && isReloadTimerEnd)
+        {
+            yield return new WaitForSeconds(currentWeapon.shootCooldown);
+            
+            Debug.Log("fully-auto Shoot");
+            StartCoroutine(FireAction(fireObject, firePoint));
+        }
     }
     
     IEnumerator FireAction(GameObject fireObject, GameObject firePoint)
@@ -111,45 +127,56 @@ public class BaseWeapon : MonoBehaviour
             }
             else
             {
-                // TODO: Reload
-
+                //Reload
                 StartCoroutine(ReloadBullet()); 
             }
-
         }
         yield return null;
     }
 
     public virtual IEnumerator ReloadBullet()
     {
-        if (data.currentBagBulletCount > 0 && isReloadTimerEnd)
+        Debug.Log("Call Reload");
+        
+        // Check if has bullet or reloading (Break)
+        if (data.currentBagBulletCount <= 0 || !isReloadTimerEnd) yield break;
+        isCancelReload = false;
+
+        // Check Bag bullet is enough for a clip 
+        if (data.weaponDetails.clipBulletCount - data.currentBulletCount < data.currentBagBulletCount)
         {
-            // Check Bag bullet is enough for a clip 
-            if (data.weaponDetails.clipBulletCount - data.currentBulletCount < data.currentBagBulletCount)
-            {
-                reloadBulletCount = data.weaponDetails.clipBulletCount - data.currentBulletCount;
-            }
-            else
-            {
-                // Check bag bullet have
-                if (currentBagBulletCount > 0)
-                {
-                    reloadBulletCount = data.currentBagBulletCount;
-
-                }
-            }
-
-            // Wait Reload Bullet time
-            CallReloadTimer(data.weaponDetails.weaponReloadTime);
-            weaponReloadAction?.Invoke(); // Reload Action
-            yield return new WaitUntil(() => isReloadTimerEnd );
-            
-            data.currentBagBulletCount -= reloadBulletCount;
-            data.currentBulletCount += reloadBulletCount;
-            saveWeaponDataAction?.Invoke(); // Save data
-            isReloadEnd = true;
-            weaponReloadEndAction?.Invoke(); // Reload End Action
+            reloadBulletCount = data.weaponDetails.clipBulletCount - data.currentBulletCount;
         }
+        else
+        {
+            // Check bag bullet have
+            if (currentBagBulletCount > 0)
+            {
+                reloadBulletCount = data.currentBagBulletCount;
+            }
+        }
+
+        // Wait Reload Bullet time
+        CallReloadTimer(data.weaponDetails.weaponReloadTime);
+        weaponReloadAction?.Invoke(); // Other Reload Action
+        yield return new WaitUntil(() => isReloadTimerEnd );
+        if (isCancelReload) yield break;
+        
+        // Weapon Reload Action
+        Debug.Log("Set Bullet Count");
+        data.currentBagBulletCount -= reloadBulletCount;
+        data.currentBulletCount += reloadBulletCount;
+        saveWeaponDataAction?.Invoke(); // Save data
+        isReloadEnd = true;
+        weaponReloadEndAction?.Invoke(); // Reload End Action
+    }
+
+    protected virtual void CancelReloadBullet()
+    {
+        StopAllCoroutines();
+        isCancelReload = true;
+        isReloadEnd = true;
+        isReloadTimerEnd = true;
     }
 
     /// <summary>
@@ -175,6 +202,11 @@ public class BaseWeapon : MonoBehaviour
         isShootCooldownTimerEnd = false;
         shootCooldownTimer= 0;
         endTime = _endTime;
+    }
+    
+    public void SetShootDone(bool isDone)
+    {
+        isShootButtonDone = isDone;
     }
 
     protected  void SetSaveBulletDataAction(Action action)

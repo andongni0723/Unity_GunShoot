@@ -24,6 +24,8 @@ public class WeaponDetails_SO : ScriptableObject
     [VerticalGroup("Basic/Details"), MinValue(0)]
     public float weaponReloadTime;
 
+    public GunShootMode gunShootMode;
+    
     [MinMaxSlider(0, 45, true), SerializeField]
     private Vector2 shootAngle;
     public AudioClip fireAudio;

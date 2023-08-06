@@ -16,6 +16,7 @@ public class AudioManager : Singleton<AudioManager>
     public AudioClip reloadWeaponAudio;
     public AudioClip shieldOpenAudio;
     public AudioClip shieldHitAudio;
+    public AudioClip changeWeaponAudio;
     
 
     public void PlayAudio(AudioClip clip)

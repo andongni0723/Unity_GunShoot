@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f79dab688cae47dc8bbf66d8cacdec8, type: 3}
+  m_Name: SMG-Details_SO
+  m_EditorClassIdentifier: 
+  weaponSprite: {fileID: 21300018, guid: 6674e8c43c63e4f4184cbd009379498d, type: 3}
+  weaponName: "\u885D\u92D2\u69CD"
+  clipBulletCount: 20
+  bagBulletCount: 200
+  weaponReloadTime: 1.5
+  gunShootMode: 1
+  shootAngle: {x: 5, y: 15}
+  fireAudio: {fileID: 8300000, guid: 0d29f53dd41ed4d1aac31f0f0cb2d988, type: 3}
+  shootCooldown: 0.1
+  damage: 20
+  cameraSight: 6
+  lightOutSight: 7.78
+  fireCameraShake: 7

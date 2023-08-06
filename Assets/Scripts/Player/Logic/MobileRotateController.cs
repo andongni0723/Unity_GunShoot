@@ -19,11 +19,7 @@ public class MobileRotateController : MonoBehaviour, IBeginDragHandler, IDragHan
     {
         currentPosX = eventData.position.x;
 
-        //player.transform.rotation = Quaternion.Euler(0, 0, 
-            //player.transform.eulerAngles.z - (currentPosX - lastPosX) * 20);
-
-        rotationZ = rotationZ - (currentPosX - prePosX) * 20 * Time.deltaTime;
-        
+        rotationZ -= (currentPosX - prePosX) * 20 * Time.deltaTime;
         
         prePosX = currentPosX;
     }
