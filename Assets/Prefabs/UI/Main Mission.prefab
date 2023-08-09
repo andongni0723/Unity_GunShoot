@@ -682,10 +682,15 @@ MonoBehaviour:
   descriptionText: {fileID: 8002336499615479767}
   missionDoneCanvasGroup: {fileID: 3156698316199765165}
   missionPointPrefab: {fileID: 2379716827217126243, guid: ef126e6d902c646f3a6b9d50bfd8e33e, type: 3}
+  missionPointParent: {fileID: 0}
   realItemMissionPointPrefab: {fileID: 3961478480559626501, guid: 5714a701163c649d088c95da141ab7ac, type: 3}
   missionDoneFadeTime: 1
   missionDisappearTime: 1
   goToMissionTargetPointList: []
+  missionTargetPointList: []
   allMissionPointCount: 0
   playerArrivesTargetPointCount: 0
   isPlayerArrivesRealItemPoint: 0
+  countItemTargetList: []
+  allCountItemCount: 0
+  itemDisappearCount: 0

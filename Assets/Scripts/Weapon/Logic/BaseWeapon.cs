@@ -101,7 +101,6 @@ public class BaseWeapon : MonoBehaviour
         {
             yield return new WaitForSeconds(currentWeapon.shootCooldown);
             
-            Debug.Log("fully-auto Shoot");
             StartCoroutine(FireAction(fireObject, firePoint));
         }
     }
@@ -163,7 +162,6 @@ public class BaseWeapon : MonoBehaviour
         if (isCancelReload) yield break;
         
         // Weapon Reload Action
-        Debug.Log("Set Bullet Count");
         data.currentBagBulletCount -= reloadBulletCount;
         data.currentBulletCount += reloadBulletCount;
         saveWeaponDataAction?.Invoke(); // Save data

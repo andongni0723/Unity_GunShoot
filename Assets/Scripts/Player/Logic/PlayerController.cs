@@ -123,7 +123,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnFireDone()
     {
-        Debug.Log("DONE");
         playerWeapon.SetShootDone(true);
     }
 

@@ -36,7 +36,7 @@ public class MissionManager : MonoBehaviour
 
     private void OnNewMission(MissionDetails_SO data)
     {
-        GameObject newMission = new GameObject();
+        GameObject newMission = null;
         switch (data.missionType)
         {
             case MissionType.MainMission:
@@ -49,7 +49,7 @@ public class MissionManager : MonoBehaviour
                 break;
         }
 
-        newMission.GetComponent<MissionUI>().missionDetails = data;
+        newMission!.GetComponent<MissionUI>().missionDetails = data;
     }
 
     #endregion 

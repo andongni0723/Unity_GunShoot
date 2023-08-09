@@ -82,4 +82,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetPointUIPrefabs: {fileID: 5305876038009765508, guid: 93bacca2857ed4882b7090fa268c016b, type: 3}
   parentMission: {fileID: 0}
+  targetPointParent: {fileID: 0}
   isItemRealPoint: 0

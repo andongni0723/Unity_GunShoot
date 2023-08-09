@@ -13,6 +13,7 @@ TagManager:
   - LookTouchArea
   - ConsoleSpawnPoint
   - Canvas
+  - CanvasPoint
   layers:
   - Default
   - TransparentFX
