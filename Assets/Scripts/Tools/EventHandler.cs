@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -132,6 +133,23 @@ public class EventHandler : MonoBehaviour
     public static void CallNewMission(MissionDetails_SO data)
     {
         NewMission?.Invoke(data);
+    }
+
+    #endregion
+
+    #region Start Scene Character System
+
+    public static event Action<List<CharacterShowDetails>> UpdateCharacterList;
+    public static void CallUpdateCharacterList(List<CharacterShowDetails> dataList)
+    {
+        UpdateCharacterList?.Invoke(dataList);
+    }
+
+    public static event Action<CharacterShowDetails> ClickCharacterToggle;
+
+    public static void CallClickCharacterToggle(CharacterShowDetails data)
+    {
+        ClickCharacterToggle?.Invoke(data);
     }
 
     #endregion

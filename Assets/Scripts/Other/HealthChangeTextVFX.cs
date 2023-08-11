@@ -27,7 +27,6 @@ public class HealthChangeTextVFX : MonoBehaviour
     /// <returns></returns>
     public void CallChangeHealthTextAnimation(int changeValue)
     {
-        Debug.Log(changeValue);
         StartCoroutine(ChangeHealthTextAnimation(changeValue));
     }
 

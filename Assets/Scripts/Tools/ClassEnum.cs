@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GamePlatform
 {
@@ -71,4 +72,12 @@ public class RandomSpawnItemDetails
     public List<GameObject> SpawnPointsList = new List<GameObject>();
     public GameObject spawnItem;
     public int spawnCount = 1;
+}
+
+[System.Serializable]
+public class CharacterShowDetails
+{
+    public int characterID;
+    public GameObject characterShowObject;
+    public CharacterDetails_SO characterDetails;
 }

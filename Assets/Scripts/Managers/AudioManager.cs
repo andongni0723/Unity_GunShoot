@@ -6,8 +6,9 @@ using UnityEngine.Serialization;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    public AudioSource fireAudioSource; 
+    public AudioSource fireAudioSource;
     public AudioSource itemAudioSource;
+    public AudioSource buttonAudioSource;
 
     [Header("Audio")] 
     public AudioClip grenadeThrowAudio;
@@ -17,12 +18,13 @@ public class AudioManager : Singleton<AudioManager>
     public AudioClip shieldOpenAudio;
     public AudioClip shieldHitAudio;
     public AudioClip changeWeaponAudio;
-    
+    public AudioClip buttonClickAudio;
+
 
     public void PlayAudio(AudioClip clip)
     {
-       fireAudioSource.clip = clip;
-       fireAudioSource.Play();
+        fireAudioSource.clip = clip;
+        fireAudioSource.Play();
     }
 
     public void PlayItemAudio(AudioClip clip)
@@ -30,5 +32,11 @@ public class AudioManager : Singleton<AudioManager>
         itemAudioSource.clip = clip;
         itemAudioSource.Play();
     }
-    
+
+    public void ButtonClickAudio()
+    {
+        buttonAudioSource.clip = buttonClickAudio;
+        buttonAudioSource.Play();
+    }
+
 }

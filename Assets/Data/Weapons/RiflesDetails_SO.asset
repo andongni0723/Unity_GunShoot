@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f79dab688cae47dc8bbf66d8cacdec8, type: 3}
+  m_Name: RiflesDetails_SO
+  m_EditorClassIdentifier: 
+  weaponSprite: {fileID: 21300046, guid: 6674e8c43c63e4f4184cbd009379498d, type: 3}
+  weaponName: "\u6B65\u69CD"
+  clipBulletCount: 26
+  bagBulletCount: 104
+  weaponReloadTime: 2
+  shootAngle: {x: 3, y: 15}
+  fireAudio: {fileID: 8300000, guid: f19e3fdb9c8082647a2c32beca28ba84, type: 3}
+  shootCooldown: 0.08
+  damage: 50
+  cameraSight: 6.5
+  lightOutSight: 7.2
+  fireCameraShake: 7
