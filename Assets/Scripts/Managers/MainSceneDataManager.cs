@@ -19,12 +19,22 @@ public class MainSceneDataManager : Singleton<MainSceneDataManager>
     public void LoadGameScene()
     {
         SceneManager.LoadScene(gameSceneName, LoadSceneMode.Additive);
+        SceneManager.sceneLoaded += (scene, mode) =>
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(gameSceneName));
+        };
+        
         SceneManager.UnloadSceneAsync(startSceneName);
     }
     
     public void LoadStartScene()
     {
         SceneManager.LoadScene(startSceneName, LoadSceneMode.Additive);
+        SceneManager.sceneLoaded += (scene, mode) =>
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(startSceneName));
+        };
+        
         SceneManager.UnloadSceneAsync(gameSceneName);
     }
 

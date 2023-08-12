@@ -23,7 +23,7 @@ MonoBehaviour:
   skillItemDetails: {fileID: 6223539517599096599, guid: dbc773d70e09243b9a30143c724cb3ff, type: 3}
   skillItemName: "\u8B77\u76FE"
   startWeaponList:
-  - {fileID: 11400000, guid: 5f02baed4dd4f4ea9aaaff77d456e278, type: 2}
+  - {fileID: 11400000, guid: 709e48c7578944210bb26a62e329e7ae, type: 2}
   - {fileID: 11400000, guid: d08362880ac8a4992afcb38c33ec22ec, type: 2}
   recoveryHealth: 50
   skillDescription: "\u6295\u64F2\u51FA\u4E00\u9846\u80FD\u91CF\u5F48\uFF0C1\u79D2\u5F8C\u5C55\u958B\u8B77\u76FE\uFF0C\u8B77\u76FE\u53EF\u62B5\u64CB\u4E00\u5207\u4F86\u81EA\u6575\u65B9\u7684\u5B50\u5F48\uFF0C\u6301\u7E8C10\u79D2\u3002"

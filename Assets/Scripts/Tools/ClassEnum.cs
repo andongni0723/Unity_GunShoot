@@ -1,6 +1,7 @@
 // Enum
 
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -80,4 +81,40 @@ public class CharacterShowDetails
     public int characterID;
     public GameObject characterShowObject;
     public CharacterDetails_SO characterDetails;
+}
+
+[System.Serializable]
+public class CharacterDetailsShowUI
+{
+    public TextMeshProUGUI characterNameText;
+    public TextMeshProUGUI characterHealthText;
+    public TextMeshProUGUI characterDefenseText;
+    public Slider characterDefenseSlider;
+    public TextMeshProUGUI characterRecoveryText;
+}
+
+[System.Serializable]
+public class WeaponDetailsShowUI
+{
+    public TextMeshProUGUI weaponNameText;
+    public TextMeshProUGUI weaponShootModeText;
+    public Image weaponImage;
+    public TextMeshProUGUI clipBulletCountText;
+    public TextMeshProUGUI bagBulletCountText;
+    public TextMeshProUGUI weaponDamageText;
+    public TextMeshProUGUI shootCooldownText;
+    public TextMeshProUGUI reloadTimeText;
+    public TextMeshProUGUI shootRangeText;
+    
+    public TextMeshProUGUI cameraSightText;
+    public TextMeshProUGUI lightOutSightText;
+    public TextMeshProUGUI fireCameraShakeText;
+}
+
+[System.Serializable]
+public class CharacterSkillDetailsShowUI
+{
+    public TextMeshProUGUI skillNameText;
+    public Image skillImage;
+    public TextMeshProUGUI skillDescriptionText;
 }

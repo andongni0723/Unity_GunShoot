@@ -1565,6 +1565,7 @@ GameObject:
   - component: {fileID: 241195263}
   - component: {fileID: 241195264}
   - component: {fileID: 241195265}
+  - component: {fileID: 241195266}
   m_Layer: 5
   m_Name: Character Details Show Panel
   m_TagString: Untagged
@@ -1659,6 +1660,58 @@ MonoBehaviour:
   originPosition: {x: -2064, y: -100}
   movePosition: {x: 1794, y: -100}
   moveSpeed: 0.5
+--- !u!114 &241195266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241195259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae4e6c3ad193b46e884acbebc455ab24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterDetails: {fileID: 0}
+  characterDetailsShowUI:
+    characterNameText: {fileID: 1259270884}
+    characterHealthText: {fileID: 1615702374}
+    characterDefenseText: {fileID: 1325440768}
+    characterDefenseSlider: {fileID: 692162390}
+    characterRecoveryText: {fileID: 1517007804}
+  mainWeaponDetailsShowUI:
+    weaponNameText: {fileID: 1894693446}
+    weaponShootModeText: {fileID: 788276932}
+    weaponImage: {fileID: 793601355}
+    clipBulletCountText: {fileID: 776873556}
+    bagBulletCountText: {fileID: 893782868}
+    weaponDamageText: {fileID: 167915805}
+    shootCooldownText: {fileID: 126529158}
+    reloadTimeText: {fileID: 1305571759}
+    shootRangeText: {fileID: 488737805}
+    cameraSightText: {fileID: 189653902}
+    lightOutSightText: {fileID: 1090530455}
+    fireCameraShakeText: {fileID: 1424368485}
+  secondWeaponDetailsShowUI:
+    weaponNameText: {fileID: 2024039008}
+    weaponShootModeText: {fileID: 1437665672}
+    weaponImage: {fileID: 660711104}
+    clipBulletCountText: {fileID: 288125391}
+    bagBulletCountText: {fileID: 1988931785}
+    weaponDamageText: {fileID: 1601048524}
+    shootCooldownText: {fileID: 868482865}
+    reloadTimeText: {fileID: 1205760291}
+    shootRangeText: {fileID: 1082152767}
+    cameraSightText: {fileID: 674398005}
+    lightOutSightText: {fileID: 1996274053}
+    fireCameraShakeText: {fileID: 1229998681}
+  characterSkillDetailsShowUI:
+    skillNameText: {fileID: 1690262213}
+    skillImage: {fileID: 415235828}
+    skillDescriptionText: {fileID: 1671270616}
+  valueLessColor: {r: 1, g: 0, b: 0, a: 1}
+  valueHighColor: {r: 0, g: 1, b: 0, a: 1}
+  valueNormalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &257051122
 GameObject:
   m_ObjectHideFlags: 0
@@ -3566,7 +3619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 733225722}
   m_Layer: 5
-  m_Name: Recover
+  m_Name: Recovery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5837,7 +5890,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1083308889}
   m_Layer: 5
-  m_Name: Light Out Sight (1)
+  m_Name: Fire Camera Shake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6666,8 +6719,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1408.8977}
-  m_SizeDelta: {x: 0, y: 4540.7954}
+  m_AnchoredPosition: {x: 0, y: -1870.0942}
+  m_SizeDelta: {x: 0, y: 5463.189}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1213104741
 MonoBehaviour:
@@ -6707,7 +6760,7 @@ GameObject:
   - component: {fileID: 1229998682}
   - component: {fileID: 1229998681}
   m_Layer: 5
-  m_Name: Light Out Sight Text
+  m_Name: Fire Camera Shake Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7783,7 +7836,7 @@ GameObject:
   - component: {fileID: 1424368486}
   - component: {fileID: 1424368485}
   m_Layer: 5
-  m_Name: Light Out Sight Text
+  m_Name: Fire Camera Shake Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8340,7 +8393,7 @@ GameObject:
   - component: {fileID: 1517007805}
   - component: {fileID: 1517007804}
   m_Layer: 5
-  m_Name: Health Value
+  m_Name: Recovery Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10594,7 +10647,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1907688574}
   m_Layer: 5
-  m_Name: Light Out Sight (1)
+  m_Name: Fire Camera Shake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

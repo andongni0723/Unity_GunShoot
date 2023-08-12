@@ -27,6 +27,7 @@ public class EnemyHealth : BaseHealth
     {
         // Play dead animation
         float angle = Random.Range(0, 360);
+        GameManager.Instance.KillEnemyAddMoney();
         Instantiate(deadVFX, transform.position, quaternion.Euler(0, 0, angle));
         Destroy(gameObject);
     }

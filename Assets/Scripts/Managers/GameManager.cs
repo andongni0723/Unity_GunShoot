@@ -85,6 +85,11 @@ public class GameManager : Singleton<GameManager>
         PlayerWeaponBulletDataList.Add(updateData);
     }
 
+    public void KillEnemyAddMoney()
+    {
+        currentPlayerMoney += 20;
+    }
+
     #endregion
     
 }

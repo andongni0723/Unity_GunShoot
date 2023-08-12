@@ -61,8 +61,7 @@ public class GameOverPanel : MonoBehaviour
 
     public void AgainButtonEvent()
     {
-        // TODO: Scene Reset
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        MainSceneDataManager.Instance.LoadStartScene();
     }
 
     #endregion
