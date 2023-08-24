@@ -16,7 +16,7 @@ public class CustomKeys : Editor
             // Try to get scene to save and close it
             Scene tryGetScene = InstanceIDToScene(id);
 
-            if (tryGetScene != default)
+            if (tryGetScene != default && tryGetScene.isLoaded)
             {
                 EditorSceneManager.SaveScene(tryGetScene);
                 EditorSceneManager.CloseScene(tryGetScene, false);
