@@ -21,12 +21,17 @@ public class ItemRandomSpawnManager : MonoBehaviour
     {
         foreach (RandomSpawnItemDetails data in randomSpawnItemDetailsList)
         {
-            int randomInt = Random.Range(0, data.SpawnPointsList.Count);
-
             // Spawn item
             for (int i = 0; i < data.spawnCount; i++)
             {
+                // Random spawn point
+                int randomInt = Random.Range(0, data.SpawnPointsList.Count);
+
                 Instantiate(data.spawnItem, data.SpawnPointsList[randomInt].transform.position, Quaternion.identity);
+                Debug.Log($"Spawn Item: {data.spawnItem.name}"); // TODO: Log
+                
+                // Remove spawn point
+                data.SpawnPointsList.RemoveAt(randomInt);
             }
         }
         

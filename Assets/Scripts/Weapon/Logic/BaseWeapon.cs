@@ -15,7 +15,7 @@ public class BaseWeapon : MonoBehaviour
 
     [Header("Component")]
     public Light2D weaponLight;
-    public BulletPool bulletPool;
+    public BulletPool bulletPool => GameObject.FindWithTag("PoolManager").GetComponent<BulletPool>();
 
     [Header("Setting")]
     public float cameraShakeIntensity = 10;

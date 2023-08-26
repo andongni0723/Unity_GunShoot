@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 8996153998137635191}
   - component: {fileID: 6604150371278905900}
   m_Layer: 7
-  m_Name: Enemy Parent
+  m_Name: Sniper_Enemy Parent
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,7 +419,7 @@ MonoBehaviour:
   enemyObject: {fileID: 3080020160453691092}
   enemySpriteObject: {fileID: 7993419006972664087}
   gunPoint: {fileID: 4991409198615269563}
-  UICanvas: {fileID: 0}
+  UICanvas: {fileID: 6278722123868019936}
   chaseDistance: 15
   attackDistance: 8
   isGoneTargetPos: 0
@@ -441,14 +441,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponList:
-  - {fileID: 11400000, guid: 2f41650e125b848079b2fe8c5b579646, type: 2}
+  - {fileID: 11400000, guid: 709e48c7578944210bb26a62e329e7ae, type: 2}
   currentWeapon: {fileID: 0}
   data:
     weaponDetails: {fileID: 0}
     currentBulletCount: 0
     currentBagBulletCount: 0
   weaponLight: {fileID: 0}
-  bulletPool: {fileID: 0}
   cameraShakeIntensity: 3
   currentBulletCount: 0
   currentBagBulletCount: 0
