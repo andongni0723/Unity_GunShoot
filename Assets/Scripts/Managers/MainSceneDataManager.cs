@@ -15,6 +15,7 @@ public class MainSceneDataManager : Singleton<MainSceneDataManager>
     protected override void Awake()
     {
         base.Awake();
+        Application.targetFrameRate = 300;
         OpenGameLoadStartScene();
     }
 

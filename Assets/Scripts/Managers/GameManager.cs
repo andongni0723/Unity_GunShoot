@@ -24,7 +24,6 @@ public class GameManager : Singleton<GameManager>
         if(!isTest) 
             CheckGamePlatform();
         
-        Application.targetFrameRate = 300;
         playerDetail = MainSceneDataManager.Instance.playerChooseCharacterDetails;
         
         StartCoroutine(WaitForGetPlayerDetailsAndMapPrepare());

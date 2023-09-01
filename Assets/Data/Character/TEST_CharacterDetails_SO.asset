@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd703d1083b64eb3981e9649dc68fd7, type: 3}
+  m_Name: TEST_CharacterDetails_SO
+  m_EditorClassIdentifier: 
+  mainWeaponSprite: {fileID: 0}
+  secondWeaponSprite: {fileID: 0}
+  skillItemSprite: {fileID: 0}
+  characterName: TEST
+  startHealth: 100
+  startDefense: 50
+  mainWeaponDetails: {fileID: 11400000, guid: 702408cb0df4f48b69185b101aa27a39, type: 2}
+  secondWeaponDetails: {fileID: 11400000, guid: 702408cb0df4f48b69185b101aa27a39, type: 2}
+  skillItemDetails: {fileID: 1665740826757819653, guid: 5942ac18e30b841f496abe1024932d8a, type: 3}
+  skillItemName: Test
+  startWeaponList: []
+  recoveryHealth: 30
+  skillDescription: Test

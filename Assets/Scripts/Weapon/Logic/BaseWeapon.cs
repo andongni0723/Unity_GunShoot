@@ -135,7 +135,6 @@ public class BaseWeapon : MonoBehaviour
 
     public virtual IEnumerator ReloadBullet()
     {
-        Debug.Log("Call Reload");
         
         // Check if has bullet or reloading (Break)
         if (data.currentBagBulletCount <= 0 || !isReloadTimerEnd) yield break;
@@ -149,7 +148,7 @@ public class BaseWeapon : MonoBehaviour
         else
         {
             // Check bag bullet have
-            if (currentBagBulletCount > 0)
+            if (data.currentBagBulletCount > 0)
             {
                 reloadBulletCount = data.currentBagBulletCount;
             }
