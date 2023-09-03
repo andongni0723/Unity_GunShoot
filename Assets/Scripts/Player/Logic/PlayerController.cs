@@ -50,19 +50,21 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         inputControlls = new PlayerInputControlls();
-      
+
+        
         inputControlls.GamePlay.Fire.performed += _ => OnFire();
         inputControlls.GamePlay.Fire.canceled += _ => OnFireDone();
         inputControlls.GamePlay.FireMobile.performed += _ => OnFireMobile();
         inputControlls.GamePlay.FireMobile.canceled += _ => OnFireDone();
+        inputControlls.GamePlay.InteractiveItem.performed += _ => OnPressInteractive();
         inputControlls.GamePlay.ReloadBullet.performed += _ => OnReload();
         inputControlls.GamePlay.Skill.performed += _ => OnUseSkill();
         inputControlls.GamePlay.Recovery.performed += _ => OnRecovery();
         inputControlls.GamePlay.PlayerDetails.performed += _ => OnOpenPlayerDetails();
         inputControlls.GamePlay.ChangeWeapon.performed += _ => OnChangeWeapon();
-        inputControlls.GamePlay.InteractiveItem.performed += _ => OnPressInteractive();
         inputControlls.UI.Cancel.performed += _ => OnCancelUI();
-      
+        inputControlls.Enable();
+
         // Object
         interactiveButton.gameObject.SetActive(false);
 
@@ -74,12 +76,43 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         EventHandler.LoadPlayer += OnLoadPlayer; // update player details form SO
-        inputControlls.Enable();
+        EventHandler.OpenStorePanel += OnOpenStorePanel; // Stop Player Input
+        EventHandler.CloseUI += OnCloseStorePanel; // Open Player Input
+        EventHandler.GameWin += OnGameWin; // Stop Player Input
     }
-
     private void OnDisable()
     {
         EventHandler.LoadPlayer -= OnLoadPlayer;
+        EventHandler.OpenStorePanel -= OnOpenStorePanel; 
+        EventHandler.CloseUI -= OnCloseStorePanel;
+        EventHandler.GameWin -= OnGameWin;
+        
+        InputControllerDisable();
+    }
+
+    private void OnOpenStorePanel()
+    {
+        inputControlls.GamePlay.Disable();
+    }
+    private void OnCloseStorePanel()
+    {
+        inputControlls.GamePlay.Enable();
+    }
+
+    private void InputControllerDisable()
+    {
+        inputControlls.GamePlay.Fire.performed -= _ => OnFire();
+        inputControlls.GamePlay.Fire.canceled -= _ => OnFireDone();
+        inputControlls.GamePlay.FireMobile.performed -= _ => OnFireMobile();
+        inputControlls.GamePlay.FireMobile.canceled -= _ => OnFireDone();
+        inputControlls.GamePlay.ReloadBullet.performed -= _ => OnReload();
+        inputControlls.GamePlay.Skill.performed -= _ => OnUseSkill();
+        inputControlls.GamePlay.Recovery.performed -= _ => OnRecovery();
+        inputControlls.GamePlay.PlayerDetails.performed -= _ => OnOpenPlayerDetails();
+        inputControlls.GamePlay.ChangeWeapon.performed -= _ => OnChangeWeapon();
+        inputControlls.GamePlay.InteractiveItem.performed -= _ => OnPressInteractive();
+        inputControlls.UI.Cancel.performed -= _ => OnCancelUI();
+        
         inputControlls.Disable();
     }
 
@@ -97,18 +130,26 @@ public class PlayerController : MonoBehaviour
         Debug.Log("load ppp");
         EventHandler.CallLoadPlayerEnd();
     }
+
+    private void OnGameWin()
+    {
+        //InputControllerDisable();
+    }
     
+
     // Fire Action
     private void OnFire()
     {
         //Mouse
         if (GameManager.Instance.gamePlatform == GamePlatform.PC)
         {
-            if (!EventSystem.current.IsPointerOverGameObject())
-            {
-                playerWeapon.SetShootDone(false);
-                playerWeapon.Fire(player, gunPoint.gameObject);
-            }
+            playerWeapon.SetShootDone(false);
+            playerWeapon.Fire(player, gunPoint.gameObject);
+            
+            // if (!EventSystem.current.IsPointerOverGameObject())
+            // {
+            //     
+            // }
         }
     }
     private void OnFireMobile()
@@ -168,9 +209,8 @@ public class PlayerController : MonoBehaviour
    
     private void OnCancelUI()
     {
-        EventHandler.CallOnCancelUI();
+        EventHandler.CallCloseUI();
     }
-    // Interface
     #endregion
    
     private void Update()
@@ -233,7 +273,7 @@ public class PlayerController : MonoBehaviour
         {
             wantInteractiveObject = other.gameObject;
             
-            interactiveItemNameText.text = wantInteractiveObject.GetComponent<BaseInteractiveItem>().interactiveDescription;
+            interactiveItemNameText.text = wantInteractiveObject.GetComponent<BaseInteractiveItem>().InteractiveDescription;
             interactiveButton.gameObject.SetActive(true);
             canInteractive = true;
         }

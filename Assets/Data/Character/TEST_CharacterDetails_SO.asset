@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd703d1083b64eb3981e9649dc68fd7, type: 3}
   m_Name: TEST_CharacterDetails_SO
   m_EditorClassIdentifier: 
-  mainWeaponSprite: {fileID: 0}
-  secondWeaponSprite: {fileID: 0}
-  skillItemSprite: {fileID: 0}
+  mainWeaponSprite: {fileID: 21300028, guid: 6674e8c43c63e4f4184cbd009379498d, type: 3}
+  secondWeaponSprite: {fileID: 21300022, guid: 6674e8c43c63e4f4184cbd009379498d, type: 3}
+  skillItemSprite: {fileID: 21300020, guid: 5163ae49a0de665458bba61cd20c99b1, type: 3}
   characterName: TEST
   startHealth: 100
   startDefense: 50
@@ -22,6 +22,8 @@ MonoBehaviour:
   secondWeaponDetails: {fileID: 11400000, guid: 702408cb0df4f48b69185b101aa27a39, type: 2}
   skillItemDetails: {fileID: 1665740826757819653, guid: 5942ac18e30b841f496abe1024932d8a, type: 3}
   skillItemName: Test
-  startWeaponList: []
+  startWeaponList:
+  - {fileID: 11400000, guid: 5f02baed4dd4f4ea9aaaff77d456e278, type: 2}
+  - {fileID: 11400000, guid: 702408cb0df4f48b69185b101aa27a39, type: 2}
   recoveryHealth: 30
   skillDescription: Test

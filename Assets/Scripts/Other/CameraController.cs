@@ -38,8 +38,9 @@ public class CameraController : Singleton<CameraController>
 
     public void CameraShake(float intensity, float time)
     {
+        
         noise.m_AmplitudeGain = intensity;
-        //noise.
+        //noise
         StartCoroutine(TimeToCloseShake(time));
     }
 

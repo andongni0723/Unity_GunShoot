@@ -71,6 +71,7 @@ public class BuyItemDetails
 public class RandomSpawnItemDetails
 {
     public List<GameObject> SpawnPointsList = new List<GameObject>();
+    public bool isEnemy = false;
     public GameObject spawnItem;
     public int spawnCount = 1;
 }
@@ -117,4 +118,12 @@ public class CharacterSkillDetailsShowUI
     public TextMeshProUGUI skillNameText;
     public Image skillImage;
     public TextMeshProUGUI skillDescriptionText;
+}
+
+
+[System.Serializable]
+public class GameWinDetailsUI
+{
+    public TextMeshProUGUI detailsText;
+    public TextMeshProUGUI detailsValueText;
 }

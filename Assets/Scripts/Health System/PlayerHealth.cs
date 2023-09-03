@@ -28,6 +28,9 @@ public class PlayerHealth : BaseHealth
         
         // Health Bar
         healthBar.value = (float)currentHealth / maxHealth;
+        
+        // GameManager update details
+        GameManager.Instance.spendHpCount += damage;
     }
 
     public override void Recovery(int increaseValue)

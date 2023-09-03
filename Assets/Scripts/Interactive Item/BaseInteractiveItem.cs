@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseInteractiveItem : MonoBehaviour
+public abstract class BaseInteractiveItem : MonoBehaviour
 {
     public string interactiveDescription; // The player close to item, the player UI will show button and text from this string.
-    
+    public abstract string InteractiveDescription { get; set; }
+
     #region Event
 
     private void OnEnable()
     {
+        InteractiveDescription = interactiveDescription;
         EventHandler.InteractiveItem += OnInteractiveItem; // Execute interactive action
     }
 
@@ -32,5 +34,5 @@ public class BaseInteractiveItem : MonoBehaviour
     /// <summary>
     /// Children Scripts will add something in there
     /// </summary>
-    protected virtual void InteractiveAction() { }
+    protected abstract void InteractiveAction();
 }

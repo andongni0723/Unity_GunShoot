@@ -21,6 +21,10 @@ public class ItemRandomSpawnManager : MonoBehaviour
     {
         foreach (RandomSpawnItemDetails data in randomSpawnItemDetailsList)
         {
+            // GameManager Details
+            if(data.isEnemy)
+                GameManager.Instance.maxEnemyCount += data.spawnCount;
+            
             // Spawn item
             for (int i = 0; i < data.spawnCount; i++)
             {
@@ -28,7 +32,6 @@ public class ItemRandomSpawnManager : MonoBehaviour
                 int randomInt = Random.Range(0, data.SpawnPointsList.Count);
 
                 Instantiate(data.spawnItem, data.SpawnPointsList[randomInt].transform.position, Quaternion.identity);
-                Debug.Log($"Spawn Item: {data.spawnItem.name}"); // TODO: Log
                 
                 // Remove spawn point
                 data.SpawnPointsList.RemoveAt(randomInt);

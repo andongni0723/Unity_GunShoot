@@ -56,14 +56,5 @@ public class GameOverPanel : MonoBehaviour
     {
         againButton.gameObject.SetActive(true);
     }
-
-    #region Button
-
-    public void AgainButtonEvent()
-    {
-        MainSceneDataManager.Instance.LoadStartScene();
-    }
-
-    #endregion
 }
 

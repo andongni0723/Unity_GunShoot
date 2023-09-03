@@ -14,6 +14,13 @@ public class GameManager : Singleton<GameManager>
     public int currentPlayerMoney = 250;
     public List<WeaponBulletData> PlayerWeaponBulletDataList = new List<WeaponBulletData>();
     public bool isMapPrepare; // ItemRandomSpawnManager will spawn console and enemys 
+
+    [Space(20)]
+    // The details var will be call by the other scripts
+    public int maxEnemyCount;   // ItemRandomSpawnManager 
+    public int killEnemyCount;  // EnemyHealth
+    public int spendHpCount;    // PlayerHealth
+    public int spendMoneyCount; // StorePanel
     
     [Header("Setting")] 
     public bool isTest;
@@ -29,6 +36,25 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(WaitForGetPlayerDetailsAndMapPrepare());
     }
 
+    #region Event
+
+    private void OnEnable()
+    {
+        EventHandler.GameWin += OnGameWin;
+    }
+
+    private void OnDisable()
+    {
+        EventHandler.GameWin -= OnGameWin;
+
+    }
+
+    private void OnGameWin()
+    {
+    }
+
+    #endregion 
+    
     private void CheckGamePlatform()
     {
         
@@ -87,6 +113,11 @@ public class GameManager : Singleton<GameManager>
     public void KillEnemyAddMoney()
     {
         currentPlayerMoney += 20;
+    }
+    
+    public void AgainButtonEvent()
+    {
+        MainSceneDataManager.Instance.LoadStartScene();
     }
 
     #endregion

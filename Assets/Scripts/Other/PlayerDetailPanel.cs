@@ -21,17 +21,17 @@ public class PlayerDetailPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        EventHandler.OnCancelUI += OnOnCancelUI; // Close Window
+        EventHandler.CloseUI += OnCloseUI; // Close Window
         EventHandler.ReadPlayDetail += OnReadPlayDetail; // Update detail to components
     }
 
     private void OnDisable()
     {
-        EventHandler.OnCancelUI -= OnOnCancelUI;
+        EventHandler.CloseUI -= OnCloseUI;
         EventHandler.ReadPlayDetail -= OnReadPlayDetail;
     }
 
-    private void OnOnCancelUI()
+    private void OnCloseUI()
     {
         panelParent.SetActive(false);
     }

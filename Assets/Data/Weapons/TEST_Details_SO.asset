@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f79dab688cae47dc8bbf66d8cacdec8, type: 3}
   m_Name: TEST_Details_SO
   m_EditorClassIdentifier: 
-  weaponSprite: {fileID: 21300010, guid: 5acb27b603af6d44ea6113c4b7b15385, type: 3}
+  weaponSprite: {fileID: 21300028, guid: 6674e8c43c63e4f4184cbd009379498d, type: 3}
   weaponName: Test
   clipBulletCount: 3
   bagBulletCount: 7

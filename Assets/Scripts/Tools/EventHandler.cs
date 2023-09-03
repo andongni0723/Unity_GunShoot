@@ -31,11 +31,11 @@ public class EventHandler : MonoBehaviour
         InteractiveItem?.Invoke(targetItem);
     }
 
-    public static event Action OnCancelUI;
+    public static event Action CloseUI;
 
-    public static void CallOnCancelUI()
+    public static void CallCloseUI()
     {
-        OnCancelUI?.Invoke();
+        CloseUI?.Invoke();
     }
     
     public static event Action<WeaponDetails_SO, WeaponDetails_SO, WeaponDetails_SO> ReadPlayDetail;
@@ -92,6 +92,20 @@ public class EventHandler : MonoBehaviour
     public static void CallChangeCameraSight(float target)
     {
         ChangeCameraSight?.Invoke(target);
+    }
+
+    public static event Action GameWin;
+
+    public static void CallGameWin()
+    {
+        GameWin?.Invoke();
+    }
+
+    public static event Action GameWinCameraSwitchDone;
+
+    public static void CallGameWinCameraSwitchDone()
+    {
+        GameWinCameraSwitchDone?.Invoke();
     }
 
     #region Store

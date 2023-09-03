@@ -14,8 +14,8 @@ public class BaseEnemy : MonoBehaviour
     public GameObject enemySpriteObject;
     public GameObject gunPoint;
     public GameObject UICanvas;
-    public BaseWeapon baseWeapon => GetComponent<BaseWeapon>();
-    public BaseSeePlayer enemySeePlayer => GetComponent<BaseSeePlayer>();
+    private BaseWeapon baseWeapon => GetComponent<BaseWeapon>();
+    private EnemySeePlayer enemySeePlayer => GetComponent<EnemySeePlayer>();
 
     [Header("Setting")] 
     public float chaseDistance = 15;
@@ -42,6 +42,27 @@ public class BaseEnemy : MonoBehaviour
         
         StartCoroutine(ExecuteStateAction());
     }
+
+    #region Event
+
+    private void OnEnable()
+    {
+        EventHandler.GameWin += OnGameWin;
+    }
+
+    private void OnDisable()
+    {
+        EventHandler.GameWin -= OnGameWin;
+    }
+
+    private void OnGameWin()
+    {
+        enemySeePlayer.enabled = false;
+        baseWeapon.enabled = false;
+        enemySeePlayer.enemySpriteObject.SetActive(true);
+    }
+
+    #endregion 
 
     private void Update()
     {

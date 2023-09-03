@@ -15,6 +15,8 @@ public class Door : BaseInteractiveItem
     
     [SerializeField]private bool isOpen;
     
+    public override string InteractiveDescription { get; set; }
+
     protected override void InteractiveAction()
     {
         OpenOrCloseDoor();
@@ -23,7 +25,7 @@ public class Door : BaseInteractiveItem
     private void OpenOrCloseDoor()
     {
         isOpen = !isOpen;
-        interactiveDescription = isOpen ? "關門" : "開門";
+        InteractiveDescription = isOpen ? "關門" : "開門";
 
         doorAxisObj.transform.DOLocalRotateQuaternion(quaternion.Euler(0, 0, isOpen? -90 : 0), doorActionTime);
     }

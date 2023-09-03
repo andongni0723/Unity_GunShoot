@@ -68,7 +68,7 @@ public class StorePanel : MonoBehaviour
 
     private void OnEnable()
     {
-        EventHandler.OnCancelUI += OnOnCancelUI;         // Close Window
+        EventHandler.CloseUI += OnCloseUI;         // Close Window
         EventHandler.OpenStorePanel += OnOpenStorePanel; // Open Panel
         EventHandler.BuyItem += OnBuyItem;               // switch window to check window
         EventHandler.CorrectBuyItem += OnCorrectBuyItem; // Check have money to buy
@@ -77,7 +77,7 @@ public class StorePanel : MonoBehaviour
 
     private void OnDisable()
     {
-        EventHandler.OnCancelUI -= OnOnCancelUI;
+        EventHandler.CloseUI -= OnCloseUI;
         EventHandler.OpenStorePanel -= OnOpenStorePanel;
         EventHandler.BuyItem -= OnBuyItem;
         EventHandler.CorrectBuyItem -= OnCorrectBuyItem;
@@ -89,7 +89,7 @@ public class StorePanel : MonoBehaviour
         storePanel.SetActive(true);
     }
 
-    private void OnOnCancelUI()
+    private void OnCloseUI()
     {
         storePanel.SetActive(false);
     }
@@ -106,6 +106,7 @@ public class StorePanel : MonoBehaviour
 
             Debug.Log(data.itemPrice);
             GameManager.Instance.currentPlayerMoney -= data.itemPrice;
+            GameManager.Instance.spendMoneyCount += data.itemPrice;
         }
         else
         {
