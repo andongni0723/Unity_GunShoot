@@ -25,7 +25,7 @@ public class CameraManager : MonoBehaviour
 
     private void OnDisable()
     {
-        EventHandler.GameWin += OnGameWin;
+        EventHandler.GameWin -= OnGameWin;
     }
 
     private void OnGameWin()

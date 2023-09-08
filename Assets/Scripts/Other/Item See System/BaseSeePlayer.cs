@@ -55,7 +55,6 @@ public class BaseSeePlayer : MonoBehaviour
             canSeePlayer = false;
             
             OnPlayerLeft();
-            //enemySpriteObject.SetActive(false); 
         }
     }
 

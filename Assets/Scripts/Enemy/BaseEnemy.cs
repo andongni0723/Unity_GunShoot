@@ -109,15 +109,23 @@ public class BaseEnemy : MonoBehaviour
                     break;
             
                 case EnemyState.Chase:
-                    if (enemySeePlayer.isFirstSeePlayer)
-                    {
-                        // Position
-                        transform.position = Vector3.MoveTowards(transform.position, enemySeePlayer.playerPos, speed * Time.deltaTime);
+                    if (!enemySeePlayer.isFirstSeePlayer) break;
+
+                    // Position
+                    transform.position = Vector3.MoveTowards(transform.position, enemySeePlayer.playerPos,
+                            speed * Time.deltaTime);
                     
-                        // Rotation
-                        angle = Mathf.Atan2(enemySeePlayer.playerPosUpdate.y - transform.position.y ,enemySeePlayer.playerPosUpdate.x - transform.position.x) * Mathf.Rad2Deg;
-                        enemyObject.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-                    }
+                    // Check Enemy is hit the wall
+                    // if (Vector2.Distance(GameObject.Find(enemySeePlayer.hitsL[0]).transform.position, transform.position) <= 2)
+                    // {
+                    //     
+                    // }
+
+                    // Rotation
+                    angle = Mathf.Atan2(enemySeePlayer.playerPosUpdate.y - transform.position.y,
+                        enemySeePlayer.playerPosUpdate.x - transform.position.x) * Mathf.Rad2Deg;
+                    
+                    enemyObject.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
                     break;
             
                 case EnemyState.Static:

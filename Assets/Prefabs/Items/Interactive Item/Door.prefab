@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3835793941358168436}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Door Axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,15 +42,14 @@ GameObject:
   m_Component:
   - component: {fileID: 7868369217355480469}
   - component: {fileID: 8556441488735194260}
-  - component: {fileID: 1049752215459223739}
   - component: {fileID: 6700243148593294743}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: InteractiveObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7868369217355480469
 Transform:
   m_ObjectHideFlags: 0
@@ -83,25 +82,7 @@ MonoBehaviour:
   interactiveDescription: "\u958B\u9580"
   doorAxisObj: {fileID: 2699819567544634176}
   doorActionTime: 1
---- !u!114 &1049752215459223739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7166113981818215704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b81146515594343a297ada936d6891d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 200
-  maxHealth: 200
-  defense: 20
-  deadVFX: {fileID: 0}
-  TextVFXInstantiatePoint: {fileID: 7371643757229220367}
-  healthChangeTextVFXObject: {fileID: 2011207226391736243, guid: f9597163404b24a318834b832bff929c, type: 3}
-  recoveryVFXPool: {fileID: 0}
+  isOpen: 0
 --- !u!61 &6700243148593294743
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -156,7 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1537738943807827093}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Health Change Text Point
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -188,6 +169,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3917432208653188802}
   - component: {fileID: 863575749055319457}
+  - component: {fileID: 6735449354648261894}
+  - component: {fileID: 7350069501180577891}
+  - component: {fileID: 5322561473699048685}
   m_Layer: 0
   m_Name: Door Sprite
   m_TagString: Untagged
@@ -248,9 +232,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1315402671
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayerID: -473102621
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
   m_FlipX: 0
@@ -262,3 +246,98 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &6735449354648261894
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7964927934103271853}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &7350069501180577891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7964927934103271853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81146515594343a297ada936d6891d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 200
+  maxHealth: 200
+  defense: 20
+  deadVFX: {fileID: 0}
+  TextVFXInstantiatePoint: {fileID: 7371643757229220367}
+  healthChangeTextVFXObject: {fileID: 2011207226391736243, guid: f9597163404b24a318834b832bff929c, type: 3}
+  recoveryVFXPool: {fileID: 0}
+  parent: {fileID: 7166113981818215704}
+--- !u!114 &5322561473699048685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7964927934103271853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000af73674ee306cde33d5ee83f
+  m_ShapePath:
+  - {x: -0.5, y: -0.49999976, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
+  - {x: 0.49999905, y: 0.5, z: 0}
+  - {x: 0.49999905, y: -0.49999976, z: 0}
+  m_ShapePathHash: 0
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 69892
+  m_LocalBounds:
+    m_Center: {x: -0.00000047683716, y: 0.00000011920929, z: 0}
+    m_Extent: {x: 0.49999952, y: 0.49999988, z: 0}

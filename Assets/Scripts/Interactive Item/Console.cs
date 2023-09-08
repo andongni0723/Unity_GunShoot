@@ -6,7 +6,7 @@ public class Console : BaseInteractiveItem
 {
     public override string InteractiveDescription { get; set; }
 
-    protected override void InteractiveAction()
+    public override void InteractiveAction()
     {
         EventHandler.CallOpenStorePanel();
     }

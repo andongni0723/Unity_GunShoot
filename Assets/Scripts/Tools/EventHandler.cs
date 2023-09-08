@@ -23,19 +23,19 @@ public class EventHandler : MonoBehaviour
     {
         PlayerDead?.Invoke();
     }
-
-    public static event Action<GameObject> InteractiveItem;
-
-    public static void CallInteractiveItem(GameObject targetItem)
-    {
-        InteractiveItem?.Invoke(targetItem);
-    }
-
+    
     public static event Action CloseUI;
 
     public static void CallCloseUI()
     {
         CloseUI?.Invoke();
+    }
+
+    public static event Action OpenPlayerDetailsPanel;
+
+    public static void CallOpenPlayerDetailsPanel()
+    {
+        OpenPlayerDetailsPanel?.Invoke();
     }
     
     public static event Action<WeaponDetails_SO, WeaponDetails_SO, WeaponDetails_SO> ReadPlayDetail;

@@ -17,7 +17,7 @@ public class Door : BaseInteractiveItem
     
     public override string InteractiveDescription { get; set; }
 
-    protected override void InteractiveAction()
+    public override void InteractiveAction()
     {
         OpenOrCloseDoor();
     }

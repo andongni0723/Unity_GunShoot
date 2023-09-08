@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Object")] 
     public GameObject player;
-    public new Collider2D light;
     public Transform gunPoint;
     public FloatingJoystick joystick;
    
@@ -76,25 +75,27 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         EventHandler.LoadPlayer += OnLoadPlayer; // update player details form SO
-        EventHandler.OpenStorePanel += OnOpenStorePanel; // Stop Player Input
-        EventHandler.CloseUI += OnCloseStorePanel; // Open Player Input
+        EventHandler.OpenStorePanel += OnOpenPanel; // Stop Player Input
+        EventHandler.OpenPlayerDetailsPanel += OnOpenPanel; // Stop Player Input
+        EventHandler.CloseUI += OnClosePanel; // Open Player Input
         EventHandler.GameWin += OnGameWin; // Stop Player Input
     }
     private void OnDisable()
     {
         EventHandler.LoadPlayer -= OnLoadPlayer;
-        EventHandler.OpenStorePanel -= OnOpenStorePanel; 
-        EventHandler.CloseUI -= OnCloseStorePanel;
+        EventHandler.OpenStorePanel -= OnOpenPanel; 
+        EventHandler.OpenPlayerDetailsPanel -= OnOpenPanel;
+        EventHandler.CloseUI -= OnClosePanel;
         EventHandler.GameWin -= OnGameWin;
         
         InputControllerDisable();
     }
 
-    private void OnOpenStorePanel()
+    private void OnOpenPanel()
     {
         inputControlls.GamePlay.Disable();
     }
-    private void OnCloseStorePanel()
+    private void OnClosePanel()
     {
         inputControlls.GamePlay.Enable();
     }
@@ -133,7 +134,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnGameWin()
     {
-        //InputControllerDisable();
+        InputControllerDisable();
     }
     
 
@@ -186,8 +187,9 @@ public class PlayerController : MonoBehaviour
    
     private void OnOpenPlayerDetails()
     {
+        EventHandler.CallOpenPlayerDetailsPanel();
+        
         // Check player has second weapon, and read player detail
-        Debug.Log("TAB");
         EventHandler.CallReadPlayDetail(playerWeapon.weaponList[0], 
             (playerWeapon.weaponList.Count >= 2 ? playerWeapon.weaponList[1] : default), playerWeapon.data.weaponDetails); 
     }
@@ -203,7 +205,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canInteractive)
         {
-            EventHandler.CallInteractiveItem(wantInteractiveObject);
+            wantInteractiveObject.GetComponent<BaseInteractiveItem>().InteractiveAction();
         }
     }
    
