@@ -6,12 +6,16 @@ using Random = UnityEngine.Random;
 
 public class ItemRandomSpawnManager : MonoBehaviour
 {
-    [Header("Setting")]
+    [Header("Setting")] 
+    public bool isTest = false;
     public List<RandomSpawnItemDetails> randomSpawnItemDetailsList = new List<RandomSpawnItemDetails>();
 
     private void Start()
     {
-        RandomSpawnItemAction();
+        if (isTest)
+            GameManager.Instance.isMapPrepare = true;
+        else
+            RandomSpawnItemAction();
     }
 
     /// <summary>

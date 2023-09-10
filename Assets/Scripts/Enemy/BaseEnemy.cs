@@ -1,11 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Sirenix;
 using Sirenix.OdinInspector;
+using UnityEngine.AI;
 
 public class BaseEnemy : MonoBehaviour
 {
@@ -16,6 +13,7 @@ public class BaseEnemy : MonoBehaviour
     public GameObject UICanvas;
     private BaseWeapon baseWeapon => GetComponent<BaseWeapon>();
     private EnemySeePlayer enemySeePlayer => GetComponent<EnemySeePlayer>();
+    private NavMeshAgent navMeshAgent => GetComponent<NavMeshAgent>();
 
     [Header("Setting")] 
     public float chaseDistance = 15;
@@ -39,6 +37,9 @@ public class BaseEnemy : MonoBehaviour
         originPos = transform.position;
         enemySpriteObject.SetActive(false);
         UICanvas.SetActive(false);
+
+        navMeshAgent.updateRotation = false;
+        navMeshAgent.updateUpAxis = false;
         
         StartCoroutine(ExecuteStateAction());
     }
@@ -95,10 +96,15 @@ public class BaseEnemy : MonoBehaviour
             switch (currentEnemyState)
             {
                 case EnemyState.Back:
-                    transform.position = Vector3.MoveTowards(transform.position, originPos, speed * Time.deltaTime);
+                    
+                    navMeshAgent.SetDestination(originPos);
+                    //transform.position = Vector3.MoveTowards(transform.position, originPos, speed * Time.deltaTime);
                     break;
             
                 case EnemyState.Attack:
+                    
+                    navMeshAgent.SetDestination(transform.position);
+                    
                     // Rotation
                     float angle = Mathf.Atan2(enemySeePlayer.playerPosUpdate.y - transform.position.y ,enemySeePlayer.playerPosUpdate.x - transform.position.x) * Mathf.Rad2Deg;
                     enemyObject.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
@@ -110,17 +116,13 @@ public class BaseEnemy : MonoBehaviour
             
                 case EnemyState.Chase:
                     if (!enemySeePlayer.isFirstSeePlayer) break;
+                    
+                    navMeshAgent.SetDestination(enemySeePlayer.playerPos);
 
                     // Position
-                    transform.position = Vector3.MoveTowards(transform.position, enemySeePlayer.playerPos,
-                            speed * Time.deltaTime);
+                    // transform.position = Vector3.MoveTowards(transform.position, enemySeePlayer.playerPos,
+                    //         speed * Time.deltaTime);
                     
-                    // Check Enemy is hit the wall
-                    // if (Vector2.Distance(GameObject.Find(enemySeePlayer.hitsL[0]).transform.position, transform.position) <= 2)
-                    // {
-                    //     
-                    // }
-
                     // Rotation
                     angle = Mathf.Atan2(enemySeePlayer.playerPosUpdate.y - transform.position.y,
                         enemySeePlayer.playerPosUpdate.x - transform.position.x) * Mathf.Rad2Deg;
@@ -130,6 +132,7 @@ public class BaseEnemy : MonoBehaviour
             
                 case EnemyState.Static:
                     enemySeePlayer.isFirstSeePlayer = false;
+                    navMeshAgent.SetDestination(transform.position);
                     break;
             }
 

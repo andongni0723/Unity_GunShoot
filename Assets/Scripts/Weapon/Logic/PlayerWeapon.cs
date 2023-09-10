@@ -52,6 +52,7 @@ public class PlayerWeapon : BaseWeapon
     
     private void OnLoadPlayerEnd()
     {
+        Debug.Log("INIT");
         currentWeapon = weaponList[0];
 
         // New bullet data from currentWeapon

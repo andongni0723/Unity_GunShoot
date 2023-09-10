@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 8678295676661795565}
   - component: {fileID: 8996153998137635191}
   - component: {fileID: 6604150371278905900}
+  - component: {fileID: 2159134040006963995}
   m_Layer: 7
   m_Name: HunGun_Enemy Parent
   m_TagString: Enemy
@@ -296,7 +297,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558112920120395133}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.12, y: -0.44, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -420,7 +421,7 @@ MonoBehaviour:
   enemySpriteObject: {fileID: 7993419006972664087}
   gunPoint: {fileID: 4991409198615269563}
   UICanvas: {fileID: 6278722123868019936}
-  chaseDistance: 15
+  chaseDistance: 12
   attackDistance: 8
   isGoneTargetPos: 0
   originPos: {x: 0, y: 0, z: 0}
@@ -479,6 +480,28 @@ MonoBehaviour:
   healthChangeTextVFXObject: {fileID: 2011207226391736243, guid: f9597163404b24a318834b832bff929c, type: 3}
   recoveryVFXPool: {fileID: 0}
   healthBar: {fileID: 8405527144984515007}
+--- !u!195 &2159134040006963995
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558112920120395133}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.7
+  m_Speed: 2
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 3
 --- !u!1 &3080020160453691092
 GameObject:
   m_ObjectHideFlags: 0

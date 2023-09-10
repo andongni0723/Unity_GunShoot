@@ -16,7 +16,6 @@ public class MissionDetails_SO : ScriptableObject
     [Space(20)]
     [Title("Go to item point")]
     [TagSelector] public string TargetPointTag;
-    public string realItemName;
 
     [Space(20)] 
     [Title("Count Item")] 
