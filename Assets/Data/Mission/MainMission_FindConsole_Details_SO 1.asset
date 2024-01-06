@@ -16,7 +16,8 @@ MonoBehaviour:
   missionDescription: "\u5DF2\u641C\u7D22\u76EE\u6A19"
   missionType: 0
   missionContentType: 0
-  TargetPointTag: ConsoleSpawnPoint
-  realItemName: Console(Clone)
+  targetPointTag: ConsoleSpawnPoint
+  RealTargetPointName: Console(Clone)
+  CountItemTag: 
   MissionDoneNextMissionList:
   - {fileID: 11400000, guid: 495f39a7ec11e443b99a8dacf54936ba, type: 2}

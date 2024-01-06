@@ -102,18 +102,6 @@ public class PlayerController : MonoBehaviour
 
     private void InputControllerDisable()
     {
-        inputControlls.GamePlay.Fire.performed -= _ => OnFire();
-        inputControlls.GamePlay.Fire.canceled -= _ => OnFireDone();
-        inputControlls.GamePlay.FireMobile.performed -= _ => OnFireMobile();
-        inputControlls.GamePlay.FireMobile.canceled -= _ => OnFireDone();
-        inputControlls.GamePlay.ReloadBullet.performed -= _ => OnReload();
-        inputControlls.GamePlay.Skill.performed -= _ => OnUseSkill();
-        inputControlls.GamePlay.Recovery.performed -= _ => OnRecovery();
-        inputControlls.GamePlay.PlayerDetails.performed -= _ => OnOpenPlayerDetails();
-        inputControlls.GamePlay.ChangeWeapon.performed -= _ => OnChangeWeapon();
-        inputControlls.GamePlay.InteractiveItem.performed -= _ => OnPressInteractive();
-        inputControlls.UI.Cancel.performed -= _ => OnCancelUI();
-        
         inputControlls.Disable();
     }
 

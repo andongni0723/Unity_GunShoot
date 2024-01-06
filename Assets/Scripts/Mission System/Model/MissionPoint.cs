@@ -16,6 +16,7 @@ public class MissionPoint : MonoBehaviour
 
     private void Start()
     {
+        
         targetPointParent = GameObject.FindGameObjectWithTag("CanvasPoint").transform;
         // Instantiate Target Point UI show to Player
         if (!isItemRealPoint)

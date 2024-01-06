@@ -2482,9 +2482,6 @@ MonoBehaviour:
   - characterID: 3
     characterShowObject: {fileID: 1770056862}
     characterDetails: {fileID: 11400000, guid: b41d460dad3de49acb19f4c0dcf87cc4, type: 2}
-  - characterID: 4
-    characterShowObject: {fileID: 1690349552}
-    characterDetails: {fileID: 11400000, guid: 039513368558b40359b8068e39728c4b, type: 2}
 --- !u!4 &429169654
 Transform:
   m_ObjectHideFlags: 0

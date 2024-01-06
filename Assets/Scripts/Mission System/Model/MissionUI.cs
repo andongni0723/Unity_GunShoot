@@ -49,7 +49,7 @@ public class MissionUI : MonoBehaviour
         yield return new WaitUntil(() => missionDetails != null);
         
         if (missionDetails.missionContentType == MissionContentType.GotoItemPoint)
-            yield return new WaitUntil(() => GameObject.FindWithTag(missionDetails.TargetPointTag) != null);
+            yield return new WaitUntil(() => GameObject.FindWithTag(missionDetails.targetPointTag) != null);
 
         // Setting UI
         titleText.text = missionDetails.missionName;
@@ -70,7 +70,7 @@ public class MissionUI : MonoBehaviour
             case MissionContentType.GotoItemPoint:
                 
                 // Get All Mission Item to spawn Mission Point
-                foreach (GameObject targetObject in GameObject.FindGameObjectsWithTag(missionDetails.TargetPointTag))
+                foreach (GameObject targetObject in GameObject.FindGameObjectsWithTag(missionDetails.targetPointTag))
                 {
                    goToMissionTargetPointList.Add(targetObject); //Debug
                    
@@ -85,10 +85,12 @@ public class MissionUI : MonoBehaviour
                 allMissionPointCount = missionTargetPointList.Count;
                 
                 // Spawn Real Item Point
+                // MissionPoint realItem = Instantiate(realItemMissionPointPrefab, 
+                //     GameObject.FindWithTag(missionDetails.TargetPointTag).transform.position, Quaternion.identity)
+                //     .GetComponent<MissionPoint>();
                 MissionPoint realItem = Instantiate(realItemMissionPointPrefab, 
-                    GameObject.FindWithTag(missionDetails.TargetPointTag).transform.position, Quaternion.identity)
+                        GameObject.Find(missionDetails.RealTargetPointName).transform.position, Quaternion.identity)
                     .GetComponent<MissionPoint>();
-                
                 realItem.parentMission = this;
                 realItem.isItemRealPoint = true;
 

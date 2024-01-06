@@ -16,6 +16,7 @@ MonoBehaviour:
   missionDescription: "\u62B5\u9054\u76EE\u6A19\u9EDE"
   missionType: 0
   missionContentType: 0
-  TargetPointTag: Finish
-  realItemName: End Game
+  targetPointTag: Finish
+  RealTargetPointName: End Game Point
+  CountItemTag: 
   MissionDoneNextMissionList: []
