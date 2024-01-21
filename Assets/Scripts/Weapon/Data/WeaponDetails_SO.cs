@@ -27,8 +27,9 @@ public class WeaponDetails_SO : ScriptableObject
     public GunShootMode gunShootMode;
     
     [MinMaxSlider(0, 45, true), SerializeField]
-    private Vector2 shootAngle;
+     private Vector2 shootAngle;
     public AudioClip fireAudio;
+    
     public float shootCooldown;
     public int damage = 1;
     

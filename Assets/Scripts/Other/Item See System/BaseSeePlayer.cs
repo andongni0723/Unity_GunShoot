@@ -62,12 +62,8 @@ public class BaseSeePlayer : MonoBehaviour
     {
         playerPos = playerPosUpdate;
 
-        //hits = Physics2D.RaycastAll(transform.position, playerPos - transform.position, Vector2.Distance(transform.position, playerPos) + 10, rayLayerMask);
         int hitCount = Physics2D.RaycastNonAlloc(transform.position, playerPos - transform.position, hits,
             Vector2.Distance(transform.position, playerPos) + 10, rayLayerMask);
-
-        //TODO: fix
-        //TestAddRayList(hitCount);
 
         hitsL.Clear();
         for (int i = 0; i < hitCount;)
