@@ -36,6 +36,11 @@ After starting the game, you need to find a console to purchase your main weapon
 6. Defeat enemies or find the exit to complete the mission.
 
 # Installation
+
+### Download the game 
+Go to the **Release** Page download the game.
+
+### Clone Repository
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/Unity_GunShoot.git
