@@ -1,17 +1,42 @@
-# GunShoot 
-![GunShoot-Unity遊戲開發-學習歷程.001](https://hackmd.io/_uploads/SkwXs8it6.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.002](https://hackmd.io/_uploads/ryDmsLsK6.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.003](https://hackmd.io/_uploads/HyD7j8stT.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.004](https://hackmd.io/_uploads/BJwXiUsF6.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.005](https://hackmd.io/_uploads/SJw7sLoKT.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.006](https://hackmd.io/_uploads/SkPQjIoKp.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.007](https://hackmd.io/_uploads/SJDQiUiKT.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.008](https://hackmd.io/_uploads/BydmsIiF6.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.009](https://hackmd.io/_uploads/SkvmsLjKp.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.010](https://hackmd.io/_uploads/rywXiLst6.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.011](https://hackmd.io/_uploads/HJD7jLsKT.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.012](https://hackmd.io/_uploads/SkwmsIiY6.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.013](https://hackmd.io/_uploads/SJwmsIoYa.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.014](https://hackmd.io/_uploads/SyPXj8it6.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.015](https://hackmd.io/_uploads/Syv7i8it6.jpg)
-![GunShoot-Unity遊戲開發-學習歷程.016](https://hackmd.io/_uploads/BywmoLsYp.jpg)
+# GunShoot
+
+![gunshoot-github-main-img](https://hackmd.io/_uploads/rJLeOXdTR.jpg)
+
+
+## Game Description
+This project is a top-down shooting game made by me using **Unity2022.3.0**. In the game, you can choose one of three characters, each with unique skills and different base stats.
+
+After starting the game, you need to find a console to purchase your main weapon. The goal is to kill enemies or reach the exit while using as little health and money as possible. Your final score is based on the health used, money spent, and the number of enemies defeated. Have fun!
+
+# Tech Stack 
+- **Unity**: Game development platform.
+- **[DoTween](https://dotween.demigiant.com/)**: A plugin about animation engine for Unity
+- **[Odin inspector](https://odininspector.com/)**: A plugin that uses Attributes to easily draw editor UI
+- **[NavMeshPlus](https://github.com/h8man/NavMeshPlus)**: A plugin that use of NavMesh in Unity 2D. In this project, it is used for enemy navigation towards the player.
+
+
+# How to Play
+
+1. Open the game.
+2. Press the "角色" button at the bottom left to choose your character.
+3. Press the "開始遊戲" button at the bottom right to start the game.
+4. Use the following controls:
+   - `WASD`: Move
+   - `C`: Switch weapon
+   - `R`: Reload
+   - `Q`: Perform actions like opening doors, accessing the console (store), or entering the exit
+   - `Left Mouse Button`: Shoot
+   - `F`: Use skill
+   - `V`: Heal HP
+   - `Tab`: Open the panel
+5. Follow the mission points on the screen to find the console, where you can buy a main weapon, skills, and healing items.
+6. Defeat enemies or find the exit to complete the mission.
+
+# Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/Unity_GunShoot.git
+   ```
+2. Open the project in **Unity (version 2022.3.0 or later)**.
+3. Ensure the Hierarchy includes the following three scenes: **Persistent**, **GameScene**, and **StartScene**.
+4. Make sure the **Persistent Scene** is open.
