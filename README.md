@@ -16,6 +16,9 @@ After starting the game, you need to find a console to purchase your main weapon
 
 
 # How to Play
+> There is a bug in the game where the enemy may not spawn properly in the scene.
+> Please press the gray gun icon button at the top left to quit the game.
+> I apologize for the inconvenience, and I will fix the bug after I find the reason.
 
 1. Open the game.
 2. Press the "角色" button at the bottom left to choose your character.
